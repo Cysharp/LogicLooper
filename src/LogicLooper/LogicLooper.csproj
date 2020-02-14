@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Cysharp.Threading.LogicLooper</RootNamespace>
+    <AssemblyName>Cysharp.Threading.LogicLooper</AssemblyName>
+    <nullable>enable</nullable>
+  </PropertyGroup>
+
+</Project>
