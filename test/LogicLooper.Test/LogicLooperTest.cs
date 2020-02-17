@@ -11,6 +11,47 @@ namespace LogicLooper.Test
     public class LogicLooperTest
     {
         [Theory]
+        [InlineData(16)] // 16fps
+        [InlineData(33)] // 30fps
+        public async Task TargetFrameTime(int targetFrameTimeMs)
+        {
+            using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(TimeSpan.FromMilliseconds(targetFrameTimeMs));
+
+            looper.ApproximatelyRunningActions.Should().Be(0);
+            looper.TargetFrameRate.Should().Be(1000 / (double)targetFrameTimeMs);
+
+            var beginTimestamp = Stopwatch.GetTimestamp();
+            var lastTimestamp = beginTimestamp;
+            var fps = 0d;
+            var task = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+            {
+                var now = Stopwatch.GetTimestamp();
+                var elapsedFromBeginMilliseconds = (now - beginTimestamp) / 10000d;
+                var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / 10000d;
+
+                fps = (fps == 0) ? (1000 / elapsedFromPreviousFrameMilliseconds) : (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
+
+                lastTimestamp = now;
+
+                return elapsedFromBeginMilliseconds < 3000; // 3 seconds
+            });
+
+            // wait for moving action from queue to actions.
+            await Task.Delay(100);
+
+            looper.ApproximatelyRunningActions.Should().Be(1);
+
+            await task;
+
+            await Task.Delay(100);
+
+            looper.ApproximatelyRunningActions.Should().Be(0);
+
+            fps.Should().BeInRange(looper.TargetFrameRate - 2, looper.TargetFrameRate);
+        }
+
+
+        [Theory]
         [InlineData(60)]
         [InlineData(30)]
         [InlineData(20)]
@@ -157,6 +198,24 @@ namespace LogicLooper.Test
             await shutdownTask;
 
             runLoopTask.IsCompleted.Should().BeFalse(); // When the looper thread is waiting for next cycle, the loop task should not be completed.
+        }
+
+
+        [Fact]
+        public async Task LastProcessingDuration()
+        {
+            using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(60);
+
+            var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+            {
+                Thread.Sleep(100);
+                return !ctx.CancellationToken.IsCancellationRequested;
+            });
+
+            await Task.Delay(1000);
+            await looper.ShutdownAsync(TimeSpan.Zero);
+
+            looper.LastProcessingDuration.TotalMilliseconds.Should().BeInRange(95, 105);
         }
     }
 }

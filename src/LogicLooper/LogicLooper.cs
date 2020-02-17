@@ -34,8 +34,8 @@ namespace Cysharp.Threading.LogicLooper
         private readonly CancellationTokenSource _ctsLoop;
         private readonly CancellationTokenSource _ctsAction;
         private readonly TaskCompletionSource<bool> _shutdownTaskAwaiter;
-        private readonly int _targetFrameRate;
-        private readonly int _targetFrameTime;
+        private readonly double _targetFrameRate;
+        private readonly int _targetFrameTimeMilliseconds;
         private readonly MinimumQueue<LooperAction> _registerQueue;
         private readonly object _lockActions = new object();
         private readonly object _lockQueue = new object();
@@ -66,15 +66,20 @@ namespace Cysharp.Threading.LogicLooper
         /// <summary>
         /// Gets a target frame rate of the looper.
         /// </summary>
-        public int TargetFrameRate => _targetFrameRate;
+        public double TargetFrameRate => _targetFrameRate;
 
         public LogicLooper(int targetFrameRate, int initialActionsCapacity = 16)
+            : this(TimeSpan.FromMilliseconds(1000 / (double)targetFrameRate), initialActionsCapacity)
         {
-            _targetFrameRate = targetFrameRate;
+        }
+
+        public LogicLooper(TimeSpan targetFrameTime, int initialActionsCapacity = 16)
+        {
+            _targetFrameRate = 1000 / targetFrameTime.TotalMilliseconds;
             _looperId = Interlocked.Increment(ref _looperSequence);
             _ctsLoop = new CancellationTokenSource();
             _ctsAction = new CancellationTokenSource();
-            _targetFrameTime = 1000 / targetFrameRate;
+            _targetFrameTimeMilliseconds = (int)targetFrameTime.TotalMilliseconds;
             _registerQueue = new MinimumQueue<LooperAction>(10);
             _runLoopThread = new Thread(StartRunLoop)
             {
@@ -182,7 +187,7 @@ namespace Cysharp.Threading.LogicLooper
 
                 lock (_lockActions)
                 {
-                    var elapsedTimeFromPreviousFrame = TimeSpan.FromTicks(Stopwatch.GetTimestamp() - lastTimestamp);
+                    var elapsedTimeFromPreviousFrame = TimeSpan.FromTicks(begin - lastTimestamp);
                     var ctx = new LogicLooperActionContext(_frame++, elapsedTimeFromPreviousFrame, _ctsAction.Token);
 
                     var j = _tail - 1;
@@ -245,12 +250,12 @@ namespace Cysharp.Threading.LogicLooper
                     }
                 }
 
-                lastTimestamp = Stopwatch.GetTimestamp();
+                lastTimestamp = begin;
 
                 var elapsedMilliseconds = (lastTimestamp - begin) / 10000;
                 _lastProcessingDuration = elapsedMilliseconds;
 
-                var waitForNextFrameMilliseconds = (int)(_targetFrameTime - elapsedMilliseconds);
+                var waitForNextFrameMilliseconds = (int)(_targetFrameTimeMilliseconds - elapsedMilliseconds);
                 if (waitForNextFrameMilliseconds > 0)
                 {
                     Thread.Sleep(waitForNextFrameMilliseconds);
