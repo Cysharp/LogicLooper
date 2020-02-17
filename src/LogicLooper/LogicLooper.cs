@@ -119,7 +119,15 @@ namespace Cysharp.Threading.LogicLooper
             if (Interlocked.CompareExchange(ref _isShuttingDown, 1, 0) == 0)
             {
                 _ctsAction.Cancel();
-                _ctsLoop.CancelAfter(shutdownDelay);
+
+                if (shutdownDelay == TimeSpan.Zero)
+                {
+                    _ctsLoop.Cancel();
+                }
+                else
+                {
+                    _ctsLoop.CancelAfter(shutdownDelay);
+                }
             }
 
             await _shutdownTaskAwaiter.Task.ConfigureAwait(false);
