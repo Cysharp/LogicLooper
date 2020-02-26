@@ -25,13 +25,23 @@ namespace Cysharp.Threading.LogicLooper
         /// <param name="looperCount"></param>
         /// <param name="balancer"></param>
         public LogicLooperPool(int targetFrameRate, int looperCount, ILogicLooperPoolBalancer balancer)
+            : this(TimeSpan.FromMilliseconds(1000 / (double)targetFrameRate), looperCount, balancer)
+        { }
+
+        /// <summary>
+        /// Initialize the looper pool with specified configurations.
+        /// </summary>
+        /// <param name="targetFrameTime"></param>
+        /// <param name="looperCount"></param>
+        /// <param name="balancer"></param>
+        public LogicLooperPool(TimeSpan targetFrameTime, int looperCount, ILogicLooperPoolBalancer balancer)
         {
             if (looperCount <= 0) throw new ArgumentOutOfRangeException(nameof(looperCount), "LooperCount must be more than zero.");
 
             _loopers = new LogicLooper[looperCount];
             for (var i = 0; i < looperCount; i++)
             {
-                _loopers[i] = new LogicLooper(targetFrameRate);
+                _loopers[i] = new LogicLooper(targetFrameTime);
             }
             _balancer = balancer ?? throw new ArgumentNullException(nameof(balancer));
         }

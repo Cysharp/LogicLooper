@@ -14,6 +14,15 @@ namespace LogicLooper.Test
         {
             using var pool = new LogicLooperPool(60, 4, RoundRobinLogicLooperPoolBalancer.Instance);
             pool.Loopers.Should().HaveCount(4);
+            pool.Loopers[0].TargetFrameRate.Should().BeInRange(60, 60.1);
+        }
+
+        [Fact]
+        public void Create_TimeSpan()
+        {
+            using var pool = new LogicLooperPool(TimeSpan.FromMilliseconds(16.666), 4, RoundRobinLogicLooperPoolBalancer.Instance);
+            pool.Loopers.Should().HaveCount(4);
+            pool.Loopers[0].TargetFrameRate.Should().BeInRange(60, 60.1);
         }
 
         [Fact]

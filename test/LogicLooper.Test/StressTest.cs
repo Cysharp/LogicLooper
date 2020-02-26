@@ -64,7 +64,7 @@ namespace LogicLooper.Test
             using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(targetFps);
 
             looper.ApproximatelyRunningActions.Should().Be(0);
-            looper.TargetFrameRate.Should().Be(targetFps);
+            looper.TargetFrameRate.Should().BeInRange(targetFps-1, targetFps+1);
 
             var executedCount = 0;
             var launchedCount = 0;

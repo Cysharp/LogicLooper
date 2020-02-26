@@ -188,6 +188,8 @@ namespace Cysharp.Threading.LogicLooper
                 lock (_lockActions)
                 {
                     var elapsedTimeFromPreviousFrame = TimeSpan.FromTicks(begin - lastTimestamp);
+                    lastTimestamp = begin;
+
                     var ctx = new LogicLooperActionContext(_frame++, elapsedTimeFromPreviousFrame, _ctsAction.Token);
 
                     var j = _tail - 1;
@@ -250,9 +252,8 @@ namespace Cysharp.Threading.LogicLooper
                     }
                 }
 
-                lastTimestamp = begin;
-
-                var elapsedMilliseconds = (lastTimestamp - begin) / 10000;
+                var now = Stopwatch.GetTimestamp();
+                var elapsedMilliseconds = (now - begin) / 10000;
                 _lastProcessingDuration = elapsedMilliseconds;
 
                 var waitForNextFrameMilliseconds = (int)(_targetFrameTimeMilliseconds - elapsedMilliseconds);

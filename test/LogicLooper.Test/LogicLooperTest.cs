@@ -11,9 +11,9 @@ namespace LogicLooper.Test
     public class LogicLooperTest
     {
         [Theory]
-        [InlineData(16)] // 16fps
-        [InlineData(33)] // 30fps
-        public async Task TargetFrameTime(int targetFrameTimeMs)
+        [InlineData(16.6666)] // 60fps
+        [InlineData(33.3333)] // 30fps
+        public async Task TargetFrameTime(double targetFrameTimeMs)
         {
             using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(TimeSpan.FromMilliseconds(targetFrameTimeMs));
 
@@ -47,7 +47,7 @@ namespace LogicLooper.Test
 
             looper.ApproximatelyRunningActions.Should().Be(0);
 
-            fps.Should().BeInRange(looper.TargetFrameRate - 2, looper.TargetFrameRate);
+            fps.Should().BeInRange(looper.TargetFrameRate - 2, looper.TargetFrameRate + 2);
         }
 
 
@@ -60,7 +60,7 @@ namespace LogicLooper.Test
             using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(targetFps);
 
             looper.ApproximatelyRunningActions.Should().Be(0);
-            looper.TargetFrameRate.Should().Be(targetFps);
+            ((int)looper.TargetFrameRate).Should().Be(targetFps);
 
             var beginTimestamp = Stopwatch.GetTimestamp();
             var lastTimestamp = beginTimestamp;
@@ -89,7 +89,7 @@ namespace LogicLooper.Test
 
             looper.ApproximatelyRunningActions.Should().Be(0);
 
-            fps.Should().BeInRange(targetFps-2, targetFps);
+            fps.Should().BeInRange(targetFps-2, targetFps + 2);
         }
 
         [Fact]
