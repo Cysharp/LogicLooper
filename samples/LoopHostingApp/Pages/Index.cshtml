@@ -1,0 +1,54 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@section Head
+{
+    <style>
+        table {
+            border: 1px solid #000;
+            border-collapse: collapse;
+            margin: 1rem;
+        }
+            table tr td {
+                border: 1px solid #000;
+                width: 1px;
+                height: 1px;
+            }
+        .fill {
+            background: #000;
+        }
+    </style>
+}
+
+<div>
+    <p>RunningActions: @Model.RunningActions</p>
+
+    <form method="post">
+        <input type="submit" value="Create New World" />
+    </form>
+</div>
+
+<div>
+    <h2>Worlds</h2>
+    @foreach (var world in Model.RunningWorlds)
+    {
+        var snapshot = world.Snapshot;
+        if (snapshot == null) continue;
+
+        <table style="float:left;">
+            <tbody>
+                @for (var y = 0; y <= snapshot.GetUpperBound(1); y++)
+                {
+                    <tr>
+                        @for (var x = 0; x <= snapshot.GetUpperBound(0); x++)
+                        {
+                            <td class="@(snapshot[x, y] ? "fill" : "")"></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
