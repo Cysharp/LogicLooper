@@ -1,12 +1,4 @@
 ﻿{
-  "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
-    "iisExpress": {
-      "applicationUrl": "http://localhost:59671",
-      "sslPort": 44394
-    }
-  },
   "profiles": {
     "LoopHostingApp": {
       "commandName": "Project",

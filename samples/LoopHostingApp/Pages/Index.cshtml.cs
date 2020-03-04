@@ -19,18 +19,20 @@ namespace LoopHostingApp.Pages
 
         public IndexModel(ILogger<IndexModel> logger, ILogicLooperPool looperPool)
         {
-            _logger = logger;
-            _looperPool = looperPool;
+            // The parameter is provided via Dependency Injection.
+            //   - See also: Startup.ConfigureServices method.
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _looperPool = looperPool ?? throw new ArgumentNullException(nameof(looperPool));
         }
 
         public void OnGet()
         {
-
         }
 
         public IActionResult OnPost()
         {
-            new LifeGameLoop(_looperPool, _logger);
+            // Example: Create a new world of life-game and register it into the loop.
+            LifeGameLoop.CreateNew(_looperPool, _logger);
 
             return RedirectToPage("Index");
         }

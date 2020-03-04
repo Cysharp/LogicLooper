@@ -12,6 +12,4 @@
     <ProjectReference Include="..\..\src\LogicLooper\LogicLooper.csproj" />
   </ItemGroup>
 
-
-
 </Project>

@@ -18,7 +18,18 @@ namespace LoopHostingApp
         public World World { get; }
         public int Id { get; }
 
-        public LifeGameLoop(ILogicLooperPool looperPool, ILogger logger)
+        /// <summary>
+        /// Create a new life-game loop and register into the LooperPool.
+        /// </summary>
+        /// <param name="looperPool"></param>
+        /// <param name="logger"></param>
+        public static void CreateNew(ILogicLooperPool looperPool, ILogger logger)
+        {
+            var gameLoop = new LifeGameLoop(logger);
+            looperPool.RegisterActionAsync(gameLoop.UpdateFrame);
+        }
+
+        private LifeGameLoop(ILogger logger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             
@@ -27,7 +38,6 @@ namespace LoopHostingApp
             World.SetPattern(Patterns.GliderGun, 10, 10);
 
             _logger.LogInformation($"{nameof(LifeGameLoop)}[{Id}]: Register");
-            _ = looperPool.RegisterActionAsync(UpdateFrame);
 
             All.Add(this);
         }
@@ -41,6 +51,7 @@ namespace LoopHostingApp
                 return false;
             }
 
+            // Update the world every update cycle.
             World.Update();
 
             return World.AliveCount != 0;

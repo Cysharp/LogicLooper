@@ -34,8 +34,9 @@ namespace LoopHostingApp
                 return true;
             });
 
-            // Example: Register a game loop to LooperPool immediately.
-            new LifeGameLoop(_looperPool, _logger);
+            // Example: Create a new world of life-game and register it into the loop.
+            //   - See also: LoopHostingApp/Pages/Index.cshtml.cs
+            LifeGameLoop.CreateNew(_looperPool, _logger);
 
             _logger.LogInformation("LoopHostedService is started.");
 

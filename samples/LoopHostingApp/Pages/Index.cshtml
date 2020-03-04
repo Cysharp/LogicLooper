@@ -19,15 +19,22 @@
         .fill {
             background: #000;
         }
+
+        .controls form { display: inline-block; }
     </style>
 }
 
-<div>
+<div class="controls">
     <p>RunningActions: @Model.RunningActions</p>
 
-    <form method="post">
-        <input type="submit" value="Create New World" />
-    </form>
+    <div>
+        <form method="post">
+            <input type="submit" value="🌏 Create New World" />
+        </form>
+        <form method="get">
+            <input type="submit" value="🔄 Reload" />
+        </form>
+    </div>
 </div>
 
 <div>
