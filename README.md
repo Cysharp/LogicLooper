@@ -1,5 +1,5 @@
 # LogicLooper
-Provide a framework for building loop-action based server application on .NET Core.
+Provide a framework for building loop-action based server application on .NET Core. This framework focuses on building game servers with server-side logic.
 
 ## Installation
 ```powershell
