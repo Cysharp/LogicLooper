@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -87,9 +87,10 @@ namespace Cysharp.Threading.LogicLooper
                 IsBackground = true,
                 Priority = ThreadPriority.AboveNormal,
             };
-            _runLoopThread.Start(this);
             _shutdownTaskAwaiter = new TaskCompletionSource<bool>();
             _actions = new LooperAction[initialActionsCapacity];
+
+            _runLoopThread.Start(this);
         }
 
         /// <summary>
