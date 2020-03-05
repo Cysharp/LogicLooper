@@ -5,7 +5,7 @@
     <LangVersion>latest</LangVersion>
 
     <!-- NuGet Package Information -->
-    <Description>Provide a framework for building loop-action based server application on .NET Core.</Description>
+    <Description>A library for building server application using loop-action programming model on .NET Core. This library focuses on building game servers with server-side logic.</Description>
     <PackageVersion>$(Version)</PackageVersion>
     <Company>Cysharp</Company>
     <Authors>Cysharp</Authors>
