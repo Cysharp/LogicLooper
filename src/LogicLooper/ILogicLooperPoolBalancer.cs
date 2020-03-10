@@ -1,4 +1,4 @@
-﻿namespace Cysharp.Threading.LogicLooper
+namespace Cysharp.Threading
 {
     public interface ILogicLooperPoolBalancer
     {

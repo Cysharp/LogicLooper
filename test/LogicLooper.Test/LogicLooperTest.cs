@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Cysharp.Threading.LogicLooper;
+using Cysharp.Threading;
 using FluentAssertions;
 using Xunit;
 
@@ -17,7 +17,7 @@ namespace LogicLooper.Test
 #endif
         public async Task TargetFrameTime(double targetFrameTimeMs)
         {
-            using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(TimeSpan.FromMilliseconds(targetFrameTimeMs));
+            using var looper = new Cysharp.Threading.LogicLooper(TimeSpan.FromMilliseconds(targetFrameTimeMs));
 
             looper.ApproximatelyRunningActions.Should().Be(0);
             looper.TargetFrameRate.Should().Be(1000 / (double)targetFrameTimeMs);
@@ -60,7 +60,7 @@ namespace LogicLooper.Test
 #endif
         public async Task TargetFrameRate_1(int targetFps)
         {
-            using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(targetFps);
+            using var looper = new Cysharp.Threading.LogicLooper(targetFps);
 
             looper.ApproximatelyRunningActions.Should().Be(0);
             ((int)looper.TargetFrameRate).Should().Be(targetFps);
@@ -98,7 +98,7 @@ namespace LogicLooper.Test
         [Fact]
         public async Task Exit()
         {
-            using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(60);
+            using var looper = new Cysharp.Threading.LogicLooper(60);
 
             var count = 0;
             await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -114,7 +114,7 @@ namespace LogicLooper.Test
         [Fact]
         public async Task Throw()
         {
-            using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(60);
+            using var looper = new Cysharp.Threading.LogicLooper(60);
 
             var count = 0;
             await Assert.ThrowsAsync<Exception>(() => looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -130,7 +130,7 @@ namespace LogicLooper.Test
         [Fact]
         public async Task CurrentFrame()
         {
-            using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(60);
+            using var looper = new Cysharp.Threading.LogicLooper(60);
 
             var currentFrame = 0L;
             await  looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -146,7 +146,7 @@ namespace LogicLooper.Test
         [Fact]
         public async Task Shutdown_Delay_Cancel()
         {
-            using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(60);
+            using var looper = new Cysharp.Threading.LogicLooper(60);
 
             var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) => !ctx.CancellationToken.IsCancellationRequested);
             runLoopTask.IsCompleted.Should().BeFalse();
@@ -163,7 +163,7 @@ namespace LogicLooper.Test
         [Fact]
         public async Task Shutdown_Delay_Cancel_2()
         {
-            using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(60);
+            using var looper = new Cysharp.Threading.LogicLooper(60);
 
             var count = 0;
             var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -186,7 +186,7 @@ namespace LogicLooper.Test
         [Fact]
         public async Task Shutdown_Immediately()
         {
-            using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(1);
+            using var looper = new Cysharp.Threading.LogicLooper(1);
 
             var signal = new ManualResetEventSlim();
             var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -209,7 +209,7 @@ namespace LogicLooper.Test
 #endif
         public async Task LastProcessingDuration()
         {
-            using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(60);
+            using var looper = new Cysharp.Threading.LogicLooper(60);
 
             var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
             {

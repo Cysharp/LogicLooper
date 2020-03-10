@@ -12,9 +12,11 @@ $ dotnet add package LogicLooper
 ## Usage
 ### Single-loop application
 ```csharp
+using Cysharp.Threading;
+
 // Create a looper.
 const int targetFps = 60;
-using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(targetFps);
+using var looper = new LogicLooper(targetFps);
 
 // Register a action to the looper and wait for completion.
 await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -32,6 +34,8 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 For example, if your server has many cores, it is more efficient running multiple loops. `LooperPool` provides multiple loopers and facade for using them.
 
 ```csharp
+using Cysharp.Threading;
+
 // Create a looper pool.
 // If your machine has 4-cores, the LooperPool creates 4-Looper instances.
 const int targetFps = 60;

@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Cysharp.Threading.LogicLooper.Internal
+namespace Cysharp.Threading.Internal
 {
     internal class NotInitializedLogicLooperPool : ILogicLooperPool
     {

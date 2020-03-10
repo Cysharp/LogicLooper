@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using Cysharp.Threading.LogicLooper;
+using Cysharp.Threading;
 using FluentAssertions;
 using Xunit;
 
@@ -61,7 +61,7 @@ namespace LogicLooper.Test
         [InlineData(120, 10000, 1000)]
         public async Task LogicLooper_Stress_1(int targetFps, int actionCount, int loopCount)
         {
-            using var looper = new Cysharp.Threading.LogicLooper.LogicLooper(targetFps);
+            using var looper = new Cysharp.Threading.LogicLooper(targetFps);
 
             looper.ApproximatelyRunningActions.Should().Be(0);
             looper.TargetFrameRate.Should().BeInRange(targetFps-1, targetFps+1);

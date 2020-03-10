@@ -4,12 +4,12 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Cysharp.Threading.LogicLooper.Internal;
+using Cysharp.Threading.Internal;
 
 // ReSharper disable StringLiteralTypo
 // ReSharper disable IdentifierTypo
 
-namespace Cysharp.Threading.LogicLooper
+namespace Cysharp.Threading
 {
     public delegate bool LogicLooperActionDelegate(in LogicLooperActionContext ctx);
     public delegate bool LogicLooperActionWithStateDelegate<in T>(in LogicLooperActionContext ctx, T state);

@@ -1,6 +1,6 @@
-﻿using System.Threading;
+using System.Threading;
 
-namespace Cysharp.Threading.LogicLooper
+namespace Cysharp.Threading
 {
     public class RoundRobinLogicLooperPoolBalancer : ILogicLooperPoolBalancer
     {

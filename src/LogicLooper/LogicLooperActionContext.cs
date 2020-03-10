@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
-namespace Cysharp.Threading.LogicLooper
+namespace Cysharp.Threading
 {
     public readonly struct LogicLooperActionContext
     {

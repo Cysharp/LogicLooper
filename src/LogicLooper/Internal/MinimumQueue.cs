@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Cysharp.Threading.LogicLooper.Internal
+namespace Cysharp.Threading.Internal
 {
     // optimized version of Standard Queue<T>.
     internal class MinimumQueue<T>

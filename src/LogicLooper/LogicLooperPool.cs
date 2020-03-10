@@ -1,11 +1,11 @@
-﻿using Cysharp.Threading.LogicLooper.Internal;
+using Cysharp.Threading.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Cysharp.Threading.LogicLooper
+namespace Cysharp.Threading
 {
     /// <summary>
     /// Provides a pool of loopers.

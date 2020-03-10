@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Cysharp.Threading.LogicLooper;
+using Cysharp.Threading;
 using FluentAssertions;
 using Xunit;
 

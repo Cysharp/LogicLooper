@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>Cysharp.Threading.LogicLooper</RootNamespace>
+    <RootNamespace>Cysharp.Threading</RootNamespace>
     <AssemblyName>Cysharp.Threading.LogicLooper</AssemblyName>
     <nullable>enable</nullable>
     <SignAssembly>true</SignAssembly>
