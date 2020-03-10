@@ -191,7 +191,7 @@ namespace Cysharp.Threading
                     var elapsedTimeFromPreviousFrame = TimeSpan.FromTicks(begin - lastTimestamp);
                     lastTimestamp = begin;
 
-                    var ctx = new LogicLooperActionContext(_frame++, elapsedTimeFromPreviousFrame, _ctsAction.Token);
+                    var ctx = new LogicLooperActionContext(this, _frame++, elapsedTimeFromPreviousFrame, _ctsAction.Token);
 
                     var j = _tail - 1;
                     for (var i = 0; i < _actions.Length; i++)
