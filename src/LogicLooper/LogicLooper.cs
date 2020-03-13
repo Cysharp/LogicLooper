@@ -94,7 +94,7 @@ namespace Cysharp.Threading
         }
 
         /// <summary>
-        /// Registers an loop-frame action to the looper and returns <see cref="Task"/> to wait for completion.
+        /// Registers a loop-frame action to the looper and returns <see cref="Task"/> to wait for completion.
         /// </summary>
         /// <param name="loopAction"></param>
         /// <returns></returns>
@@ -105,7 +105,7 @@ namespace Cysharp.Threading
         }
 
         /// <summary>
-        /// Registers an loop-frame action with state object to the looper and returns <see cref="Task"/> to wait for completion.
+        /// Registers a loop-frame action with state object to the looper and returns <see cref="Task"/> to wait for completion.
         /// </summary>
         /// <param name="loopAction"></param>
         /// <param name="state"></param>
@@ -117,7 +117,7 @@ namespace Cysharp.Threading
         }
 
         /// <summary>
-        /// Stops action loop of the looper.
+        /// Stops the action loop of the looper.
         /// </summary>
         /// <param name="shutdownDelay"></param>
         public async Task ShutdownAsync(TimeSpan shutdownDelay)
