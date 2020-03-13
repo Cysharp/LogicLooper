@@ -17,7 +17,7 @@ namespace Cysharp.Threading
     /// <summary>
     /// Provides update loop programming model. the looper ties thread and while-loop and call registered methods every frame.
     /// </summary>
-    public class LogicLooper : IDisposable
+    public sealed class LogicLooper : IDisposable
     {
         private static int _looperSequence = 0;
 

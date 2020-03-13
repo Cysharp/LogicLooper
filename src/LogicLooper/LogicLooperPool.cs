@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace Cysharp.Threading
 {
     /// <summary>
-    /// Provides a pool of loopers.
+    /// Provides a pool of loopers that can be register loop-action into the pooled looper.
     /// </summary>
-    public partial class LogicLooperPool : ILogicLooperPool, IDisposable
+    public sealed partial class LogicLooperPool : ILogicLooperPool, IDisposable
     {
         private readonly LogicLooper[] _loopers;
         private readonly ILogicLooperPoolBalancer _balancer;
