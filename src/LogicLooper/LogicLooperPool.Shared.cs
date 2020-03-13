@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cysharp.Threading
 {
-    public partial class LogicLooperPool
+    public sealed partial class LogicLooperPool
     {
         /// <summary>
         /// Gets the shared pool of loopers. Requires to call <see cref="InitializeSharedPool"/> method before use.

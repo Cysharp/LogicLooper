@@ -56,3 +56,41 @@ await looperPool.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 
 ### Integrate with Microsoft.Extensions.Hosting
 See [samples/LoopHostingApp](samples/LoopHostingApp).
+
+## Advanced
+### Coroutine
+LogicLooper has support for the coroutine-like operation. If you are using Unity, you are familiar with the coroutine pattern.
+
+```csharp
+using var looper = new LogicLooper(60);
+
+var coroutine = default(LogicLooperCoroutine);
+await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+{
+    if (/* ... */)
+    {
+        // Launch a coroutine in the looper that same as the loop action.
+        coroutine = ctx.RunCoroutine(async coCtx =>
+        {
+            // NOTE: `DelayFrame`, `DelayNextFrame`, `Delay` methods are allowed and awaitable in the coroutine.
+            // If you await a Task or Task-like, the coroutine throws an exception.
+            await coCtx.DelayFrame(60);
+
+            // some stuff to do ...
+
+            await coCtx.DelayNextFrame();
+
+            // some stuff to do ...
+
+            await coCtx.Delay(TimeSpan.FromMilliseconds(16.66666));
+        });
+    }
+
+    if (coroutine.IsCompleted)
+    {
+        // When the coroutine has completed, you can do some stuff ...
+    }
+
+    return true;
+});
+```
