@@ -148,7 +148,7 @@ namespace Cysharp.Threading
         {
             lock (_lockQueue)
             {
-                if (!_isRunning)
+                if (_isRunning)
                 {
                     _registerQueue.Enqueue(action);
                     return action.Future.Task;
