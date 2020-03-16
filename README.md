@@ -1,5 +1,42 @@
 # LogicLooper
-A library for building server application using loop-action programming model on .NET Core. This library focuses on building game servers with server-side logic.
+[![CircleCI](https://circleci.com/gh/Cysharp/LogicLooper.svg?style=svg)](https://circleci.com/gh/Cysharp/LogicLooper) [![NuGet Package: LogicLooper](https://img.shields.io/nuget/vpre/LogicLooper?label=NuGet%3A%20LogicLooper)](https://www.nuget.org/packages/LogicLooper)
+
+[日本語](README.ja.md)
+
+A library is for building server application using loop-action programming model on .NET Core. This library focuses on building game servers with server-side logic.
+
+For example, if you have the following game loops, the library will provide a way to aggregate and process in a more efficient way than driving with a simple `Task`.
+
+```csharp
+while (true)
+{
+    // some stuff to do ...
+    network.Receive();
+    world.Update();
+    players.Update();
+    network.Send();
+    // some stuff to do ...
+
+    // wait for next frame
+    await Task.Delay(16);
+}
+```
+
+```csharp
+using var looper = new LogicLooper(60);
+await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+{
+    // The action will be called by looper every frame.
+    // some stuff to do ...
+    network.Receive();
+    world.Update();
+    players.Update();
+    network.Send();
+    // some stuff to do ...
+
+    return true; // wait for next update
+});
+```
 
 ## Installation
 ```powershell
@@ -11,6 +48,9 @@ $ dotnet add package LogicLooper
 
 ## Usage
 ### Single-loop application
+A Looper bound one thread and begin a main-loop. You can register multiple loop actions for the Looper.
+It's similar to be multiple `Update` methods called in one frame of the game engine.
+
 ```csharp
 using Cysharp.Threading;
 
