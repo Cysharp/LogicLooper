@@ -38,7 +38,7 @@ namespace LoopHostingApp
             //   - See also: LoopHostingApp/Pages/Index.cshtml.cs
             LifeGameLoop.CreateNew(_looperPool, _logger);
 
-            _logger.LogInformation("LoopHostedService is started.");
+            _logger.LogInformation($"LoopHostedService is started. (Loopers={_looperPool.Loopers.Count}; TargetFrameRate={_looperPool.Loopers[0].TargetFrameRate:0}fps)");
 
             return Task.CompletedTask;
         }
