@@ -19,6 +19,8 @@ namespace Cysharp.Threading
     /// </summary>
     public sealed class LogicLooper : IDisposable
     {
+        private static readonly double TimestampsToTicks = TimeSpan.TicksPerSecond / (double)Stopwatch.Frequency;
+
         private static int _looperSequence = 0;
 
         [ThreadStatic]
@@ -254,7 +256,8 @@ namespace Cysharp.Threading
                 }
 
                 var now = Stopwatch.GetTimestamp();
-                var elapsedMilliseconds = (now - begin) / 10000;
+                var elapsedTicks = (now - begin) * TimestampsToTicks;
+                var elapsedMilliseconds = (long)elapsedTicks / TimeSpan.TicksPerMillisecond;
                 _lastProcessingDuration = elapsedMilliseconds;
 
                 var waitForNextFrameMilliseconds = (int)(_targetFrameTimeMilliseconds - elapsedMilliseconds);
