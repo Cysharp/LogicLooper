@@ -190,7 +190,8 @@ namespace Cysharp.Threading
 
                 lock (_lockActions)
                 {
-                    var elapsedTimeFromPreviousFrame = TimeSpan.FromTicks(begin - lastTimestamp);
+                    var elapsedTicksFromPreviousFrame = (long)((begin - lastTimestamp) * TimestampsToTicks);
+                    var elapsedTimeFromPreviousFrame = TimeSpan.FromTicks(elapsedTicksFromPreviousFrame);
                     lastTimestamp = begin;
 
                     var ctx = new LogicLooperActionContext(this, _frame++, elapsedTimeFromPreviousFrame, _ctsAction.Token);
@@ -307,7 +308,7 @@ namespace Cysharp.Threading
 
         internal readonly struct LooperAction
         {
-            public long BeginAt { get; }
+            public DateTimeOffset BeginAt { get; }
             public object? State { get; }
             public Delegate Action { get; }
             public InternalLogicLooperActionDelegate ActionWrapper { get; }
@@ -315,7 +316,7 @@ namespace Cysharp.Threading
 
             public LooperAction(InternalLogicLooperActionDelegate actionWrapper, Delegate action, object? state)
             {
-                BeginAt = Stopwatch.GetTimestamp();
+                BeginAt = DateTimeOffset.Now;
                 ActionWrapper = actionWrapper ?? throw new ArgumentNullException(nameof(actionWrapper));
                 Action = action ?? throw new ArgumentNullException(nameof(action));
                 State = state;

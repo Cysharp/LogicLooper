@@ -10,11 +10,9 @@ namespace LogicLooper.Test
 {
     public class LogicLooperTest
     {
-#if !RUNNING_IN_CI
         [Theory]
         [InlineData(16.6666)] // 60fps
         [InlineData(33.3333)] // 30fps
-#endif
         public async Task TargetFrameTime(double targetFrameTimeMs)
         {
             using var looper = new Cysharp.Threading.LogicLooper(TimeSpan.FromMilliseconds(targetFrameTimeMs));
@@ -22,16 +20,18 @@ namespace LogicLooper.Test
             looper.ApproximatelyRunningActions.Should().Be(0);
             looper.TargetFrameRate.Should().Be(1000 / (double)targetFrameTimeMs);
 
-            var beginTimestamp = Stopwatch.GetTimestamp();
+            var beginTimestamp = DateTime.Now.Ticks;
             var lastTimestamp = beginTimestamp;
             var fps = 0d;
             var task = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
             {
-                var now = Stopwatch.GetTimestamp();
-                var elapsedFromBeginMilliseconds = (now - beginTimestamp) / 10000d;
-                var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / 10000d;
+                var now = DateTime.Now.Ticks;
+                var elapsedFromBeginMilliseconds = (now - beginTimestamp) / TimeSpan.TicksPerMillisecond;
+                var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / TimeSpan.TicksPerMillisecond;
 
-                fps = (fps == 0) ? (1000 / elapsedFromPreviousFrameMilliseconds) : (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
+                if (elapsedFromPreviousFrameMilliseconds == 0) return true;
+
+                fps = (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
 
                 lastTimestamp = now;
 
@@ -52,12 +52,10 @@ namespace LogicLooper.Test
             fps.Should().BeInRange(looper.TargetFrameRate - 2, looper.TargetFrameRate + 2);
         }
 
-#if !RUNNING_IN_CI
         [Theory]
         [InlineData(60)]
         [InlineData(30)]
         [InlineData(20)]
-#endif
         public async Task TargetFrameRate_1(int targetFps)
         {
             using var looper = new Cysharp.Threading.LogicLooper(targetFps);
@@ -65,16 +63,18 @@ namespace LogicLooper.Test
             looper.ApproximatelyRunningActions.Should().Be(0);
             ((int)looper.TargetFrameRate).Should().Be(targetFps);
 
-            var beginTimestamp = Stopwatch.GetTimestamp();
+            var beginTimestamp = DateTime.Now.Ticks;
             var lastTimestamp = beginTimestamp;
             var fps = 0d;
             var task = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
             {
-                var now = Stopwatch.GetTimestamp();
-                var elapsedFromBeginMilliseconds = (now - beginTimestamp) / 10000d;
-                var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / 10000d;
+                var now = DateTime.Now.Ticks;
+                var elapsedFromBeginMilliseconds = (now - beginTimestamp) / TimeSpan.TicksPerMillisecond;
+                var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / TimeSpan.TicksPerMillisecond;
 
-                fps = (fps == 0) ? (1000 / elapsedFromPreviousFrameMilliseconds) : (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
+                if (elapsedFromPreviousFrameMilliseconds == 0) return true;
+
+                fps = (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
 
                 lastTimestamp = now;
 
@@ -204,9 +204,7 @@ namespace LogicLooper.Test
         }
 
 
-#if !RUNNING_IN_CI
         [Fact]
-#endif
         public async Task LastProcessingDuration()
         {
             using var looper = new Cysharp.Threading.LogicLooper(60);
