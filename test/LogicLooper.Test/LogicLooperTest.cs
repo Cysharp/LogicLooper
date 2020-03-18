@@ -29,7 +29,9 @@ namespace LogicLooper.Test
                 var elapsedFromBeginMilliseconds = (now - beginTimestamp) / TimeSpan.TicksPerMillisecond;
                 var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / TimeSpan.TicksPerMillisecond;
 
-                fps = (fps == 0) ? (1000 / elapsedFromPreviousFrameMilliseconds) : (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
+                if (elapsedFromPreviousFrameMilliseconds == 0) return true;
+
+                fps = (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
 
                 lastTimestamp = now;
 
@@ -37,13 +39,13 @@ namespace LogicLooper.Test
             });
 
             // wait for moving action from queue to actions.
-            await Task.Delay(300);
+            await Task.Delay(100);
 
             looper.ApproximatelyRunningActions.Should().Be(1);
 
             await task;
 
-            await Task.Delay(300);
+            await Task.Delay(100);
 
             looper.ApproximatelyRunningActions.Should().Be(0);
 
@@ -70,7 +72,9 @@ namespace LogicLooper.Test
                 var elapsedFromBeginMilliseconds = (now - beginTimestamp) / TimeSpan.TicksPerMillisecond;
                 var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / TimeSpan.TicksPerMillisecond;
 
-                fps = (fps == 0) ? (1000 / elapsedFromPreviousFrameMilliseconds) : (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
+                if (elapsedFromPreviousFrameMilliseconds == 0) return true;
+
+                fps = (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
 
                 lastTimestamp = now;
 
@@ -78,13 +82,13 @@ namespace LogicLooper.Test
             });
 
             // wait for moving action from queue to actions.
-            await Task.Delay(300);
+            await Task.Delay(100);
 
             looper.ApproximatelyRunningActions.Should().Be(1);
 
             await task;
 
-            await Task.Delay(300);
+            await Task.Delay(100);
 
             looper.ApproximatelyRunningActions.Should().Be(0);
 
