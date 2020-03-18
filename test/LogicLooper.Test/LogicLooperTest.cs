@@ -10,11 +10,9 @@ namespace LogicLooper.Test
 {
     public class LogicLooperTest
     {
-#if !RUNNING_IN_CI
         [Theory]
         [InlineData(16.6666)] // 60fps
         [InlineData(33.3333)] // 30fps
-#endif
         public async Task TargetFrameTime(double targetFrameTimeMs)
         {
             using var looper = new Cysharp.Threading.LogicLooper(TimeSpan.FromMilliseconds(targetFrameTimeMs));
@@ -52,12 +50,10 @@ namespace LogicLooper.Test
             fps.Should().BeInRange(looper.TargetFrameRate - 2, looper.TargetFrameRate + 2);
         }
 
-#if !RUNNING_IN_CI
         [Theory]
         [InlineData(60)]
         [InlineData(30)]
         [InlineData(20)]
-#endif
         public async Task TargetFrameRate_1(int targetFps)
         {
             using var looper = new Cysharp.Threading.LogicLooper(targetFps);
@@ -204,9 +200,7 @@ namespace LogicLooper.Test
         }
 
 
-#if !RUNNING_IN_CI
         [Fact]
-#endif
         public async Task LastProcessingDuration()
         {
             using var looper = new Cysharp.Threading.LogicLooper(60);
