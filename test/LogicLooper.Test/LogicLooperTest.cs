@@ -20,14 +20,14 @@ namespace LogicLooper.Test
             looper.ApproximatelyRunningActions.Should().Be(0);
             looper.TargetFrameRate.Should().Be(1000 / (double)targetFrameTimeMs);
 
-            var beginTimestamp = Stopwatch.GetTimestamp();
+            var beginTimestamp = DateTime.Now.Ticks;
             var lastTimestamp = beginTimestamp;
             var fps = 0d;
             var task = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
             {
-                var now = Stopwatch.GetTimestamp();
-                var elapsedFromBeginMilliseconds = (now - beginTimestamp) / 10000d;
-                var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / 10000d;
+                var now = DateTime.Now.Ticks;
+                var elapsedFromBeginMilliseconds = (now - beginTimestamp) / TimeSpan.TicksPerMillisecond;
+                var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / TimeSpan.TicksPerMillisecond;
 
                 fps = (fps == 0) ? (1000 / elapsedFromPreviousFrameMilliseconds) : (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
 
@@ -37,13 +37,13 @@ namespace LogicLooper.Test
             });
 
             // wait for moving action from queue to actions.
-            await Task.Delay(100);
+            await Task.Delay(300);
 
             looper.ApproximatelyRunningActions.Should().Be(1);
 
             await task;
 
-            await Task.Delay(100);
+            await Task.Delay(300);
 
             looper.ApproximatelyRunningActions.Should().Be(0);
 
@@ -61,14 +61,14 @@ namespace LogicLooper.Test
             looper.ApproximatelyRunningActions.Should().Be(0);
             ((int)looper.TargetFrameRate).Should().Be(targetFps);
 
-            var beginTimestamp = Stopwatch.GetTimestamp();
+            var beginTimestamp = DateTime.Now.Ticks;
             var lastTimestamp = beginTimestamp;
             var fps = 0d;
             var task = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
             {
-                var now = Stopwatch.GetTimestamp();
-                var elapsedFromBeginMilliseconds = (now - beginTimestamp) / 10000d;
-                var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / 10000d;
+                var now = DateTime.Now.Ticks;
+                var elapsedFromBeginMilliseconds = (now - beginTimestamp) / TimeSpan.TicksPerMillisecond;
+                var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / TimeSpan.TicksPerMillisecond;
 
                 fps = (fps == 0) ? (1000 / elapsedFromPreviousFrameMilliseconds) : (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
 
@@ -78,13 +78,13 @@ namespace LogicLooper.Test
             });
 
             // wait for moving action from queue to actions.
-            await Task.Delay(100);
+            await Task.Delay(300);
 
             looper.ApproximatelyRunningActions.Should().Be(1);
 
             await task;
 
-            await Task.Delay(100);
+            await Task.Delay(300);
 
             looper.ApproximatelyRunningActions.Should().Be(0);
 
