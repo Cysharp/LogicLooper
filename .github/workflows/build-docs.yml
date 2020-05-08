@@ -7,6 +7,7 @@ on:
 
 jobs:
   run-docfx:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: nikeee/docfx-action@master
