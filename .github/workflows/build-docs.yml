@@ -18,3 +18,8 @@ jobs:
         name: Docfx build
         with:
           args: build docs/docfx.json
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_site
