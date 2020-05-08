@@ -64,7 +64,7 @@
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
-      "default-v2.5.2",
+      "templates/default-v2.5.2",
       "templates/cysharp"
     ],
     "postProcessors": [],
