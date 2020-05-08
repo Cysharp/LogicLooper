@@ -1,6 +1,7 @@
 :root {
     --color-text-base: #151515;
     --color-link-base: #0065b3;
+    --color-background-base: #fff;
     --font-family-base: 'Segoe UI', 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Arial', sans-serif;
     --icon-github-icon: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2Ij48cGF0aCBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik04IDBDMy41OCAwIDAgMy41OCAwIDhjMCAzLjU0IDIuMjkgNi41MyA1LjQ3IDcuNTkuNC4wNy41NS0uMTcuNTUtLjM4IDAtLjE5LS4wMS0uODItLjAxLTEuNDktMi4wMS4zNy0yLjUzLS40OS0yLjY5LS45NC0uMDktLjIzLS40OC0uOTQtLjgyLTEuMTMtLjI4LS4xNS0uNjgtLjUyLS4wMS0uNTMuNjMtLjAxIDEuMDguNTggMS4yMy44Mi43MiAxLjIxIDEuODcuODcgMi4zMy42Ni4wNy0uNTIuMjgtLjg3LjUxLTEuMDctMS43OC0uMi0zLjY0LS44OS0zLjY0LTMuOTUgMC0uODcuMzEtMS41OS44Mi0yLjE1LS4wOC0uMi0uMzYtMS4wMi4wOC0yLjEyIDAgMCAuNjctLjIxIDIuMi44Mi42NC0uMTggMS4zMi0uMjcgMi0uMjcuNjggMCAxLjM2LjA5IDIgLjI3IDEuNTMtMS4wNCAyLjItLjgyIDIuMi0uODIuNDQgMS4xLjE2IDEuOTIuMDggMi4xMi41MS41Ni44MiAxLjI3LjgyIDIuMTUgMCAzLjA3LTEuODcgMy43NS0zLjY1IDMuOTUuMjkuMjUuNTQuNzMuNTQgMS40OCAwIDEuMDctLjAxIDEuOTMtLjAxIDIuMiAwIC4yMS4xNS40Ni41NS4zOEE4LjAxMyA4LjAxMyAwIDAwMTYgOGMwLTQuNDItMy41OC04LTgtOHoiPjwvcGF0aD48L3N2Zz4=);
 }
@@ -65,7 +66,7 @@ header .navbar {
 
 /* Table of contents (side) */
 .sidefilter {
-    background: #fff;
+    background: var(--color-background-base);
     border-bottom: 1px solid #c7c7c7;
     border: none;
 }
@@ -74,11 +75,11 @@ header .navbar {
     border-radius: 0;
 }
 .sidetoc {
-    background: #fff;
+    background: var(--color-background-base);
     border: none;
 }
 .sidetoc .toc {
-    background: #fff;
+    background: var(--color-background-base);
 }
 
 .toc .nav > li {
@@ -92,9 +93,19 @@ header .navbar {
 .article {
     margin-top: 96px;
 }
+article section {
+    margin: 0;
+}
 article :not(div) + h3 {
     margin-top: 50px;
 }
+article section h4 {
+    margin-top: 3.5em;
+}
+article h3 + section h4 {
+    margin-top: 2em;
+}
+
 pre {
     padding: 4px;
     border-radius: 0;
@@ -117,9 +128,23 @@ pre {
     margin-top: 2em;
 }
 
+.propertyValue, .decalaration, .fieldValue, .parameters, .returns {
+    color: var(--color-text-base);
+}
+
 .cysharpdocfx-category {
     color: #ccc;
     font-weight: normal;
+}
+.cysharpdocfx-valuedefinition dt {
+    font-weight: normal;
+}
+.cysharpdocfx-valuedefinition dt:not(:first-child) {
+    margin-top: 1rem;
+}
+.cysharpdocfx-valuedefinition .parametername {
+    font-weight: bold;
+    font-style: normal;
 }
 
 /* Right side */

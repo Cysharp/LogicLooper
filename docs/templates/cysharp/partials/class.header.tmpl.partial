@@ -1,5 +1,4 @@
 {{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}}
-
 <h1 id="{{id}}" data-uid="{{uid}}" class="text-break">{{>partials/title}}</h1>
 <h6><strong>{{__global.namespace}}</strong>: {{{namespace.specName.0.value}}}</h6>
 <h6><strong>{{__global.assembly}}</strong>: {{assemblies.0}}.dll</h6>
@@ -63,66 +62,43 @@
 {{/__false}}
 
 {{#syntax.parameters.0}}
-<h5 class="parameters">{{__global.parameters}}</h5>
-<table class="table table-bordered table-striped table-condensed">
-  <thead>
-    <tr>
-      <th>{{__global.type}}</th>
-      <th>{{__global.name}}</th>
-      <th>{{__global.description}}</th>
-    </tr>
-  </thead>
-  <tbody>
+<section>
+<h4 class="parameters">{{__global.parameters}}</h4>
+<dl class="cysharpdocfx-valuedefinition">
 {{/syntax.parameters.0}}
 {{#syntax.parameters}}
-    <tr>
-      <td>{{{type.specName.0.value}}}</td>
-      <td><span class="parametername">{{{id}}}</span></td>
-      <td>{{{description}}}</td>
-    </tr>
+  <dt><span class="parametername"><code>{{{id}}}</code></span> {{{type.specName.0.value}}}</dt>
+  <dd>{{{description}}}</dd>
 {{/syntax.parameters}}
 {{#syntax.parameters.0}}
-  </tbody>
-</table>
+</dl>
+</section>
 {{/syntax.parameters.0}}
+
 {{#syntax.return}}
-<h5 class="returns">{{__global.returns}}</h5>
-<table class="table table-bordered table-striped table-condensed">
-  <thead>
-    <tr>
-      <th>{{__global.type}}</th>
-      <th>{{__global.description}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{{type.specName.0.value}}}</td>
-      <td>{{{description}}}</td>
-    </tr>
-  </tbody>
-</table>
+<section>
+<h4 class="returns">{{__global.returns}}</h4>
+<dl class="cysharpdocfx-valuedefinition">
+  <dt>{{{type.specName.0.value}}}</dt>
+  <dd>{{{description}}}</dd>
+</dl>
+</section>
 {{/syntax.return}}
+
 {{#syntax.typeParameters.0}}
-<h5 class="typeParameters">{{__global.typeParameters}}</h5>
-<table class="table table-bordered table-striped table-condensed">
-  <thead>
-    <tr>
-      <th>{{__global.name}}</th>
-      <th>{{__global.description}}</th>
-    </tr>
-  </thead>
-  <tbody>
+<section>
+<h4 class="typeParameters">{{__global.typeParameters}}</h4>
+<dl class="cysharpdocfx-valuedefinition">
 {{/syntax.typeParameters.0}}
 {{#syntax.typeParameters}}
-    <tr>
-      <td><span class="parametername">{{{id}}}</span></td>
-      <td>{{{description}}}</td>
-    </tr>
+  <dt><span class="parametername"><code>{{{id}}}</code></span></dt>
+  <dd>{{{description}}}</dd>
 {{/syntax.typeParameters}}
 {{#syntax.typeParameters.0}}
-  </tbody>
-</table>
+</dl>
+</section>
 {{/syntax.typeParameters.0}}
+
 {{#remarks}}
 <h5 id="{{id}}_remarks"><strong>{{__global.remarks}}</strong></h5>
 <div class="markdown level0 remarks">{{{remarks}}}</div>
