@@ -1,3 +1,6 @@
+---
+title: Home
+---
 # LogicLooper
 A library is for building server application using loop-action programming model on .NET Core. This library focuses on building game servers with server-side logic.
 
