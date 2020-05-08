@@ -908,15 +908,12 @@ references:
   isSpec: "True"
   fullName: Cysharp.Threading.LogicLooperPool.Dispose
   nameWithType: LogicLooperPool.Dispose
-- uid: Cysharp.Threading.LogicLooperPool.InitializeSharedPool(System.Int32,System.Int32,System.Nullable{Cysharp.Threading.ILogicLooperPoolBalancer})
-  name: InitializeSharedPool(Int32, Int32, Nullable<ILogicLooperPoolBalancer>)
-  href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_InitializeSharedPool_System_Int32_System_Int32_System_Nullable_Cysharp_Threading_ILogicLooperPoolBalancer__
-  commentId: M:Cysharp.Threading.LogicLooperPool.InitializeSharedPool(System.Int32,System.Int32,System.Nullable{Cysharp.Threading.ILogicLooperPoolBalancer})
-  name.vb: InitializeSharedPool(Int32, Int32, Nullable(Of ILogicLooperPoolBalancer))
-  fullName: Cysharp.Threading.LogicLooperPool.InitializeSharedPool(System.Int32, System.Int32, System.Nullable<Cysharp.Threading.ILogicLooperPoolBalancer>)
-  fullName.vb: Cysharp.Threading.LogicLooperPool.InitializeSharedPool(System.Int32, System.Int32, System.Nullable(Of Cysharp.Threading.ILogicLooperPoolBalancer))
-  nameWithType: LogicLooperPool.InitializeSharedPool(Int32, Int32, Nullable<ILogicLooperPoolBalancer>)
-  nameWithType.vb: LogicLooperPool.InitializeSharedPool(Int32, Int32, Nullable(Of ILogicLooperPoolBalancer))
+- uid: Cysharp.Threading.LogicLooperPool.InitializeSharedPool(System.Int32,System.Int32,Cysharp.Threading.ILogicLooperPoolBalancer)
+  name: InitializeSharedPool(Int32, Int32, ILogicLooperPoolBalancer)
+  href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_InitializeSharedPool_System_Int32_System_Int32_Cysharp_Threading_ILogicLooperPoolBalancer_
+  commentId: M:Cysharp.Threading.LogicLooperPool.InitializeSharedPool(System.Int32,System.Int32,Cysharp.Threading.ILogicLooperPoolBalancer)
+  fullName: Cysharp.Threading.LogicLooperPool.InitializeSharedPool(System.Int32, System.Int32, Cysharp.Threading.ILogicLooperPoolBalancer)
+  nameWithType: LogicLooperPool.InitializeSharedPool(Int32, Int32, ILogicLooperPoolBalancer)
 - uid: Cysharp.Threading.LogicLooperPool.InitializeSharedPool*
   name: InitializeSharedPool
   href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_InitializeSharedPool_

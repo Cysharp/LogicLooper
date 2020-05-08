@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="LogicLooperPool Class
    | LogicLooper ">
-    <meta name="generator" content="docfx 2.45.1.0">
+    <meta name="generator" content="docfx 2.51.0.0">
     
     <link rel="shortcut icon" href="../Icon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -151,7 +151,7 @@
         <td>
           <a class="xref" href="Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_Shared">Shared</a>
         </td>
-        <td class="markdown level1 summary"><p>Gets the shared pool of loopers. Requires to call <a class="xref" href="Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_InitializeSharedPool_System_Int32_System_Int32_System_Nullable_Cysharp_Threading_ILogicLooperPoolBalancer__">InitializeSharedPool(Int32, Int32, Nullable&lt;ILogicLooperPoolBalancer&gt;)</a> method before use.</p>
+        <td class="markdown level1 summary"><p>Gets the shared pool of loopers. Requires to call <a class="xref" href="Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_InitializeSharedPool_System_Int32_System_Int32_Cysharp_Threading_ILogicLooperPoolBalancer_">InitializeSharedPool(Int32, Int32, ILogicLooperPoolBalancer)</a> method before use.</p>
 </td>
       </tr>
     </tbody>
@@ -174,7 +174,7 @@
       </tr>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_InitializeSharedPool_System_Int32_System_Int32_System_Nullable_Cysharp_Threading_ILogicLooperPoolBalancer__">InitializeSharedPool(Int32, Int32, Nullable&lt;ILogicLooperPoolBalancer&gt;)</a>
+          <a class="xref" href="Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_InitializeSharedPool_System_Int32_System_Int32_Cysharp_Threading_ILogicLooperPoolBalancer_">InitializeSharedPool(Int32, Int32, ILogicLooperPoolBalancer)</a>
         </td>
         <td class="markdown level1 summary"><p>Initializes the shared pool of loopers with specified options.</p>
 </td>
@@ -190,7 +190,8 @@
         <td>
           <a class="xref" href="Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_">RegisterActionAsync&lt;TState&gt;(LogicLooperActionWithStateDelegate&lt;TState&gt;, TState)</a>
         </td>
-        <td class="markdown level1 summary"></td>
+        <td class="markdown level1 summary"><p>Registers an loop-frame action with state object to a pooled looper and returns <see cref="!:Task"></see> to wait for completion.</p>
+</td>
       </tr>
       <tr>
         <td>
@@ -310,7 +311,7 @@
   <section>
   <a id="Cysharp_Threading_LogicLooperPool_Shared_" data-uid="Cysharp.Threading.LogicLooperPool.Shared*"></a>
   <h4 id="Cysharp_Threading_LogicLooperPool_Shared" data-uid="Cysharp.Threading.LogicLooperPool.Shared">Shared</h4>
-  <div class="markdown level1 summary"><p>Gets the shared pool of loopers. Requires to call <a class="xref" href="Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_InitializeSharedPool_System_Int32_System_Int32_System_Nullable_Cysharp_Threading_ILogicLooperPoolBalancer__">InitializeSharedPool(Int32, Int32, Nullable&lt;ILogicLooperPoolBalancer&gt;)</a> method before use.</p>
+  <div class="markdown level1 summary"><p>Gets the shared pool of loopers. Requires to call <a class="xref" href="Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_InitializeSharedPool_System_Int32_System_Int32_Cysharp_Threading_ILogicLooperPoolBalancer_">InitializeSharedPool(Int32, Int32, ILogicLooperPoolBalancer)</a> method before use.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   
@@ -365,13 +366,13 @@
   </section>
   <section>
   <a id="Cysharp_Threading_LogicLooperPool_InitializeSharedPool_" data-uid="Cysharp.Threading.LogicLooperPool.InitializeSharedPool*"></a>
-  <h4 id="Cysharp_Threading_LogicLooperPool_InitializeSharedPool_System_Int32_System_Int32_System_Nullable_Cysharp_Threading_ILogicLooperPoolBalancer__" data-uid="Cysharp.Threading.LogicLooperPool.InitializeSharedPool(System.Int32,System.Int32,System.Nullable{Cysharp.Threading.ILogicLooperPoolBalancer})">InitializeSharedPool(Int32, Int32, Nullable&lt;ILogicLooperPoolBalancer&gt;)</h4>
+  <h4 id="Cysharp_Threading_LogicLooperPool_InitializeSharedPool_System_Int32_System_Int32_Cysharp_Threading_ILogicLooperPoolBalancer_" data-uid="Cysharp.Threading.LogicLooperPool.InitializeSharedPool(System.Int32,System.Int32,Cysharp.Threading.ILogicLooperPoolBalancer)">InitializeSharedPool(Int32, Int32, ILogicLooperPoolBalancer)</h4>
   <div class="markdown level1 summary"><p>Initializes the shared pool of loopers with specified options.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void InitializeSharedPool(int targetFrameRate, int looperCount = 0, ILogicLooperPoolBalancer? balancer = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void InitializeSharedPool(int targetFrameRate, int looperCount = 0, ILogicLooperPoolBalancer balancer = null)</code></pre>
   </div>
 
   <section>
@@ -381,7 +382,7 @@
     <dd></dd>
     <dt><span class="parametername"><code>looperCount</code></span> <span class="xref">System.Int32</span></dt>
     <dd></dd>
-    <dt><span class="parametername"><code>balancer</code></span> <span class="xref">System.Nullable</span>&lt;<a class="xref" href="Cysharp.Threading.ILogicLooperPoolBalancer.html">ILogicLooperPoolBalancer</a>&gt;</dt>
+    <dt><span class="parametername"><code>balancer</code></span> <a class="xref" href="Cysharp.Threading.ILogicLooperPoolBalancer.html">ILogicLooperPoolBalancer</a></dt>
     <dd></dd>
   </dl>
   </section>
@@ -439,7 +440,8 @@
   <section>
   <a id="Cysharp_Threading_LogicLooperPool_RegisterActionAsync_" data-uid="Cysharp.Threading.LogicLooperPool.RegisterActionAsync*"></a>
   <h4 id="Cysharp_Threading_LogicLooperPool_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_" data-uid="Cysharp.Threading.LogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0)">RegisterActionAsync&lt;TState&gt;(LogicLooperActionWithStateDelegate&lt;TState&gt;, TState)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Registers an loop-frame action with state object to a pooled looper and returns <see cref="!:Task"></see> to wait for completion.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   
   <div class="codewrapper">
