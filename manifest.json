@@ -1,0 +1,287 @@
+{
+  "homepages": [],
+  "source_base_path": "/github/workspace/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineAsyncValueTaskMethodBuilder-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineAsyncValueTaskMethodBuilder-1.html",
+          "hash": "dZbCg3PQsrj/NgmdTIrYtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineAsyncValueTaskMethodBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineAsyncValueTaskMethodBuilder.html",
+          "hash": "GF22cshbz83Z2dJmlgkBOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineFrameAwaitable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineFrameAwaitable.html",
+          "hash": "9L+gSIt8N8NPhAVYNPadIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.CompilerServices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.CompilerServices.html",
+          "hash": "ic3bbAa+nWo1eomboshNZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.ILogicLooperPool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.ILogicLooperPool.html",
+          "hash": "xzJwp3ePk9wekvSEvNMnVw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.ILogicLooperPoolBalancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.ILogicLooperPoolBalancer.html",
+          "hash": "03zMLOzvKWbaEO+aPu6Bjg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooper.html",
+          "hash": "a8tMsxQccNvdVHA7OIraJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperActionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperActionContext.html",
+          "hash": "ejHrES4kueKSX2EOnVAAAw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperActionDelegate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperActionDelegate.html",
+          "hash": "fcbhHEkSiyLFQEGdSKrAcg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperActionWithStateDelegate-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperActionWithStateDelegate-1.html",
+          "hash": "/n+E/lVFT8TniEw7dVXUQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperCoroutine-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperCoroutine-1.html",
+          "hash": "EW5NCZgFxe3T/cH++DFICA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperCoroutine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperCoroutine.html",
+          "hash": "9vQ/XnoEU91rf709QL72EA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperCoroutineActionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperCoroutineActionContext.html",
+          "hash": "7thhqaBJXqSQrB3VjBNA5A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperPool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperPool.html",
+          "hash": "lCaZ+Ku83nB5A0Y9WqeQHA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.RoundRobinLogicLooperPoolBalancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.RoundRobinLogicLooperPoolBalancer.html",
+          "hash": "bZA8JUQlIVt/7ZY7MLygyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.html",
+          "hash": "pRgNvUpIYlaHsjTw+6HHvQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "FKjLJ0/b8RgVcJmvYLky2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "rpojrp2ffgaFkcyNG8UQ7Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "r0/ZnY1aAvrf7qk1WwTmgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 1,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 16,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
