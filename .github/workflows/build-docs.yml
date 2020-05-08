@@ -1,0 +1,19 @@
+name: build-docs
+
+on:
+  push:
+    branch:
+      - feature/docs
+
+jobs:
+  run-docfx:
+    steps:
+      - uses: actions/checkout@v2
+      - uses: nikeee/docfx-action@master
+        name: Docfx metadata
+        with:
+          args: metadata docs/docfx.json
+      - uses: nikeee/docfx-action@master
+        name: Docfx build
+        with:
+          args: build docs/docfx.json
