@@ -1,8 +1,16 @@
 {{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}}
 
 <h1 id="{{id}}" data-uid="{{uid}}" class="text-break">{{>partials/title}}</h1>
+<h6><strong>{{__global.namespace}}</strong>: {{{namespace.specName.0.value}}}</h6>
+<h6><strong>{{__global.assembly}}</strong>: {{assemblies.0}}.dll</h6>
+
 <div class="markdown level0 summary">{{{summary}}}</div>
 <div class="markdown level0 conceptual">{{{conceptual}}}</div>
+
+<div class="codewrapper">
+  <pre><code class="lang-{{_lang}} hljs">{{syntax.content.0.value}}</code></pre>
+</div>
+
 {{#inClass}}
 <div class="inheritance">
   <h5>{{__global.inheritance}}</h5>
@@ -11,7 +19,6 @@
   {{/inheritance}}
   <span class="xref">{{name.0.value}}</span>
 </div>
-
 {{#derivedClasses.0}}
 <div class="inheritance">
   <h5>Derived</h5>
@@ -22,8 +29,8 @@
 {{#derivedClasses.0}}
 </div>
 {{/derivedClasses.0}}
-
 {{/inClass}}
+
 {{#implements.0}}
 <div classs="implements">
   <h5>{{__global.implements}}</h5>
@@ -34,6 +41,8 @@
 {{#implements.0}}
 </div>
 {{/implements.0}}
+
+{{#__false}}
 {{#inheritedMembers.0}}
 <div class="inheritedMembers">
   <h5>{{__global.inheritedMembers}}</h5>
@@ -51,12 +60,8 @@
 {{#inheritedMembers.0}}
 </div>
 {{/inheritedMembers.0}}
-<h6><strong>{{__global.namespace}}</strong>: {{{namespace.specName.0.value}}}</h6>
-<h6><strong>{{__global.assembly}}</strong>: {{assemblies.0}}.dll</h6>
-<h5 id="{{id}}_syntax">{{__global.syntax}}</h5>
-<div class="codewrapper">
-  <pre><code class="lang-{{_lang}} hljs">{{syntax.content.0.value}}</code></pre>
-</div>
+{{/__false}}
+
 {{#syntax.parameters.0}}
 <h5 class="parameters">{{__global.parameters}}</h5>
 <table class="table table-bordered table-striped table-condensed">

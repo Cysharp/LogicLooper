@@ -102,15 +102,7 @@ pre {
 .inheritance h5, .inheritedMembers h5 {
     border: none;
 }
-
-/* Right side */
-.sideaffix {
-    margin-top: 18px;
-}
-.affix h5 {
-    text-transform: none;
-}
-a[href^='https://github.com/']::before {
+.article a[href^='https://github.com/']::before {
     content: '';
     background: var(--icon-github-icon);
     width: 18px;
@@ -119,6 +111,23 @@ a[href^='https://github.com/']::before {
     vertical-align: middle;
     display: inline-block;
     margin-right: 0.5rem;
+}
+#constructors, #members {
+    font-weight: bold;
+    margin-top: 2em;
+}
+
+.cysharpdocfx-category {
+    color: #ccc;
+    font-weight: normal;
+}
+
+/* Right side */
+.sideaffix {
+    margin-top: 18px;
+}
+.affix h5 {
+    text-transform: none;
 }
 
 
