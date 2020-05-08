@@ -3,7 +3,7 @@ name: build-docs
 on:
   push:
     branch:
-      - feature/docs
+      - master
 
 jobs:
   run-docfx:
