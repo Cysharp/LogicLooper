@@ -1,3 +1,6 @@
 - name: API Documentation
   href: api/
   homepage: api/Cysharp.Threading.html
+- name: Repository
+  href: https://github.com/Cysharp/LogicLooper
+  homepage: https://github.com/Cysharp/LogicLooper
