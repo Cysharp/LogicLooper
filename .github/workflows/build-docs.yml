@@ -2,7 +2,7 @@ name: build-docs
 
 on:
   push:
-    branch:
+    branches:
       - master
 
 jobs:
