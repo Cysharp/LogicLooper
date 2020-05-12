@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineAsyncValueTaskMethodBuilder-1.html",
-          "hash": "16nyCUmts2JwgaIIejReCw=="
+          "hash": "7UXS/qRUaT0GSobG3gJ0gw=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineAsyncValueTaskMethodBuilder.html",
-          "hash": "g4SnVpIw36VeaotI3eVPQw=="
+          "hash": "8+IXR1aqislOskkCWwUTjA=="
         }
       },
       "is_incremental": false,
@@ -33,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineFrameAwaitable.html",
-          "hash": "RLFKVdQFSJgITjOQophJ3A=="
+          "hash": "6tYhBplR95BJUEMcqHDS8g=="
         }
       },
       "is_incremental": false,
@@ -45,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.CompilerServices.html",
-          "hash": "Bj3w3A0Yk0NAs/Bfxci5IA=="
+          "hash": "zixeiJLgSYvX0hjingDG4g=="
         }
       },
       "is_incremental": false,
@@ -57,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.ILogicLooperPool.html",
-          "hash": "ldlSJO7HuKm7l0iTL3ISQA=="
+          "hash": "W2s/Ra+7LSIWgoCEZTXFIw=="
         }
       },
       "is_incremental": false,
@@ -69,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.ILogicLooperPoolBalancer.html",
-          "hash": "mkGA7O9Cz/dQgr0XRRFYgA=="
+          "hash": "DAgJOph6sPfJaOotJa45SA=="
         }
       },
       "is_incremental": false,
@@ -81,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.LogicLooper.html",
-          "hash": "Xr1GoLBeyrPovT7OmRolIA=="
+          "hash": "bp+/FJaHLjZr8Ax4arWjbA=="
         }
       },
       "is_incremental": false,
@@ -93,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.LogicLooperActionContext.html",
-          "hash": "4bVutFmoBCUeLgIc4y9cJg=="
+          "hash": "FwwEvTT5bKkFDeAh6Jse8w=="
         }
       },
       "is_incremental": false,
@@ -105,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.LogicLooperActionDelegate.html",
-          "hash": "5sJN57EaLRMb2z1lt9bWcA=="
+          "hash": "BJ/81fJU9JLhmzND2DlO3w=="
         }
       },
       "is_incremental": false,
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.LogicLooperActionWithStateDelegate-1.html",
-          "hash": "U+l3eh1Qz6QFVWs4NngYvQ=="
+          "hash": "sxxMeIPhBgXxhghXUMvThw=="
         }
       },
       "is_incremental": false,
@@ -129,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.LogicLooperCoroutine-1.html",
-          "hash": "k5+2sD1kqjeJCukLIR+iNw=="
+          "hash": "TWNSa07QN+W+AVg4k9y+Rg=="
         }
       },
       "is_incremental": false,
@@ -141,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.LogicLooperCoroutine.html",
-          "hash": "3wQApXbsf877pxe2B/M2pw=="
+          "hash": "g978uiYKJZkZsRAwpKfKEA=="
         }
       },
       "is_incremental": false,
@@ -153,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.LogicLooperCoroutineActionContext.html",
-          "hash": "gnB8l9zhKvG15FjtXx0uMA=="
+          "hash": "LNcMFruRKPDjCd+D8eBFrQ=="
         }
       },
       "is_incremental": false,
@@ -165,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.LogicLooperPool.html",
-          "hash": "RL/M9+l2NRdeplpGzjGJpA=="
+          "hash": "W5G3Ndo3gcx7xGQskRbz0A=="
         }
       },
       "is_incremental": false,
@@ -177,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.RoundRobinLogicLooperPoolBalancer.html",
-          "hash": "k9SAnDOylfzvzKwcJqNbbQ=="
+          "hash": "/vFCUuMpPmMTU2w8rYMJ4g=="
         }
       },
       "is_incremental": false,
@@ -189,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Cysharp.Threading.html",
-          "hash": "J+CSJ4fxs4S5O1kRDvb+xA=="
+          "hash": "JfANil6VnkYbLIbdEIycig=="
         }
       },
       "is_incremental": false,
@@ -213,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "QmOKMO8uPcIxQwfqX5HBtA=="
+          "hash": "PhUHdE5lXyUmYFqJH8pENw=="
         }
       },
       "is_incremental": false,
