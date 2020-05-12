@@ -1,4 +1,4 @@
-name: build-docs
+name: Build-Master
 
 on:
   push:
@@ -21,6 +21,6 @@ jobs:
       - run: dotnet build -c Debug -p:DefineConstants=RUNNING_IN_CI
       - run: dotnet pack ./src/LogicLooper/LogicLooper.csproj -c Debug --no-build -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
       - run: dotnet test -c Debug --no-build
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         with:
           path: ./src/LogicLooper/bin/Debug/*.*nupkg
