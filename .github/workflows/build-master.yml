@@ -1,0 +1,26 @@
+name: build-docs
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "!*" # not a tag push
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  build-debug-test:
+    if: "!(contains(github.event.head_commit.message, '[skip ci]') || contains(github.event.head_commit.message, '[ci skip]'))"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo ::set-env name=GIT_TAG::${GITHUB_REF#refs/tags/}
+      - run: dotnet build -c Debug -p:DefineConstants=RUNNING_IN_CI
+      - run: dotnet pack ./src/LogicLooper/LogicLooper.csproj -c Debug --no-build -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+      - run: dotnet test -c Debug --no-build
+      - uses: actions/upload-artifact@v1
+        with:
+          path: ./src/LogicLooper/bin/Debug/*.*nupkg
