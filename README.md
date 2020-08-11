@@ -1,5 +1,6 @@
+[![GitHub Actions](https://github.com/Cysharp/LogicLooper/workflows/Build-Debug/badge.svg)](https://github.com/Cysharp/LogicLooper/actions) [![Releases](https://img.shields.io/github/release/Cysharp/LogicLooper.svg)](https://github.com/Cysharp/LogicLooper/releases)
+
 # LogicLooper
-[![CircleCI](https://circleci.com/gh/Cysharp/LogicLooper.svg?style=svg)](https://circleci.com/gh/Cysharp/LogicLooper) [![NuGet Package: LogicLooper](https://img.shields.io/nuget/vpre/LogicLooper?label=NuGet%3A%20LogicLooper)](https://www.nuget.org/packages/LogicLooper)
 
 [日本語](README.ja.md)
 
@@ -37,6 +38,11 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
     return true; // wait for next update
 });
 ```
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation
 ```powershell
