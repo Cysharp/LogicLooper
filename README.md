@@ -42,6 +42,15 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 ## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Single-loop application](#single-loop-application)
+  - [Multiple-loop application using LooperPool](#multiple-loop-application-using-looperpool)
+  - [Integrate with Microsoft.Extensions.Hosting](#integrate-with-microsoftextensionshosting)
+- [Advanced](#advanced)
+  - [Coroutine](#coroutine)
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation
