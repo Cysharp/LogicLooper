@@ -3,7 +3,7 @@ name: Build-Master
 on:
   push:
     branches:
-      - "**"
+      - "master"
     tags:
       - "!*" # not a tag push
   pull_request:
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: echo ::set-env name=GIT_TAG::${GITHUB_REF#refs/tags/}
+      - run: echo "GIT_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - run: dotnet build -c Debug -p:DefineConstants=RUNNING_IN_CI
       - run: dotnet pack ./src/LogicLooper/LogicLooper.csproj -c Debug --no-build -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
       - run: dotnet test -c Debug --no-build
