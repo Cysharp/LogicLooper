@@ -10,7 +10,7 @@ jobs:
     if: "!(contains(github.event.head_commit.message, '[skip ci]') || contains(github.event.head_commit.message, '[ci skip]'))"
     steps:
       - uses: actions/checkout@v2
-      - run: echo ::set-env name=GIT_TAG::${GITHUB_REF#refs/tags/}
+      - run: echo "GIT_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - run: dotnet build -c Release -p:VersionPrefix=${{ env.GIT_TAG }} -p:DefineConstants=RUNNING_IN_CI
       - run: dotnet test -c Release --no-build
       - run: dotnet pack ./src/LogicLooper/LogicLooper.csproj -c Release --no-build -p:VersionPrefix=${{ env.GIT_TAG }} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
