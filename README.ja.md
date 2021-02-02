@@ -34,6 +34,20 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 });
 ```
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [インストール](#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB)
+- [使い方](#%E4%BD%BF%E3%81%84%E6%96%B9)
+  - [一つのループ](#%E4%B8%80%E3%81%A4%E3%81%AE%E3%83%AB%E3%83%BC%E3%83%97)
+  - [LooperPool を使用した複数の Looper](#looperpool-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E8%A4%87%E6%95%B0%E3%81%AE-looper)
+  - [Microsoft.Extensions.Hosting との統合](#microsoftextensionshosting-%E3%81%A8%E3%81%AE%E7%B5%B1%E5%90%88)
+- [上級編](#%E4%B8%8A%E7%B4%9A%E7%B7%A8)
+  - [Coroutine](#coroutine)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## インストール
 ```powershell
 PS> Install-Package LogicLooper

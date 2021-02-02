@@ -6,13 +6,53 @@ on:
       - "[0-9]+.[0-9]+.[0-9]+*" # only tag
 
 jobs:
-  build-release:
-    if: "!(contains(github.event.head_commit.message, '[skip ci]') || contains(github.event.head_commit.message, '[ci skip]'))"
+  build-dotnet:
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      NUGET_XMLDOC_MODE: skip
     steps:
       - uses: actions/checkout@v2
-      - run: echo "GIT_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.201
+      - run: echo ::set-env name=GIT_TAG::${GITHUB_REF#refs/tags/}
       - run: dotnet build -c Release -p:VersionPrefix=${{ env.GIT_TAG }} -p:DefineConstants=RUNNING_IN_CI
       - run: dotnet test -c Release --no-build
-      - run: dotnet pack ./src/LogicLooper/LogicLooper.csproj -c Release --no-build -p:VersionPrefix=${{ env.GIT_TAG }} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
-      - run: dotnet nuget push ./src/LogicLooper/bin/Release/LogicLooper.${{ env.GIT_TAG }}.nupkg -s https://www.nuget.org/api/v2/package -k $${{ secrets.NUGET_KEY }}
-      - run: dotnet nuget push ./src/LogicLooper/bin/Release/LogicLooper.${{ env.GIT_TAG }}.snupkg -s https://www.nuget.org/api/v2/package -k ${{ secrets.NUGET_KEY }}
+      - run: dotnet pack ./src/LogicLooper/LogicLooper.csproj -c Release --no-build -p:VersionPrefix=${{ env.GIT_TAG }} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -o ./publish
+      - uses: actions/upload-artifact@v2
+        with:
+          name: nuget
+          path: ./publish
+
+  create-release:
+    needs: [build-dotnet]
+    runs-on: ubuntu-latest
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      NUGET_XMLDOC_MODE: skip
+    steps:
+      # setup dotnet for nuget push
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.201
+      # set release tag(*.*.*) to env.GIT_TAG
+      - run: echo ::set-env name=GIT_TAG::${GITHUB_REF#refs/tags/}
+
+      # Create Releases
+      - uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Ver.${{ github.ref }}
+
+      # Download (All) Artifacts to current directory
+      - uses: actions/download-artifact@v2
+
+      # Upload to NuGet
+      - run: dotnet nuget push "./nuget/*.nupkg" -s https://www.nuget.org/api/v2/package -k ${{ secrets.NUGET_KEY }}
+      - run: dotnet nuget push "./nuget/*.snupkg" -s https://www.nuget.org/api/v2/package -k ${{ secrets.NUGET_KEY }}
