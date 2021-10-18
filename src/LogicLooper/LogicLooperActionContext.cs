@@ -21,7 +21,7 @@ namespace Cysharp.Threading
         public long CurrentFrame { get; }
 
         /// <summary>
-        /// Gets an elapsed time since the previous frame has proceeded.
+        /// Gets an elapsed time since the previous frame has proceeded. This is the equivalent to Time.deltaTime on Unity.
         /// </summary>
         public TimeSpan ElapsedTimeFromPreviousFrame { get; }
 
