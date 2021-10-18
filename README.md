@@ -49,6 +49,7 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
   - [Multiple-loop application using LooperPool](#multiple-loop-application-using-looperpool)
   - [Integrate with Microsoft.Extensions.Hosting](#integrate-with-microsoftextensionshosting)
 - [Advanced](#advanced)
+  - [Unit tests / Frame-by-Frame execution](#unit-tests--frame-by-frame-execution)
   - [Coroutine](#coroutine)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
