@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
     <RootNamespace>Cysharp.Threading</RootNamespace>
     <AssemblyName>Cysharp.Threading.LogicLooper</AssemblyName>
     <nullable>enable</nullable>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>opensource.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
 
     <!-- NuGet Package information -->
     <PackageId>LogicLooper</PackageId>
@@ -18,7 +19,7 @@
     <None Include="..\..\README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.3" />
   </ItemGroup>
 </Project>
