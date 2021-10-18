@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>LogicLooper Class
+    <title>ManualLogicLooper Class
    | LogicLooper </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="LogicLooper Class
+    <meta name="title" content="ManualLogicLooper Class
    | LogicLooper ">
     <meta name="generator" content="docfx 2.51.0.0">
     
@@ -71,25 +71,25 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Cysharp.Threading.LogicLooper">
+            <article class="content wrap" id="_content" data-uid="Cysharp.Threading.ManualLogicLooper">
   
-  <h1 id="Cysharp_Threading_LogicLooper" data-uid="Cysharp.Threading.LogicLooper" class="text-break">LogicLooper Class
+  <h1 id="Cysharp_Threading_ManualLogicLooper" data-uid="Cysharp.Threading.ManualLogicLooper" class="text-break">ManualLogicLooper Class
   </h1>
   <h6><strong>Namespace</strong>: <a class="xref" href="Cysharp.Threading.html">Cysharp.Threading</a></h6>
   <h6><strong>Assembly</strong>: Cysharp.Threading.LogicLooper.dll</h6>
   
-  <div class="markdown level0 summary"><p>Provides update loop programming model. the looper ties thread and while-loop and call registered methods every frame.</p>
+  <div class="markdown level0 summary"><p>Implements <a class="xref" href="Cysharp.Threading.ILogicLooper.html">ILogicLooper</a> to loop update frame manually.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class LogicLooper : object, ILogicLooper, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">public sealed class ManualLogicLooper : object, ILogicLooper, IDisposable</code></pre>
   </div>
 
   <div class="inheritance">
     <h5>Inheritance</h5>
     <span><span class="xref">System.Object</span></span> → 
-    <span class="xref">LogicLooper</span>
+    <span class="xref">ManualLogicLooper</span>
   </div>
   
   <div classs="implements">
@@ -116,13 +116,7 @@
     <tbody>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper__ctor_System_Int32_System_Int32_">LogicLooper(Int32, Int32)</a>
-        </td>
-        <td class="markdown level1 summary"></td>
-      </tr>
-      <tr>
-        <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper__ctor_TimeSpan_System_Int32_">LogicLooper(TimeSpan, Int32)</a>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper__ctor_System_Double_">ManualLogicLooper(Double)</a>
         </td>
         <td class="markdown level1 summary"></td>
       </tr>
@@ -140,35 +134,28 @@
     <tbody>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_ApproximatelyRunningActions">ApproximatelyRunningActions</a>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_ApproximatelyRunningActions">ApproximatelyRunningActions</a>
         </td>
         <td class="markdown level1 summary"><p>Gets an approximately count of running actions.</p>
 </td>
       </tr>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_Current">Current</a>
-        </td>
-        <td class="markdown level1 summary"><p>Gets a looper of the current thread.</p>
-</td>
-      </tr>
-      <tr>
-        <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_Id">Id</a>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_Id">Id</a>
         </td>
         <td class="markdown level1 summary"><p>Gets a unique identifier of the looper.</p>
 </td>
       </tr>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_LastProcessingDuration">LastProcessingDuration</a>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_LastProcessingDuration">LastProcessingDuration</a>
         </td>
         <td class="markdown level1 summary"><p>Gets a duration of the last processed frame.</p>
 </td>
       </tr>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_TargetFrameRate">TargetFrameRate</a>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_TargetFrameRate">TargetFrameRate</a>
         </td>
         <td class="markdown level1 summary"><p>Gets a target frame rate of the looper.</p>
 </td>
@@ -187,29 +174,50 @@
     <tbody>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_Dispose">Dispose()</a>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_Dispose">Dispose()</a>
         </td>
         <td class="markdown level1 summary"></td>
       </tr>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_">RegisterActionAsync(LogicLooperActionDelegate)</a>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_">RegisterActionAsync(LogicLooperActionDelegate)</a>
         </td>
         <td class="markdown level1 summary"><p>Registers a loop-frame action to the looper and returns <see cref="!:Task"></see> to wait for completion.</p>
 </td>
       </tr>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_">RegisterActionAsync&lt;TState&gt;(LogicLooperActionWithStateDelegate&lt;TState&gt;, TState)</a>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_">RegisterActionAsync&lt;TState&gt;(LogicLooperActionWithStateDelegate&lt;TState&gt;, TState)</a>
         </td>
         <td class="markdown level1 summary"><p>Registers a loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.</p>
 </td>
       </tr>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_ShutdownAsync_TimeSpan_">ShutdownAsync(TimeSpan)</a>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_ShutdownAsync_TimeSpan_">ShutdownAsync(TimeSpan)</a>
         </td>
         <td class="markdown level1 summary"><p>Stops the action loop of the looper.</p>
+</td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_Tick">Tick()</a>
+        </td>
+        <td class="markdown level1 summary"><p>Ticks the frame of the current looper.</p>
+</td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_Tick_System_Int32_">Tick(Int32)</a>
+        </td>
+        <td class="markdown level1 summary"><p>Ticks the frame of the current looper.</p>
+</td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_TickWhile_Func_System_Boolean__">TickWhile(Func&lt;Boolean&gt;)</a>
+        </td>
+        <td class="markdown level1 summary"><p>Ticks the frame of the current looper while the predicate returns <code>true</code>.</p>
 </td>
       </tr>
     </tbody>
@@ -218,53 +226,19 @@
   <h3 id="constructors">Constructors
   </h3>
   <section>
-  <a id="Cysharp_Threading_LogicLooper__ctor_" data-uid="Cysharp.Threading.LogicLooper.#ctor*"></a>
-  <h4 id="Cysharp_Threading_LogicLooper__ctor_System_Int32_System_Int32_" data-uid="Cysharp.Threading.LogicLooper.#ctor(System.Int32,System.Int32)">LogicLooper(Int32, Int32)</h4>
+  <a id="Cysharp_Threading_ManualLogicLooper__ctor_" data-uid="Cysharp.Threading.ManualLogicLooper.#ctor*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper__ctor_System_Double_" data-uid="Cysharp.Threading.ManualLogicLooper.#ctor(System.Double)">ManualLogicLooper(Double)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LogicLooper(int targetFrameRate, int initialActionsCapacity = 16)</code></pre>
+    <pre><code class="lang-csharp hljs">public ManualLogicLooper(double targetFrameRate)</code></pre>
   </div>
 
   <section>
   <h5 class="parameters">Parameters</h5>
   <dl class="cysharpdocfx-valuedefinition">
-    <dt><span class="parametername"><code>targetFrameRate</code></span> <span class="xref">System.Int32</span></dt>
-    <dd></dd>
-    <dt><span class="parametername"><code>initialActionsCapacity</code></span> <span class="xref">System.Int32</span></dt>
-    <dd></dd>
-  </dl>
-  </section>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </section>
-  <section>
-  <a id="Cysharp_Threading_LogicLooper__ctor_" data-uid="Cysharp.Threading.LogicLooper.#ctor*"></a>
-  <h4 id="Cysharp_Threading_LogicLooper__ctor_TimeSpan_System_Int32_" data-uid="Cysharp.Threading.LogicLooper.#ctor(TimeSpan,System.Int32)">LogicLooper(TimeSpan, Int32)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LogicLooper(TimeSpan targetFrameTime, int initialActionsCapacity = 16)</code></pre>
-  </div>
-
-  <section>
-  <h5 class="parameters">Parameters</h5>
-  <dl class="cysharpdocfx-valuedefinition">
-    <dt><span class="parametername"><code>targetFrameTime</code></span> <span class="xref">TimeSpan</span></dt>
-    <dd></dd>
-    <dt><span class="parametername"><code>initialActionsCapacity</code></span> <span class="xref">System.Int32</span></dt>
+    <dt><span class="parametername"><code>targetFrameRate</code></span> <span class="xref">System.Double</span></dt>
     <dd></dd>
   </dl>
   </section>
@@ -284,8 +258,8 @@
   <h3 id="properties">Properties
   </h3>
   <section>
-  <a id="Cysharp_Threading_LogicLooper_ApproximatelyRunningActions_" data-uid="Cysharp.Threading.LogicLooper.ApproximatelyRunningActions*"></a>
-  <h4 id="Cysharp_Threading_LogicLooper_ApproximatelyRunningActions" data-uid="Cysharp.Threading.LogicLooper.ApproximatelyRunningActions">ApproximatelyRunningActions</h4>
+  <a id="Cysharp_Threading_ManualLogicLooper_ApproximatelyRunningActions_" data-uid="Cysharp.Threading.ManualLogicLooper.ApproximatelyRunningActions*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_ApproximatelyRunningActions" data-uid="Cysharp.Threading.ManualLogicLooper.ApproximatelyRunningActions">ApproximatelyRunningActions</h4>
   <div class="markdown level1 summary"><p>Gets an approximately count of running actions.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -315,39 +289,8 @@
   
   </section>
   <section>
-  <a id="Cysharp_Threading_LogicLooper_Current_" data-uid="Cysharp.Threading.LogicLooper.Current*"></a>
-  <h4 id="Cysharp_Threading_LogicLooper_Current" data-uid="Cysharp.Threading.LogicLooper.Current">Current</h4>
-  <div class="markdown level1 summary"><p>Gets a looper of the current thread.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static LogicLooper Current { get; }</code></pre>
-  </div>
-
-  
-  
-  
-  
-  <section>
-  <h5 class="propertyValue">Property Value</h5>
-  <dl class="cysharpdocfx-valuedefinition">
-    <dt><a class="xref" href="Cysharp.Threading.LogicLooper.html">LogicLooper</a></dt>
-    <dd></dd>
-  </dl>
-  </section>
-  
-  
-  
-  
-  
-  
-  
-  
-  </section>
-  <section>
-  <a id="Cysharp_Threading_LogicLooper_Id_" data-uid="Cysharp.Threading.LogicLooper.Id*"></a>
-  <h4 id="Cysharp_Threading_LogicLooper_Id" data-uid="Cysharp.Threading.LogicLooper.Id">Id</h4>
+  <a id="Cysharp_Threading_ManualLogicLooper_Id_" data-uid="Cysharp.Threading.ManualLogicLooper.Id*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_Id" data-uid="Cysharp.Threading.ManualLogicLooper.Id">Id</h4>
   <div class="markdown level1 summary"><p>Gets a unique identifier of the looper.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -377,8 +320,8 @@
   
   </section>
   <section>
-  <a id="Cysharp_Threading_LogicLooper_LastProcessingDuration_" data-uid="Cysharp.Threading.LogicLooper.LastProcessingDuration*"></a>
-  <h4 id="Cysharp_Threading_LogicLooper_LastProcessingDuration" data-uid="Cysharp.Threading.LogicLooper.LastProcessingDuration">LastProcessingDuration</h4>
+  <a id="Cysharp_Threading_ManualLogicLooper_LastProcessingDuration_" data-uid="Cysharp.Threading.ManualLogicLooper.LastProcessingDuration*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_LastProcessingDuration" data-uid="Cysharp.Threading.ManualLogicLooper.LastProcessingDuration">LastProcessingDuration</h4>
   <div class="markdown level1 summary"><p>Gets a duration of the last processed frame.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -408,8 +351,8 @@
   
   </section>
   <section>
-  <a id="Cysharp_Threading_LogicLooper_TargetFrameRate_" data-uid="Cysharp.Threading.LogicLooper.TargetFrameRate*"></a>
-  <h4 id="Cysharp_Threading_LogicLooper_TargetFrameRate" data-uid="Cysharp.Threading.LogicLooper.TargetFrameRate">TargetFrameRate</h4>
+  <a id="Cysharp_Threading_ManualLogicLooper_TargetFrameRate_" data-uid="Cysharp.Threading.ManualLogicLooper.TargetFrameRate*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_TargetFrameRate" data-uid="Cysharp.Threading.ManualLogicLooper.TargetFrameRate">TargetFrameRate</h4>
   <div class="markdown level1 summary"><p>Gets a target frame rate of the looper.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -441,8 +384,8 @@
   <h3 id="methods">Methods
   </h3>
   <section>
-  <a id="Cysharp_Threading_LogicLooper_Dispose_" data-uid="Cysharp.Threading.LogicLooper.Dispose*"></a>
-  <h4 id="Cysharp_Threading_LogicLooper_Dispose" data-uid="Cysharp.Threading.LogicLooper.Dispose">Dispose()</h4>
+  <a id="Cysharp_Threading_ManualLogicLooper_Dispose_" data-uid="Cysharp.Threading.ManualLogicLooper.Dispose*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_Dispose" data-uid="Cysharp.Threading.ManualLogicLooper.Dispose">Dispose()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   
@@ -464,8 +407,8 @@
   
   </section>
   <section>
-  <a id="Cysharp_Threading_LogicLooper_RegisterActionAsync_" data-uid="Cysharp.Threading.LogicLooper.RegisterActionAsync*"></a>
-  <h4 id="Cysharp_Threading_LogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_" data-uid="Cysharp.Threading.LogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)">RegisterActionAsync(LogicLooperActionDelegate)</h4>
+  <a id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)">RegisterActionAsync(LogicLooperActionDelegate)</h4>
   <div class="markdown level1 summary"><p>Registers a loop-frame action to the looper and returns <see cref="!:Task"></see> to wait for completion.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -502,8 +445,8 @@
   
   </section>
   <section>
-  <a id="Cysharp_Threading_LogicLooper_RegisterActionAsync_" data-uid="Cysharp.Threading.LogicLooper.RegisterActionAsync*"></a>
-  <h4 id="Cysharp_Threading_LogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_" data-uid="Cysharp.Threading.LogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0)">RegisterActionAsync&lt;TState&gt;(LogicLooperActionWithStateDelegate&lt;TState&gt;, TState)</h4>
+  <a id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0)">RegisterActionAsync&lt;TState&gt;(LogicLooperActionWithStateDelegate&lt;TState&gt;, TState)</h4>
   <div class="markdown level1 summary"><p>Registers a loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -549,8 +492,8 @@
   
   </section>
   <section>
-  <a id="Cysharp_Threading_LogicLooper_ShutdownAsync_" data-uid="Cysharp.Threading.LogicLooper.ShutdownAsync*"></a>
-  <h4 id="Cysharp_Threading_LogicLooper_ShutdownAsync_TimeSpan_" data-uid="Cysharp.Threading.LogicLooper.ShutdownAsync(TimeSpan)">ShutdownAsync(TimeSpan)</h4>
+  <a id="Cysharp_Threading_ManualLogicLooper_ShutdownAsync_" data-uid="Cysharp.Threading.ManualLogicLooper.ShutdownAsync*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_ShutdownAsync_TimeSpan_" data-uid="Cysharp.Threading.ManualLogicLooper.ShutdownAsync(TimeSpan)">ShutdownAsync(TimeSpan)</h4>
   <div class="markdown level1 summary"><p>Stops the action loop of the looper.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -574,6 +517,106 @@
     <dd></dd>
   </dl>
   </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </section>
+  <section>
+  <a id="Cysharp_Threading_ManualLogicLooper_Tick_" data-uid="Cysharp.Threading.ManualLogicLooper.Tick*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_Tick" data-uid="Cysharp.Threading.ManualLogicLooper.Tick">Tick()</h4>
+  <div class="markdown level1 summary"><p>Ticks the frame of the current looper.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Tick()</code></pre>
+  </div>
+
+  
+  <section>
+  <h5 class="returns">Returns</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="xref">System.Boolean</span></dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </section>
+  <section>
+  <a id="Cysharp_Threading_ManualLogicLooper_Tick_" data-uid="Cysharp.Threading.ManualLogicLooper.Tick*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_Tick_System_Int32_" data-uid="Cysharp.Threading.ManualLogicLooper.Tick(System.Int32)">Tick(Int32)</h4>
+  <div class="markdown level1 summary"><p>Ticks the frame of the current looper.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Tick(int frameCount)</code></pre>
+  </div>
+
+  <section>
+  <h5 class="parameters">Parameters</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>frameCount</code></span> <span class="xref">System.Int32</span></dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
+  <section>
+  <h5 class="returns">Returns</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="xref">System.Boolean</span></dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </section>
+  <section>
+  <a id="Cysharp_Threading_ManualLogicLooper_TickWhile_" data-uid="Cysharp.Threading.ManualLogicLooper.TickWhile*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_TickWhile_Func_System_Boolean__" data-uid="Cysharp.Threading.ManualLogicLooper.TickWhile(Func{System.Boolean})">TickWhile(Func&lt;Boolean&gt;)</h4>
+  <div class="markdown level1 summary"><p>Ticks the frame of the current looper while the predicate returns <code>true</code>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TickWhile(Func&lt;bool&gt; predicate)</code></pre>
+  </div>
+
+  <section>
+  <h5 class="parameters">Parameters</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>predicate</code></span> <span class="xref">Func</span>&lt;<span class="xref">System.Boolean</span>&gt;</dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
   
   
   

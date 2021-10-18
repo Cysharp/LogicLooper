@@ -106,7 +106,7 @@
     <tbody>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooperActionContext.html#Cysharp_Threading_LogicLooperActionContext__ctor_Cysharp_Threading_LogicLooper_System_Int64_TimeSpan_CancellationToken_">LogicLooperActionContext(LogicLooper, Int64, TimeSpan, CancellationToken)</a>
+          <a class="xref" href="Cysharp.Threading.LogicLooperActionContext.html#Cysharp_Threading_LogicLooperActionContext__ctor_Cysharp_Threading_ILogicLooper_System_Int64_TimeSpan_CancellationToken_">LogicLooperActionContext(ILogicLooper, Int64, TimeSpan, CancellationToken)</a>
         </td>
         <td class="markdown level1 summary"></td>
       </tr>
@@ -183,18 +183,18 @@
   </h3>
   <section>
   <a id="Cysharp_Threading_LogicLooperActionContext__ctor_" data-uid="Cysharp.Threading.LogicLooperActionContext.#ctor*"></a>
-  <h4 id="Cysharp_Threading_LogicLooperActionContext__ctor_Cysharp_Threading_LogicLooper_System_Int64_TimeSpan_CancellationToken_" data-uid="Cysharp.Threading.LogicLooperActionContext.#ctor(Cysharp.Threading.LogicLooper,System.Int64,TimeSpan,CancellationToken)">LogicLooperActionContext(LogicLooper, Int64, TimeSpan, CancellationToken)</h4>
+  <h4 id="Cysharp_Threading_LogicLooperActionContext__ctor_Cysharp_Threading_ILogicLooper_System_Int64_TimeSpan_CancellationToken_" data-uid="Cysharp.Threading.LogicLooperActionContext.#ctor(Cysharp.Threading.ILogicLooper,System.Int64,TimeSpan,CancellationToken)">LogicLooperActionContext(ILogicLooper, Int64, TimeSpan, CancellationToken)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LogicLooperActionContext(LogicLooper looper, long currentFrame, TimeSpan elapsedTimeFromPreviousFrame, CancellationToken cancellationToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public LogicLooperActionContext(ILogicLooper looper, long currentFrame, TimeSpan elapsedTimeFromPreviousFrame, CancellationToken cancellationToken)</code></pre>
   </div>
 
   <section>
   <h5 class="parameters">Parameters</h5>
   <dl class="cysharpdocfx-valuedefinition">
-    <dt><span class="parametername"><code>looper</code></span> <a class="xref" href="Cysharp.Threading.LogicLooper.html">LogicLooper</a></dt>
+    <dt><span class="parametername"><code>looper</code></span> <a class="xref" href="Cysharp.Threading.ILogicLooper.html">ILogicLooper</a></dt>
     <dd></dd>
     <dt><span class="parametername"><code>currentFrame</code></span> <span class="xref">System.Int64</span></dt>
     <dd></dd>
@@ -320,7 +320,7 @@
   <div class="markdown level1 conceptual"></div>
   
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public LogicLooper Looper { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public ILogicLooper Looper { get; }</code></pre>
   </div>
 
   
@@ -330,7 +330,7 @@
   <section>
   <h5 class="propertyValue">Property Value</h5>
   <dl class="cysharpdocfx-valuedefinition">
-    <dt><a class="xref" href="Cysharp.Threading.LogicLooper.html">LogicLooper</a></dt>
+    <dt><a class="xref" href="Cysharp.Threading.ILogicLooper.html">ILogicLooper</a></dt>
     <dd></dd>
   </dl>
   </section>
