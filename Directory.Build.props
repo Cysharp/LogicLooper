@@ -5,7 +5,7 @@
     <LangVersion>latest</LangVersion>
 
     <!-- NuGet Package Information -->
-    <Description>A library for building server application using loop-action programming model on .NET Core. This library focuses on building game servers with server-side logic.</Description>
+    <Description>A library for building server application using loop-action programming model on .NET. This library focuses on building game servers with server-side logic.</Description>
     <PackageVersion>$(Version)</PackageVersion>
     <Company>Cysharp</Company>
     <Authors>Cysharp</Authors>
@@ -16,5 +16,6 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>Icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 </Project>
