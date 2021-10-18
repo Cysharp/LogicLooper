@@ -109,6 +109,32 @@ await looperPool.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 [samples/LoopHostingApp](samples/LoopHostingApp) をご覧ください。`IHostedService` と組み合わせることでサーバーのライフサイクルなどを考慮した実装を行えます。
 
 ## 上級編
+### ユニットテスト / フレーム単位実行
+LogicLooper と共にユニットテストを記述する場合やフレームを手動で更新したいような場合には `ManualLogicLooper` / `ManualLogicLooperPool` を利用できます。
+
+```csharp
+var looper = new ManualLogicLooper(60.0); // `ElapsedTimeFromPreviousFrame` は `1000 / FrameTargetFrameRate` に固定されます
+
+var count = 0;
+var t1 = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+{
+    count++;
+    return count != 3;
+});
+
+looper.Tick(); // Update frame
+Console.WriteLine(count); // => 1
+
+looper.Tick(); // Update frame
+Console.WriteLine(count); // => 2
+
+looper.Tick(); // Update frame (t1 が完了します)
+Console.WriteLine(count); // => 3
+
+looper.Tick(); // Update frame (実行するアクションはありません)
+Console.WriteLine(count); // => 3
+```
+
 ### Coroutine
 LogicLooper はコルーチンのような操作もサポートしています。Unity を利用したことがあればなじみのあるコルーチンパターンです。
 

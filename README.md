@@ -1,4 +1,4 @@
-[![GitHub Actions](https://github.com/Cysharp/LogicLooper/workflows/Build-Debug/badge.svg)](https://github.com/Cysharp/LogicLooper/actions) [![Releases](https://img.shields.io/github/release/Cysharp/LogicLooper.svg)](https://github.com/Cysharp/LogicLooper/releases)
+[![Build-Master](https://github.com/Cysharp/LogicLooper/actions/workflows/build-master.yaml/badge.svg)](https://github.com/Cysharp/LogicLooper/actions/workflows/build-master.yaml) [![Releases](https://img.shields.io/github/release/Cysharp/LogicLooper.svg)](https://github.com/Cysharp/LogicLooper/releases)
 
 # LogicLooper
 
@@ -113,6 +113,32 @@ await looperPool.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 See [samples/LoopHostingApp](samples/LoopHostingApp).
 
 ## Advanced
+### Unit tests / Frame-by-Frame execution
+If you want to write unit tests with LogicLooper or update frames manually, you can use `ManualLogicLooper` / `ManualLogicLooperPool`.
+
+```csharp
+var looper = new ManualLogicLooper(60.0); // `ElapsedTimeFromPreviousFrame` will be fixed to `1000 / FrameTargetFrameRate`.
+
+var count = 0;
+var t1 = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+{
+    count++;
+    return count != 3;
+});
+
+looper.Tick(); // Update frame
+Console.WriteLine(count); // => 1
+
+looper.Tick(); // Update frame
+Console.WriteLine(count); // => 2
+
+looper.Tick(); // Update frame (t1 will be completed)
+Console.WriteLine(count); // => 3
+
+looper.Tick(); // Update frame (no action)
+Console.WriteLine(count); // => 3
+```
+
 ### Coroutine
 LogicLooper has support for the coroutine-like operation. If you are using Unity, you are familiar with the coroutine pattern.
 
