@@ -9,7 +9,7 @@ namespace Cysharp.Threading
         /// <summary>
         /// Gets the pooled looper instances.
         /// </summary>
-        IReadOnlyList<LogicLooper> Loopers { get; }
+        IReadOnlyList<ILogicLooper> Loopers { get; }
 
         /// <summary>
         /// Registers an loop-frame action to a pooled looper and returns <see cref="Task"/> to wait for completion.
