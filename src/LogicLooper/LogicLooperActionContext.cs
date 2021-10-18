@@ -13,7 +13,7 @@ namespace Cysharp.Threading
         /// <summary>
         /// Gets a looper for the current action.
         /// </summary>
-        public LogicLooper Looper { get; }
+        public ILogicLooper Looper { get; }
 
         /// <summary>
         /// Gets a current frame that elapsed since beginning the looper is started.
@@ -30,7 +30,7 @@ namespace Cysharp.Threading
         /// </summary>
         public CancellationToken CancellationToken { get; }
 
-        public LogicLooperActionContext(LogicLooper looper, long currentFrame, TimeSpan elapsedTimeFromPreviousFrame, CancellationToken cancellationToken)
+        public LogicLooperActionContext(ILogicLooper looper, long currentFrame, TimeSpan elapsedTimeFromPreviousFrame, CancellationToken cancellationToken)
         {
             Looper = looper ?? throw new ArgumentNullException(nameof(looper));
             CurrentFrame = currentFrame;

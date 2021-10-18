@@ -6,7 +6,7 @@ namespace Cysharp.Threading.Internal
 {
     internal class NotInitializedLogicLooperPool : ILogicLooperPool
     {
-        public IReadOnlyList<LogicLooper> Loopers => Array.Empty<LogicLooper>();
+        IReadOnlyList<ILogicLooper> ILogicLooperPool.Loopers => throw new NotImplementedException();
 
         public Task RegisterActionAsync(LogicLooperActionDelegate loopAction)
             => throw new InvalidOperationException("LogicLooper.Shared is not initialized yet.");

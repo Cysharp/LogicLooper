@@ -16,7 +16,7 @@ namespace Cysharp.Threading
         private readonly ILogicLooperPoolBalancer _balancer;
 
         /// <inheritdoc />
-        public IReadOnlyList<LogicLooper> Loopers => _loopers;
+        public IReadOnlyList<ILogicLooper> Loopers => _loopers;
 
         /// <summary>
         /// Initialize the looper pool with specified configurations.

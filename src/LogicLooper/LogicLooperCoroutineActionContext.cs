@@ -23,7 +23,7 @@ namespace Cysharp.Threading
         /// <summary>
         /// Gets a looper for the current action.
         /// </summary>
-        public LogicLooper Looper => _actionContext.Looper;
+        public ILogicLooper Looper => _actionContext.Looper;
 
         /// <summary>
         /// Gets a current frame that elapsed since beginning the looper is started.
