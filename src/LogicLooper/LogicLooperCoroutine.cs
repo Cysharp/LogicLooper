@@ -101,9 +101,9 @@ namespace Cysharp.Threading
     [AsyncMethodBuilder(typeof(LogicLooperCoroutineAsyncValueTaskMethodBuilder<>))]
     public sealed class LogicLooperCoroutine<TResult> : LogicLooperCoroutine
     {
-        private TResult _result;
+        private TResult? _result;
 
-        public TResult Result
+        public TResult? Result
         {
             get
             {
