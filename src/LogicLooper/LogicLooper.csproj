@@ -12,6 +12,7 @@
 
     <!-- NuGet Package information -->
     <PackageId>LogicLooper</PackageId>
+     <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
