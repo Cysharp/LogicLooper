@@ -153,9 +153,25 @@
       </tr>
       <tr>
         <td>
+          <a class="xref" href="Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_">RegisterActionAsync(LogicLooperAsyncActionDelegate)</a>
+        </td>
+        <td class="markdown level1 summary"><p>[Experimental] Registers a loop-frame action to the looper and returns <see cref="!:Task"></see> to wait for completion.
+An asynchronous action is executed across multiple frames, differ from the synchronous version.</p>
+</td>
+      </tr>
+      <tr>
+        <td>
           <a class="xref" href="Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_">RegisterActionAsync&lt;TState&gt;(LogicLooperActionWithStateDelegate&lt;TState&gt;, TState)</a>
         </td>
         <td class="markdown level1 summary"><p>Registers a loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.</p>
+</td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xref" href="Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_">RegisterActionAsync&lt;TState&gt;(LogicLooperAsyncActionWithStateDelegate&lt;TState&gt;, TState)</a>
+        </td>
+        <td class="markdown level1 summary"><p>[Experimental] Registers a loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.
+An asynchronous action is executed across multiple frames, differ from the synchronous version.</p>
 </td>
       </tr>
       <tr>
@@ -336,6 +352,45 @@
   </section>
   <section>
   <a id="Cysharp_Threading_ILogicLooper_RegisterActionAsync_" data-uid="Cysharp.Threading.ILogicLooper.RegisterActionAsync*"></a>
+  <h4 id="Cysharp_Threading_ILogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_" data-uid="Cysharp.Threading.ILogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)">RegisterActionAsync(LogicLooperAsyncActionDelegate)</h4>
+  <div class="markdown level1 summary"><p>[Experimental] Registers a loop-frame action to the looper and returns <see cref="!:Task"></see> to wait for completion.
+An asynchronous action is executed across multiple frames, differ from the synchronous version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)</code></pre>
+  </div>
+
+  <section>
+  <h5 class="parameters">Parameters</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>loopAction</code></span> <a class="xref" href="Cysharp.Threading.LogicLooperAsyncActionDelegate.html">LogicLooperAsyncActionDelegate</a></dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
+  <section>
+  <h5 class="returns">Returns</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="xref">Task</span></dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </section>
+  <section>
+  <a id="Cysharp_Threading_ILogicLooper_RegisterActionAsync_" data-uid="Cysharp.Threading.ILogicLooper.RegisterActionAsync*"></a>
   <h4 id="Cysharp_Threading_ILogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_" data-uid="Cysharp.Threading.ILogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0)">RegisterActionAsync&lt;TState&gt;(LogicLooperActionWithStateDelegate&lt;TState&gt;, TState)</h4>
   <div class="markdown level1 summary"><p>Registers a loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.</p>
 </div>
@@ -349,6 +404,54 @@
   <h5 class="parameters">Parameters</h5>
   <dl class="cysharpdocfx-valuedefinition">
     <dt><span class="parametername"><code>loopAction</code></span> <a class="xref" href="Cysharp.Threading.LogicLooperActionWithStateDelegate-1.html">LogicLooperActionWithStateDelegate</a>&lt;TState&gt;</dt>
+    <dd></dd>
+    <dt><span class="parametername"><code>state</code></span> <span class="xref">TState</span></dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
+  <section>
+  <h5 class="returns">Returns</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="xref">Task</span></dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
+  <section>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>TState</code></span></dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </section>
+  <section>
+  <a id="Cysharp_Threading_ILogicLooper_RegisterActionAsync_" data-uid="Cysharp.Threading.ILogicLooper.RegisterActionAsync*"></a>
+  <h4 id="Cysharp_Threading_ILogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_" data-uid="Cysharp.Threading.ILogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0)">RegisterActionAsync&lt;TState&gt;(LogicLooperAsyncActionWithStateDelegate&lt;TState&gt;, TState)</h4>
+  <div class="markdown level1 summary"><p>[Experimental] Registers a loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.
+An asynchronous action is executed across multiple frames, differ from the synchronous version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task RegisterActionAsync&lt;TState&gt;(LogicLooperAsyncActionWithStateDelegate&lt;TState&gt; loopAction, TState state)</code></pre>
+  </div>
+
+  <section>
+  <h5 class="parameters">Parameters</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>loopAction</code></span> <a class="xref" href="Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate-1.html">LogicLooperAsyncActionWithStateDelegate</a>&lt;TState&gt;</dt>
     <dd></dd>
     <dt><span class="parametername"><code>state</code></span> <span class="xref">TState</span></dt>
     <dd></dd>

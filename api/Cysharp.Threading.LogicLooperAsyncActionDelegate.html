@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Cysharp.Threading Namespace
+    <title>LogicLooperAsyncActionDelegate Delegate
    | LogicLooper </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Cysharp.Threading Namespace
+    <meta name="title" content="LogicLooperAsyncActionDelegate Delegate
    | LogicLooper ">
     <meta name="generator" content="docfx 2.59.2.0">
     
@@ -71,62 +71,46 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Cysharp.Threading">
+            <article class="content wrap" id="_content" data-uid="Cysharp.Threading.LogicLooperAsyncActionDelegate">
   
-  <h1 id="Cysharp_Threading" data-uid="Cysharp.Threading" class="text-break">Cysharp.Threading Namespace
+  <h1 id="Cysharp_Threading_LogicLooperAsyncActionDelegate" data-uid="Cysharp.Threading.LogicLooperAsyncActionDelegate" class="text-break">LogicLooperAsyncActionDelegate Delegate
   </h1>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Cysharp.Threading.html">Cysharp.Threading</a></h6>
+  <h6><strong>Assembly</strong>: Cysharp.Threading.LogicLooper.dll</h6>
+  
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
-    <h3 id="classes">Classes
-  </h3>
-      <h4><a class="xref" href="Cysharp.Threading.LogicLooper.html">LogicLooper</a></h4>
-      <section><p>Provides update loop programming model. the looper ties thread and while-loop and call registered methods every frame.</p>
-</section>
-      <h4><a class="xref" href="Cysharp.Threading.LogicLooperCoroutine.html">LogicLooperCoroutine</a></h4>
-      <section><p>Represents a coroutine-like operation.</p>
-</section>
-      <h4><a class="xref" href="Cysharp.Threading.LogicLooperCoroutine-1.html">LogicLooperCoroutine&lt;TResult&gt;</a></h4>
-      <section><p>Represents a coroutine-like operation.</p>
-</section>
-      <h4><a class="xref" href="Cysharp.Threading.LogicLooperCoroutineActionContext.html">LogicLooperCoroutineActionContext</a></h4>
-      <section><p>Represents the current coroutine-like contextual values.</p>
-</section>
-      <h4><a class="xref" href="Cysharp.Threading.LogicLooperPool.html">LogicLooperPool</a></h4>
-      <section><p>Provides a pool of loopers that can be register loop-action into the pooled looper.</p>
-</section>
-      <h4><a class="xref" href="Cysharp.Threading.ManualLogicLooper.html">ManualLogicLooper</a></h4>
-      <section><p>Implements <a class="xref" href="Cysharp.Threading.ILogicLooper.html">ILogicLooper</a> to loop update frame manually.</p>
-</section>
-      <h4><a class="xref" href="Cysharp.Threading.ManualLogicLooperPool.html">ManualLogicLooperPool</a></h4>
-      <section><p>Provides a pool of <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html">ManualLogicLooper</a>.</p>
-</section>
-      <h4><a class="xref" href="Cysharp.Threading.RoundRobinLogicLooperPoolBalancer.html">RoundRobinLogicLooperPoolBalancer</a></h4>
-      <section></section>
-    <h3 id="structs">Structs
-  </h3>
-      <h4><a class="xref" href="Cysharp.Threading.LogicLooperActionContext.html">LogicLooperActionContext</a></h4>
-      <section><p>Represents the current loop-action contextual values.</p>
-</section>
-    <h3 id="interfaces">Interfaces
-  </h3>
-      <h4><a class="xref" href="Cysharp.Threading.ILogicLooper.html">ILogicLooper</a></h4>
-      <section><p>Provides interface for update loop programming model.</p>
-</section>
-      <h4><a class="xref" href="Cysharp.Threading.ILogicLooperPool.html">ILogicLooperPool</a></h4>
-      <section></section>
-      <h4><a class="xref" href="Cysharp.Threading.ILogicLooperPoolBalancer.html">ILogicLooperPoolBalancer</a></h4>
-      <section></section>
-    <h3 id="delegates">Delegates
-  </h3>
-      <h4><a class="xref" href="Cysharp.Threading.LogicLooperActionDelegate.html">LogicLooperActionDelegate</a></h4>
-      <section></section>
-      <h4><a class="xref" href="Cysharp.Threading.LogicLooperActionWithStateDelegate-1.html">LogicLooperActionWithStateDelegate&lt;T&gt;</a></h4>
-      <section></section>
-      <h4><a class="xref" href="Cysharp.Threading.LogicLooperAsyncActionDelegate.html">LogicLooperAsyncActionDelegate</a></h4>
-      <section></section>
-      <h4><a class="xref" href="Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate-1.html">LogicLooperAsyncActionWithStateDelegate&lt;T&gt;</a></h4>
-      <section></section>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public delegate ValueTask&lt;bool&gt; LogicLooperAsyncActionDelegate(LogicLooperActionContext ctx);</code></pre>
+  </div>
+
+  
+  
+  
+  <section>
+  <h4 class="parameters">Parameters</h4>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>ctx</code></span> <a class="xref" href="Cysharp.Threading.LogicLooperActionContext.html">LogicLooperActionContext</a></dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
+  <section>
+  <h4 class="returns">Returns</h4>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="xref">ValueTask</span>&lt;<span class="xref">System.Boolean</span>&gt;</dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
+  
+  
+  <h3 id="members">Members</h3>
+  
+  
+  
+  
 </article>
           </div>
           
