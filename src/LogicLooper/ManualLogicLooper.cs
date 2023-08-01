@@ -106,6 +106,28 @@ public sealed class ManualLogicLooper : ILogicLooper
         }
         return action.Future.Task;
     }
+    
+    /// <inheritdoc />
+    public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
+    {
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper(), LogicLooper.DelegateHelper.ConvertAsyncToSync(loopAction), default);
+        lock (_actions)
+        {
+            _actions.Add(action);
+        }
+        return action.Future.Task;
+    }
+
+    /// <inheritdoc />
+    public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
+    {
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), LogicLooper.DelegateHelper.ConvertAsyncToSync(loopAction), state);
+        lock (_actions)
+        {
+            _actions.Add(action);
+        }
+        return action.Future.Task;
+    }
 
     /// <inheritdoc />
     public Task ShutdownAsync(TimeSpan shutdownDelay)

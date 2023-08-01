@@ -214,4 +214,55 @@ public class LogicLooperTest
 
         looper.LastProcessingDuration.TotalMilliseconds.Should().BeInRange(95, 105);
     }
+
+    [Fact]
+    public async Task AsyncAction()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(60);
+        var count = 0;
+        var managedThreadId = 0;
+        await looper.RegisterActionAsync(((in LogicLooperActionContext ctx) =>
+        {
+            managedThreadId = Thread.CurrentThread.ManagedThreadId;
+            return false;
+        }));
+
+        var results = new List<int>();
+        var runLoopTask = looper.RegisterActionAsync(async (LogicLooperActionContext ctx) =>
+        {
+            results.Add(Thread.CurrentThread.ManagedThreadId);
+            await Task.Delay(100);
+            results.Add(Thread.CurrentThread.ManagedThreadId);
+            return ++count < 3;
+        });
+
+        await runLoopTask;
+
+        // 2 x 3
+        results.Should().BeEquivalentTo(new[] { managedThreadId, managedThreadId, managedThreadId, managedThreadId, managedThreadId, managedThreadId });
+    }
+
+    [Fact]
+    public async Task AsyncAction_WithState()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(60);
+        var managedThreadId = 0;
+        await looper.RegisterActionAsync(((in LogicLooperActionContext ctx) =>
+        {
+            managedThreadId = Thread.CurrentThread.ManagedThreadId;
+            return false;
+        }));
+
+        var results = new List<int>();
+        var runLoopTask = looper.RegisterActionAsync(static async (LogicLooperActionContext ctx, List<int> results) =>
+        {
+            await Task.Delay(100);
+            results.Add(Thread.CurrentThread.ManagedThreadId);
+            return results.Count < 3;
+        }, results);
+
+        await runLoopTask;
+
+        results.Should().BeEquivalentTo(new[] { managedThreadId, managedThreadId, managedThreadId });
+    }
 }
