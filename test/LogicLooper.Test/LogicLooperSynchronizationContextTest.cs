@@ -43,6 +43,7 @@ public class LogicLooperSynchronizationContextTest
     {
         using var looper = new ManualLogicLooper(60);
         using var syncContext = new LogicLooperSynchronizationContext(looper);
+        SynchronizationContext.SetSynchronizationContext(syncContext);
 
         var result = new List<string>();
         var task = looper.RegisterActionAsync(async (ctx) =>
@@ -63,4 +64,41 @@ public class LogicLooperSynchronizationContextTest
 
         task.IsCompleted.Should().BeTrue();
     }
+
+    [Fact]
+    public async Task DequeueLoopAction_NotRegisteredWhenNonAsync()
+    {
+        using var looper = new ManualLogicLooper(60);
+        using var syncContext = new LogicLooperSynchronizationContext(looper);
+        SynchronizationContext.SetSynchronizationContext(syncContext); // This context is used when advancing frame within the Tick method.
+        var t = looper.RegisterActionAsync((in LogicLooperActionContext ctx) => false);
+
+        looper.ApproximatelyRunningActions.Should().Be(1);
+        looper.Tick();
+        looper.ApproximatelyRunningActions.Should().Be(0);
+        t.IsCompleted.Should().BeTrue();
+    }
+    
+    [Fact]
+    public async Task DequeueLoopAction_RegisteredWhenHasAsyncAction()
+    {
+        using var looper = new ManualLogicLooper(60);
+        using var syncContext = new LogicLooperSynchronizationContext(looper);
+        SynchronizationContext.SetSynchronizationContext(syncContext); // This context is used when advancing frame within the Tick method.
+        var t = looper.RegisterActionAsync(async (LogicLooperActionContext ctx) =>
+        {
+            await Task.Yield();
+            return false;
+        });
+
+        looper.ApproximatelyRunningActions.Should().Be(1); // User-Action
+        looper.Tick();
+        await Task.Delay(100).ConfigureAwait(false);
+        looper.ApproximatelyRunningActions.Should().Be(2); // User-Action + DequeLoopAction
+        looper.Tick(); // Run continuation
+        looper.Tick(); // Wait for complete action
+        t.IsCompleted.Should().BeTrue();
+        looper.ApproximatelyRunningActions.Should().Be(1); // DequeueLoopAction
+    }
+
 }

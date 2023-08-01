@@ -57,7 +57,7 @@ public sealed class ManualLogicLooper : ILogicLooper
         var completed = new List<LogicLooper.LooperAction>();
         lock (_actions)
         {
-            foreach (var action in _actions)
+            foreach (var action in _actions.ToArray())
             {
                 if (!InvokeAction(ctx, action))
                 {
