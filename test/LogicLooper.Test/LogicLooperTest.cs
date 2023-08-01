@@ -1,224 +1,217 @@
-using System;
-using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading;
-using FluentAssertions;
-using Xunit;
 
-namespace LogicLooper.Test
+namespace LogicLooper.Test;
+
+public class LogicLooperTest
 {
-    public class LogicLooperTest
+    [Theory]
+    [InlineData(16.6666)] // 60fps
+    [InlineData(33.3333)] // 30fps
+    public async Task TargetFrameTime(double targetFrameTimeMs)
     {
-        [Theory]
-        [InlineData(16.6666)] // 60fps
-        [InlineData(33.3333)] // 30fps
-        public async Task TargetFrameTime(double targetFrameTimeMs)
+        using var looper = new Cysharp.Threading.LogicLooper(TimeSpan.FromMilliseconds(targetFrameTimeMs));
+
+        looper.ApproximatelyRunningActions.Should().Be(0);
+        looper.TargetFrameRate.Should().Be(1000 / (double)targetFrameTimeMs);
+
+        var beginTimestamp = DateTime.Now.Ticks;
+        var lastTimestamp = beginTimestamp;
+        var fps = 0d;
+        var task = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
         {
-            using var looper = new Cysharp.Threading.LogicLooper(TimeSpan.FromMilliseconds(targetFrameTimeMs));
+            var now = DateTime.Now.Ticks;
+            var elapsedFromBeginMilliseconds = (now - beginTimestamp) / TimeSpan.TicksPerMillisecond;
+            var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / TimeSpan.TicksPerMillisecond;
 
-            looper.ApproximatelyRunningActions.Should().Be(0);
-            looper.TargetFrameRate.Should().Be(1000 / (double)targetFrameTimeMs);
+            if (elapsedFromPreviousFrameMilliseconds == 0) return true;
 
-            var beginTimestamp = DateTime.Now.Ticks;
-            var lastTimestamp = beginTimestamp;
-            var fps = 0d;
-            var task = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
-            {
-                var now = DateTime.Now.Ticks;
-                var elapsedFromBeginMilliseconds = (now - beginTimestamp) / TimeSpan.TicksPerMillisecond;
-                var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / TimeSpan.TicksPerMillisecond;
+            fps = (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
 
-                if (elapsedFromPreviousFrameMilliseconds == 0) return true;
+            lastTimestamp = now;
 
-                fps = (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
+            return elapsedFromBeginMilliseconds < 3000; // 3 seconds
+        });
 
-                lastTimestamp = now;
+        // wait for moving action from queue to actions.
+        await Task.Delay(100);
 
-                return elapsedFromBeginMilliseconds < 3000; // 3 seconds
-            });
+        looper.ApproximatelyRunningActions.Should().Be(1);
 
-            // wait for moving action from queue to actions.
-            await Task.Delay(100);
+        await task;
 
-            looper.ApproximatelyRunningActions.Should().Be(1);
+        await Task.Delay(100);
 
-            await task;
+        looper.ApproximatelyRunningActions.Should().Be(0);
 
-            await Task.Delay(100);
+        fps.Should().BeInRange(looper.TargetFrameRate - 2, looper.TargetFrameRate + 2);
+    }
 
-            looper.ApproximatelyRunningActions.Should().Be(0);
+    [Theory]
+    [InlineData(60)]
+    [InlineData(30)]
+    [InlineData(20)]
+    public async Task TargetFrameRate_1(int targetFps)
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(targetFps);
 
-            fps.Should().BeInRange(looper.TargetFrameRate - 2, looper.TargetFrameRate + 2);
-        }
+        looper.ApproximatelyRunningActions.Should().Be(0);
+        ((int)looper.TargetFrameRate).Should().Be(targetFps);
 
-        [Theory]
-        [InlineData(60)]
-        [InlineData(30)]
-        [InlineData(20)]
-        public async Task TargetFrameRate_1(int targetFps)
+        var beginTimestamp = DateTime.Now.Ticks;
+        var lastTimestamp = beginTimestamp;
+        var fps = 0d;
+        var task = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
         {
-            using var looper = new Cysharp.Threading.LogicLooper(targetFps);
+            var now = DateTime.Now.Ticks;
+            var elapsedFromBeginMilliseconds = (now - beginTimestamp) / TimeSpan.TicksPerMillisecond;
+            var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / TimeSpan.TicksPerMillisecond;
 
-            looper.ApproximatelyRunningActions.Should().Be(0);
-            ((int)looper.TargetFrameRate).Should().Be(targetFps);
+            if (elapsedFromPreviousFrameMilliseconds == 0) return true;
 
-            var beginTimestamp = DateTime.Now.Ticks;
-            var lastTimestamp = beginTimestamp;
-            var fps = 0d;
-            var task = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
-            {
-                var now = DateTime.Now.Ticks;
-                var elapsedFromBeginMilliseconds = (now - beginTimestamp) / TimeSpan.TicksPerMillisecond;
-                var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / TimeSpan.TicksPerMillisecond;
+            fps = (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
 
-                if (elapsedFromPreviousFrameMilliseconds == 0) return true;
+            lastTimestamp = now;
 
-                fps = (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
+            return elapsedFromBeginMilliseconds < 3000; // 3 seconds
+        });
 
-                lastTimestamp = now;
+        // wait for moving action from queue to actions.
+        await Task.Delay(100);
 
-                return elapsedFromBeginMilliseconds < 3000; // 3 seconds
-            });
+        looper.ApproximatelyRunningActions.Should().Be(1);
 
-            // wait for moving action from queue to actions.
-            await Task.Delay(100);
+        await task;
 
-            looper.ApproximatelyRunningActions.Should().Be(1);
+        await Task.Delay(100);
 
-            await task;
+        looper.ApproximatelyRunningActions.Should().Be(0);
 
-            await Task.Delay(100);
+        fps.Should().BeInRange(targetFps-2, targetFps + 2);
+    }
 
-            looper.ApproximatelyRunningActions.Should().Be(0);
+    [Fact]
+    public async Task Exit()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(60);
 
-            fps.Should().BeInRange(targetFps-2, targetFps + 2);
-        }
-
-        [Fact]
-        public async Task Exit()
+        var count = 0;
+        await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
         {
-            using var looper = new Cysharp.Threading.LogicLooper(60);
+            count++;
+            return false;
+        });
 
-            var count = 0;
-            await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
-            {
-                count++;
-                return false;
-            });
+        await Task.Delay(100);
+        count.Should().Be(1);
+    }
 
-            await Task.Delay(100);
-            count.Should().Be(1);
-        }
+    [Fact]
+    public async Task Throw()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(60);
 
-        [Fact]
-        public async Task Throw()
+        var count = 0;
+        await Assert.ThrowsAsync<Exception>(() => looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
         {
-            using var looper = new Cysharp.Threading.LogicLooper(60);
+            count++;
+            throw new Exception("Throw from inside loop");
+        }));
 
-            var count = 0;
-            await Assert.ThrowsAsync<Exception>(() => looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
-            {
-                count++;
-                throw new Exception("Throw from inside loop");
-            }));
+        await Task.Delay(100);
+        count.Should().Be(1);
+    }
 
-            await Task.Delay(100);
-            count.Should().Be(1);
-        }
+    [Fact]
+    public async Task CurrentFrame()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(60);
 
-        [Fact]
-        public async Task CurrentFrame()
+        var currentFrame = 0L;
+        await  looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
         {
-            using var looper = new Cysharp.Threading.LogicLooper(60);
+            currentFrame = ctx.CurrentFrame;
+            return currentFrame != 10;
+        });
 
-            var currentFrame = 0L;
-            await  looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
-            {
-                currentFrame = ctx.CurrentFrame;
-                return currentFrame != 10;
-            });
+        await Task.Delay(100);
+        currentFrame.Should().Be(10);
+    }
 
-            await Task.Delay(100);
-            currentFrame.Should().Be(10);
-        }
+    [Fact]
+    public async Task Shutdown_Delay_Cancel()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(60);
 
-        [Fact]
-        public async Task Shutdown_Delay_Cancel()
+        var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) => !ctx.CancellationToken.IsCancellationRequested);
+        runLoopTask.IsCompleted.Should().BeFalse();
+
+        var shutdownTask = looper.ShutdownAsync(TimeSpan.FromMilliseconds(500));
+        await Task.Delay(50);
+        runLoopTask.IsCompleted.Should().BeTrue();
+        shutdownTask.IsCompleted.Should().BeFalse();
+
+        await shutdownTask;
+    }
+
+
+    [Fact]
+    public async Task Shutdown_Delay_Cancel_2()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(60);
+
+        var count = 0;
+        var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
         {
-            using var looper = new Cysharp.Threading.LogicLooper(60);
+            count++;
+            return !ctx.CancellationToken.IsCancellationRequested;
+        });
+        runLoopTask.IsCompleted.Should().BeFalse();
 
-            var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) => !ctx.CancellationToken.IsCancellationRequested);
-            runLoopTask.IsCompleted.Should().BeFalse();
+        var shutdownTask = looper.ShutdownAsync(TimeSpan.FromMilliseconds(500));
+        await Task.Delay(50);
+        runLoopTask.IsCompleted.Should().BeTrue();
+        var count2 = count;
+        shutdownTask.IsCompleted.Should().BeFalse();
 
-            var shutdownTask = looper.ShutdownAsync(TimeSpan.FromMilliseconds(500));
-            await Task.Delay(50);
-            runLoopTask.IsCompleted.Should().BeTrue();
-            shutdownTask.IsCompleted.Should().BeFalse();
+        await shutdownTask;
+        count.Should().Be(count);
+    }
 
-            await shutdownTask;
-        }
+    [Fact]
+    public async Task Shutdown_Immediately()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(1);
 
-
-        [Fact]
-        public async Task Shutdown_Delay_Cancel_2()
+        var signal = new ManualResetEventSlim();
+        var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
         {
-            using var looper = new Cysharp.Threading.LogicLooper(60);
+            signal.Set();
+            return !ctx.CancellationToken.IsCancellationRequested;
+        });
+        runLoopTask.IsCompleted.Should().BeFalse();
 
-            var count = 0;
-            var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
-            {
-                count++;
-                return !ctx.CancellationToken.IsCancellationRequested;
-            });
-            runLoopTask.IsCompleted.Should().BeFalse();
+        signal.Wait();
+        var shutdownTask = looper.ShutdownAsync(TimeSpan.Zero);
+        await shutdownTask;
 
-            var shutdownTask = looper.ShutdownAsync(TimeSpan.FromMilliseconds(500));
-            await Task.Delay(50);
-            runLoopTask.IsCompleted.Should().BeTrue();
-            var count2 = count;
-            shutdownTask.IsCompleted.Should().BeFalse();
+        //runLoopTask.IsCompleted.Should().BeFalse(); // When the looper thread is waiting for next cycle, the loop task should not be completed.
+    }
 
-            await shutdownTask;
-            count.Should().Be(count);
-        }
 
-        [Fact]
-        public async Task Shutdown_Immediately()
+    [Fact]
+    public async Task LastProcessingDuration()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(60);
+
+        var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
         {
-            using var looper = new Cysharp.Threading.LogicLooper(1);
+            Thread.Sleep(100);
+            return !ctx.CancellationToken.IsCancellationRequested;
+        });
 
-            var signal = new ManualResetEventSlim();
-            var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
-            {
-                signal.Set();
-                return !ctx.CancellationToken.IsCancellationRequested;
-            });
-            runLoopTask.IsCompleted.Should().BeFalse();
+        await Task.Delay(1000);
+        await looper.ShutdownAsync(TimeSpan.Zero);
 
-            signal.Wait();
-            var shutdownTask = looper.ShutdownAsync(TimeSpan.Zero);
-            await shutdownTask;
-
-            //runLoopTask.IsCompleted.Should().BeFalse(); // When the looper thread is waiting for next cycle, the loop task should not be completed.
-        }
-
-
-        [Fact]
-        public async Task LastProcessingDuration()
-        {
-            using var looper = new Cysharp.Threading.LogicLooper(60);
-
-            var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
-            {
-                Thread.Sleep(100);
-                return !ctx.CancellationToken.IsCancellationRequested;
-            });
-
-            await Task.Delay(1000);
-            await looper.ShutdownAsync(TimeSpan.Zero);
-
-            looper.LastProcessingDuration.TotalMilliseconds.Should().BeInRange(95, 105);
-        }
+        looper.LastProcessingDuration.TotalMilliseconds.Should().BeInRange(95, 105);
     }
 }
