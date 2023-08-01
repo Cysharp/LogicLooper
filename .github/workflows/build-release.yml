@@ -24,9 +24,8 @@ jobs:
       - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
         with:
           dotnet-version: |
-            3.1.x
-            5.0.x
             6.0.x
+            7.0.x
       - run: dotnet build -c Release -p:VersionPrefix=${{ env.GIT_TAG }} -p:DefineConstants=RUNNING_IN_CI
       - run: dotnet test -c Release --no-build
       - run: dotnet pack -c Release --no-build -p:VersionPrefix=${{ env.GIT_TAG }} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -o ./publish
