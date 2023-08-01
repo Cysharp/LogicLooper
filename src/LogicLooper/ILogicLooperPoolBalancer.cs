@@ -1,7 +1,6 @@
-namespace Cysharp.Threading
+namespace Cysharp.Threading;
+
+public interface ILogicLooperPoolBalancer
 {
-    public interface ILogicLooperPoolBalancer
-    {
-        LogicLooper GetPooledLooper(LogicLooper[] pooledLoopers);
-    }
+    LogicLooper GetPooledLooper(LogicLooper[] pooledLoopers);
 }

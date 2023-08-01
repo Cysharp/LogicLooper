@@ -1,141 +1,135 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+namespace Cysharp.Threading;
 
-namespace Cysharp.Threading
+/// <summary>
+/// Implements <see cref="ILogicLooper"/> to loop update frame manually.
+/// </summary>
+public sealed class ManualLogicLooper : ILogicLooper
 {
-    /// <summary>
-    /// Implements <see cref="ILogicLooper"/> to loop update frame manually.
-    /// </summary>
-    public sealed class ManualLogicLooper : ILogicLooper
+    private readonly List<LogicLooper.LooperAction> _actions = new List<LogicLooper.LooperAction>();
+    private readonly CancellationTokenSource _ctsAction = new CancellationTokenSource();
+    private int _frame;
+
+    /// <inheritdoc />
+    public int Id => 0;
+
+    /// <inheritdoc />
+    public int ApproximatelyRunningActions => _actions.Count;
+
+    /// <inheritdoc />
+    public TimeSpan LastProcessingDuration => TimeSpan.Zero;
+
+    /// <inheritdoc />
+    public double TargetFrameRate { get; }
+
+    public ManualLogicLooper(double targetFrameRate)
     {
-        private readonly List<LogicLooper.LooperAction> _actions = new List<LogicLooper.LooperAction>();
-        private readonly CancellationTokenSource _ctsAction = new CancellationTokenSource();
-        private int _frame;
+        if (targetFrameRate == 0) throw new ArgumentOutOfRangeException(nameof(targetFrameRate), "TargetFrameRate must be greater than 0.");
+        TargetFrameRate = targetFrameRate;
+    }
 
-        /// <inheritdoc />
-        public int Id => 0;
+    /// <inheritdoc />
+    public void Dispose()
+    {
+    }
 
-        /// <inheritdoc />
-        public int ApproximatelyRunningActions => _actions.Count;
-
-        /// <inheritdoc />
-        public TimeSpan LastProcessingDuration => TimeSpan.Zero;
-
-        /// <inheritdoc />
-        public double TargetFrameRate { get; }
-
-        public ManualLogicLooper(double targetFrameRate)
+    /// <summary>
+    /// Ticks the frame of the current looper.
+    /// </summary>
+    /// <param name="frameCount"></param>
+    public bool Tick(int frameCount)
+    {
+        var result = true;
+        for (var i = 0; i < frameCount; i++)
         {
-            if (targetFrameRate == 0) throw new ArgumentOutOfRangeException(nameof(targetFrameRate), "TargetFrameRate must be greater than 0.");
-            TargetFrameRate = targetFrameRate;
+            result &= Tick();
         }
 
-        /// <inheritdoc />
-        public void Dispose()
-        {
-        }
+        return result;
+    }
 
-        /// <summary>
-        /// Ticks the frame of the current looper.
-        /// </summary>
-        /// <param name="frameCount"></param>
-        public bool Tick(int frameCount)
+    /// <summary>
+    /// Ticks the frame of the current looper.
+    /// </summary>
+    /// <returns></returns>
+    public bool Tick()
+    {
+        var ctx = new LogicLooperActionContext(this, _frame++, TimeSpan.FromMilliseconds(1000 / TargetFrameRate) /* Fixed Time */, _ctsAction.Token);
+        var completed = new List<LogicLooper.LooperAction>();
+        lock (_actions)
         {
-            var result = true;
-            for (var i = 0; i < frameCount; i++)
+            foreach (var action in _actions)
             {
-                result &= Tick();
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Ticks the frame of the current looper.
-        /// </summary>
-        /// <returns></returns>
-        public bool Tick()
-        {
-            var ctx = new LogicLooperActionContext(this, _frame++, TimeSpan.FromMilliseconds(1000 / TargetFrameRate) /* Fixed Time */, _ctsAction.Token);
-            var completed = new List<LogicLooper.LooperAction>();
-            lock (_actions)
-            {
-                foreach (var action in _actions)
+                if (!InvokeAction(ctx, action))
                 {
-                    if (!InvokeAction(ctx, action))
-                    {
-                        completed.Add(action);
-                    }
+                    completed.Add(action);
                 }
-
-                foreach (var completedAction in completed)
-                {
-                    _actions.Remove(completedAction);
-                }
-
-                return _actions.Count != 0;
             }
-        }
 
-        /// <summary>
-        /// Ticks the frame of the current looper while the predicate returns <c>true</c>.
-        /// </summary>
-        public void TickWhile(Func<bool> predicate)
-        {
-            while (predicate())
+            foreach (var completedAction in completed)
             {
-                Tick();
+                _actions.Remove(completedAction);
             }
-        }
 
-        /// <inheritdoc />
-        public Task RegisterActionAsync(LogicLooperActionDelegate loopAction)
+            return _actions.Count != 0;
+        }
+    }
+
+    /// <summary>
+    /// Ticks the frame of the current looper while the predicate returns <c>true</c>.
+    /// </summary>
+    public void TickWhile(Func<bool> predicate)
+    {
+        while (predicate())
         {
-            var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper(), loopAction, default);
-            lock (_actions)
-            {
-                _actions.Add(action);
-            }
-            return action.Future.Task;
+            Tick();
         }
+    }
 
-        /// <inheritdoc />
-        public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state)
+    /// <inheritdoc />
+    public Task RegisterActionAsync(LogicLooperActionDelegate loopAction)
+    {
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper(), loopAction, default);
+        lock (_actions)
         {
-            var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), loopAction, state);
-            lock (_actions)
-            {
-                _actions.Add(action);
-            }
-            return action.Future.Task;
+            _actions.Add(action);
         }
+        return action.Future.Task;
+    }
 
-        /// <inheritdoc />
-        public Task ShutdownAsync(TimeSpan shutdownDelay)
+    /// <inheritdoc />
+    public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state)
+    {
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), loopAction, state);
+        lock (_actions)
         {
-            return Task.CompletedTask;
+            _actions.Add(action);
         }
+        return action.Future.Task;
+    }
 
-        private static bool InvokeAction(in LogicLooperActionContext ctx, in LogicLooper.LooperAction action)
+    /// <inheritdoc />
+    public Task ShutdownAsync(TimeSpan shutdownDelay)
+    {
+        return Task.CompletedTask;
+    }
+
+    private static bool InvokeAction(in LogicLooperActionContext ctx, in LogicLooper.LooperAction action)
+    {
+        try
         {
-            try
+            var hasNext = action.Invoke(ctx);
+            if (!hasNext)
             {
-                var hasNext = action.Invoke(ctx);
-                if (!hasNext)
-                {
-                    action.Future.SetResult(true);
-                }
-
-                return hasNext;
-            }
-            catch (Exception ex)
-            {
-                action.Future.SetException(ex);
+                action.Future.SetResult(true);
             }
 
-            return false;
+            return hasNext;
         }
+        catch (Exception ex)
+        {
+            action.Future.SetException(ex);
+        }
+
+        return false;
     }
 }
