@@ -43,7 +43,7 @@ public class LogicLooperSynchronizationContextTest
     {
         using var looper = new ManualLogicLooper(60);
         using var syncContext = new LogicLooperSynchronizationContext(looper);
-        SynchronizationContext.SetSynchronizationContext(syncContext);
+        SynchronizationContext.SetSynchronizationContext(syncContext); // This context is used when advancing frame within the Tick method. Use `ConfigureAwait(false)` in the following codes.
 
         var result = new List<string>();
         var task = looper.RegisterActionAsync(async (ctx) =>
@@ -57,9 +57,10 @@ public class LogicLooperSynchronizationContextTest
         looper.Tick();
         result.Should().BeEquivalentTo(new[] { "1" });
 
-        await Task.Delay(500);
+        await Task.Delay(500).ConfigureAwait(false);
 
-        looper.Tick();
+        looper.Tick(); // Run continuation
+        looper.Tick(); // Wait for complete action
         result.Should().BeEquivalentTo(new[] { "1", "2" });
 
         task.IsCompleted.Should().BeTrue();
@@ -70,7 +71,7 @@ public class LogicLooperSynchronizationContextTest
     {
         using var looper = new ManualLogicLooper(60);
         using var syncContext = new LogicLooperSynchronizationContext(looper);
-        SynchronizationContext.SetSynchronizationContext(syncContext); // This context is used when advancing frame within the Tick method.
+        SynchronizationContext.SetSynchronizationContext(syncContext); // This context is used when advancing frame within the Tick method. Use `ConfigureAwait(false)` in the following codes.
         var t = looper.RegisterActionAsync((in LogicLooperActionContext ctx) => false);
 
         looper.ApproximatelyRunningActions.Should().Be(1);
@@ -84,7 +85,7 @@ public class LogicLooperSynchronizationContextTest
     {
         using var looper = new ManualLogicLooper(60);
         using var syncContext = new LogicLooperSynchronizationContext(looper);
-        SynchronizationContext.SetSynchronizationContext(syncContext); // This context is used when advancing frame within the Tick method.
+        SynchronizationContext.SetSynchronizationContext(syncContext); // This context is used when advancing frame within the Tick method. Use `ConfigureAwait(false)` in the following codes.
         var t = looper.RegisterActionAsync(async (LogicLooperActionContext ctx) =>
         {
             await Task.Yield();
