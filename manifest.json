@@ -4,12 +4,252 @@
   "xrefmap": "xrefmap.yml",
   "files": [
     {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineAsyncValueTaskMethodBuilder-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineAsyncValueTaskMethodBuilder-1.html",
+          "hash": "h/M2CiIaFZHTSUwiGu187SGwUSRWmbnBxZ/Ll1XkEDk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineAsyncValueTaskMethodBuilder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineAsyncValueTaskMethodBuilder.html",
+          "hash": "UAvhX5WhqSzEZheKV6YxWQ+rZUGgqRjBt/w/MiS/d+4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineFrameAwaitable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.CompilerServices.LogicLooperCoroutineFrameAwaitable.html",
+          "hash": "QPuaOom0elkcxGBxW6Wo1MbsBckDuhjOyyS2b5qqsfo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.CompilerServices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.CompilerServices.html",
+          "hash": "+pzz20eMfKzzMzwNicGztU38ZZ/f54AcmIAaDp7vhPA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.ILogicLooper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.ILogicLooper.html",
+          "hash": "mjt/XwhPVTGZh8+RmAEJtme88mG+8itmAkk735Exa+w="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.ILogicLooperPool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.ILogicLooperPool.html",
+          "hash": "ObCMAqU+1Nc2H3yFaoc8Vz7VaWoEtpSHhv4QpaSJHJU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.ILogicLooperPoolBalancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.ILogicLooperPoolBalancer.html",
+          "hash": "n51U2YrXxdUI9rU/qLcsHPZaj/eowKderJptAeK/kL8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooper.html",
+          "hash": "XW2EfjSp7Na/kEkGJ53Vse8P092F4tr6Xv1bkUJHlIY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperActionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperActionContext.html",
+          "hash": "pu0LvYDkpgFXPLUBAIKxs3pFSPYKqCOVguXHuDzD92Q="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperActionDelegate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperActionDelegate.html",
+          "hash": "Fh1OPehAsX9rM71vhjIeZwNDj7eHXeHeIGOqI8BIV7Q="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperActionWithStateDelegate-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperActionWithStateDelegate-1.html",
+          "hash": "1lvH9hITa172q2TOSDIBNJYg4wF/MGhZWJAI2ChwYA4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperCoroutine-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperCoroutine-1.html",
+          "hash": "mAVQ2Tr9hCs8fCCpBb5nJ+wBD3UJEHv6ghLplaWjtGo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperCoroutine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperCoroutine.html",
+          "hash": "YMwa3SXK9nMVL4aViQy20AuwZ5McATs6t8zexSGuBPg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperCoroutineActionContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperCoroutineActionContext.html",
+          "hash": "SZzuAUTEJ6imKGJatCB5T724ehp3YMrWpd6zWzoIRCM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.LogicLooperPool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.LogicLooperPool.html",
+          "hash": "hl37OpTyP/lmhHd/KN9fdeF+UhuaxmXsI82IyuWAHtU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.ManualLogicLooper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.ManualLogicLooper.html",
+          "hash": "zCAr34hfdbIs50lqQjeiS61BehrNYoz7GsVeiC7Md9Q="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.ManualLogicLooperPool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.ManualLogicLooperPool.html",
+          "hash": "vxjPax3QAb9CJf/VTT4deeyYmRWSu2DrWjVVHBYVL/8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.RoundRobinLogicLooperPoolBalancer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.RoundRobinLogicLooperPoolBalancer.html",
+          "hash": "CD0fRcgZb8rXM9drlaeP8gHOyE5HR9HtvOICcoSwoow="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.html",
+          "hash": "kafVPiwhogUFE2IcvgfDQNEpjtqxtkpLCPiIuNxYCao="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "G+DWPvArg4Y1o6MmMrqQN1/QMeHHIbrNYpMDyI4fqEc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "index.md",
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "d0S8K/HG9Vz7ahH40d76nw=="
+          "hash": "iO5RS2q1P7RMEsIwLuWGIAWDe1xmGLb/UWFlBft8dRw="
         }
       },
       "is_incremental": false,
@@ -24,7 +264,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "BLJjhDho29zTm4uYpnUqqQ=="
+          "hash": "nWRl4JGOCWJED83Dr4/pBFQ0BHKorXIm+qsr2en2vng="
         }
       },
       "is_incremental": false,
@@ -46,6 +286,12 @@
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 1,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 19,
           "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
