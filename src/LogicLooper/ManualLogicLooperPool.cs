@@ -60,6 +60,18 @@ public sealed class ManualLogicLooperPool : ILogicLooperPool
     }
 
     /// <inheritdoc />
+    public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
+    {
+        return Loopers[0].RegisterActionAsync(loopAction);
+    }
+
+    /// <inheritdoc />
+    public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
+    {
+        return Loopers[0].RegisterActionAsync(loopAction, state);
+    }
+
+    /// <inheritdoc />
     public Task ShutdownAsync(TimeSpan shutdownDelay)
     {
         return Loopers[0].ShutdownAsync(shutdownDelay);

@@ -41,6 +41,23 @@ public interface ILogicLooper : IDisposable
     Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state);
 
     /// <summary>
+    /// [Experimental] Registers a loop-frame action to the looper and returns <see cref="Task"/> to wait for completion.
+    /// An asynchronous action is executed across multiple frames, differ from the synchronous version.
+    /// </summary>
+    /// <param name="loopAction"></param>
+    /// <returns></returns>
+    Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction);
+
+    /// <summary>
+    /// [Experimental] Registers a loop-frame action with state object to the looper and returns <see cref="Task"/> to wait for completion.
+    /// An asynchronous action is executed across multiple frames, differ from the synchronous version.
+    /// </summary>
+    /// <param name="loopAction"></param>
+    /// <param name="state"></param>
+    /// <returns></returns>
+    Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state);
+
+    /// <summary>
     /// Stops the action loop of the looper.
     /// </summary>
     /// <param name="shutdownDelay"></param>

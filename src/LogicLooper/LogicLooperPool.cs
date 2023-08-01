@@ -48,6 +48,14 @@ public sealed partial class LogicLooperPool : ILogicLooperPool, IDisposable
         => _balancer.GetPooledLooper(_loopers).RegisterActionAsync(loopAction, state);
 
     /// <inheritdoc />
+    public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
+        => _balancer.GetPooledLooper(_loopers).RegisterActionAsync(loopAction);
+
+    /// <inheritdoc />
+    public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
+        => _balancer.GetPooledLooper(_loopers).RegisterActionAsync(loopAction, state);
+
+    /// <inheritdoc />
     public async Task ShutdownAsync(TimeSpan shutdownDelay)
     {
         await Task.WhenAll(_loopers.Select(x => x.ShutdownAsync(shutdownDelay)));

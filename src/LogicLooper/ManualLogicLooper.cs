@@ -57,7 +57,7 @@ public sealed class ManualLogicLooper : ILogicLooper
         var completed = new List<LogicLooper.LooperAction>();
         lock (_actions)
         {
-            foreach (var action in _actions)
+            foreach (var action in _actions.ToArray())
             {
                 if (!InvokeAction(ctx, action))
                 {
@@ -100,6 +100,28 @@ public sealed class ManualLogicLooper : ILogicLooper
     public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state)
     {
         var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), loopAction, state);
+        lock (_actions)
+        {
+            _actions.Add(action);
+        }
+        return action.Future.Task;
+    }
+    
+    /// <inheritdoc />
+    public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
+    {
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper(), LogicLooper.DelegateHelper.ConvertAsyncToSync(loopAction), default);
+        lock (_actions)
+        {
+            _actions.Add(action);
+        }
+        return action.Future.Task;
+    }
+
+    /// <inheritdoc />
+    public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
+    {
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), LogicLooper.DelegateHelper.ConvertAsyncToSync(loopAction), state);
         lock (_actions)
         {
             _actions.Add(action);

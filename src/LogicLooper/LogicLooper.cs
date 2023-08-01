@@ -8,6 +8,8 @@ namespace Cysharp.Threading;
 
 public delegate bool LogicLooperActionDelegate(in LogicLooperActionContext ctx);
 public delegate bool LogicLooperActionWithStateDelegate<in T>(in LogicLooperActionContext ctx, T state);
+public delegate ValueTask<bool> LogicLooperAsyncActionDelegate(LogicLooperActionContext ctx);
+public delegate ValueTask<bool> LogicLooperAsyncActionWithStateDelegate<in T>(LogicLooperActionContext ctx, T state);
 
 /// <summary>
 /// Provides update loop programming model. the looper ties thread and while-loop and call registered methods every frame.
@@ -65,6 +67,11 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     /// </summary>
     public double TargetFrameRate => _targetFrameRate;
 
+    /// <summary>
+    /// Gets a unique identifier of the managed thread.
+    /// </summary>
+    internal int ThreadId => _runLoopThread.ManagedThreadId;
+
     public LogicLooper(int targetFrameRate, int initialActionsCapacity = 16)
         : this(TimeSpan.FromMilliseconds(1000 / (double)targetFrameRate), initialActionsCapacity)
     {
@@ -111,6 +118,29 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     {
         var action = new LooperAction(DelegateHelper.GetWrapper<TState>(), loopAction, state);
         return RegisterActionAsyncCore(action);
+    }
+
+    /// <summary>
+    /// [Experimental] Registers a async-aware loop-frame action to the looper and returns <see cref="Task"/> to wait for completion.
+    /// </summary>
+    /// <param name="loopAction"></param>
+    /// <returns></returns>
+    public async Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
+    {
+        var action = new LooperAction(DelegateHelper.GetWrapper(), DelegateHelper.ConvertAsyncToSync(loopAction), null);
+        await RegisterActionAsyncCore(action);
+    }
+
+    /// <summary>
+    /// [Experimental] Registers a async-aware loop-frame action with state object to the looper and returns <see cref="Task"/> to wait for completion.
+    /// </summary>
+    /// <param name="loopAction"></param>
+    /// <param name="state"></param>
+    /// <returns></returns>
+    public async Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
+    {
+        var action = new LooperAction(DelegateHelper.GetWrapper<TState>(), DelegateHelper.ConvertAsyncToSync(loopAction), state);
+        await RegisterActionAsyncCore(action);
     }
 
     /// <summary>
@@ -173,6 +203,9 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     private void RunLoop()
     {
         var lastTimestamp = Stopwatch.GetTimestamp();
+
+        var syncContext = new LogicLooperSynchronizationContext(this);
+        SynchronizationContext.SetSynchronizationContext(syncContext);
 
         while (!_ctsLoop.IsCancellationRequested)
         {
@@ -293,6 +326,48 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
         public static InternalLogicLooperActionDelegate GetWrapper<T>() => Cache<T>.Wrapper;
         public static InternalLogicLooperActionDelegate GetWrapper() => _wrapper;
 
+        public static LogicLooperActionDelegate ConvertAsyncToSync(LogicLooperAsyncActionDelegate loopAction)
+        {
+            // TODO: perf
+            var runningTask = default(ValueTask<bool>?);
+            return LoopActionSync;
+
+            bool LoopActionSync(in LogicLooperActionContext ctx)
+            {
+                runningTask ??= loopAction(ctx);
+
+                if (runningTask is { IsCompleted: true } completedTask)
+                {
+                    var result = completedTask.GetAwaiter().GetResult();
+                    runningTask = null;
+                    return result;
+                }
+
+                return true;
+            }
+        }
+
+        public static LogicLooperActionWithStateDelegate<TState> ConvertAsyncToSync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction)
+        {
+            // TODO: perf
+            var runningTask = default(ValueTask<bool>?);
+            return LoopActionSync;
+
+            bool LoopActionSync(in LogicLooperActionContext ctx, TState state)
+            {
+                runningTask ??= loopAction(ctx, state);
+
+                if (runningTask is { IsCompleted: true } completedTask)
+                {
+                    var result = completedTask.GetAwaiter().GetResult();
+                    runningTask = null;
+                    return result;
+                }
+
+                return true;
+            }
+        }
+
         static class Cache<T>
         {
             public static InternalLogicLooperActionDelegate Wrapper => (object wrappedDelegate, in LogicLooperActionContext ctx, object? state) => ((LogicLooperActionWithStateDelegate<T>) wrappedDelegate)(ctx, (T) state!);
@@ -305,7 +380,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     {
         public DateTimeOffset BeginAt { get; }
         public object? State { get; }
-        public Delegate Action { get; }
+        public Delegate? Action { get; }
         public InternalLogicLooperActionDelegate ActionWrapper { get; }
         public TaskCompletionSource<bool> Future { get; }
 
@@ -320,7 +395,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
 
         public bool Invoke(in LogicLooperActionContext ctx)
         {
-            return ActionWrapper(Action, ctx, State);
+            return ActionWrapper(Action!, ctx, State);
         }
     }
 }
