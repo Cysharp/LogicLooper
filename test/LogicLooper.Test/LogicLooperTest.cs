@@ -1,4 +1,5 @@
 using Cysharp.Threading;
+using Cysharp.Threading.Internal;
 
 namespace LogicLooper.Test;
 
@@ -205,7 +206,7 @@ public class LogicLooperTest
 
         var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
         {
-            Thread.Sleep(100);
+            SleepInterop.Sleep(100);
             return !ctx.CancellationToken.IsCancellationRequested;
         });
 
