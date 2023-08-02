@@ -38,8 +38,9 @@ internal static class SleepInterop
         public static unsafe void Sleep(int milliseconds)
         {
 #if NET5_0_OR_GREATER
+            // https://learn.microsoft.com/en-us/dotnet/standard/analyzers/platform-compat-analyzer#assert-the-call-site-with-platform-check
             Debug.Assert(OperatingSystem.IsWindows());
-            Debug.Assert(OperatingSystem.IsWindowsVersionAtLeast(6, 2));
+            Debug.Assert(OperatingSystem.IsWindowsVersionAtLeast(10, 0, 17134)); // Windows 10 version 1803 or newer
 #endif
             _timerHandle ??= PInvoke.CreateWaitableTimerEx(null, default(string?), CREATE_WAITABLE_TIMER_HIGH_RESOLUTION, 0x1F0003 /* TIMER_ALL_ACCESS */);
             var result = PInvoke.SetWaitableTimer(_timerHandle, milliseconds * -10000, 0, null, null, false);
