@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework Condition="'$(OS)' != 'Windows_NT'">net7.0</TargetFramework>
-    <TargetFramework Condition="'$(OS)' == 'Windows_NT'">net7.0-windows</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <NoWarn>1998</NoWarn>
     <SignAssembly>true</SignAssembly>

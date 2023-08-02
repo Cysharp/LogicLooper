@@ -5,7 +5,6 @@ namespace LogicLooper.Test;
 
 public class SleepInteropTest
 {
-#if WINDOWS
     [Fact]
     public void LessThan16Milliseconds()
     {
@@ -46,5 +45,4 @@ public class SleepInteropTest
             thread.Join(TimeSpan.FromSeconds(10)).Should().BeTrue();
         }
     }
-#endif
 }
