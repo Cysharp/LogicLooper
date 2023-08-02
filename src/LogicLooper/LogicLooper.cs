@@ -292,7 +292,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
             var waitForNextFrameMilliseconds = (int)(_targetFrameTimeMilliseconds - elapsedMilliseconds);
             if (waitForNextFrameMilliseconds > 0)
             {
-                Thread.Sleep(waitForNextFrameMilliseconds);
+                SleepInterop.Sleep(waitForNextFrameMilliseconds);
             }
         }
 
