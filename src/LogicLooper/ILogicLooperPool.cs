@@ -45,4 +45,10 @@ public interface ILogicLooperPool : IDisposable
     /// <param name="shutdownDelay"></param>
     /// <returns></returns>
     Task ShutdownAsync(TimeSpan shutdownDelay);
+
+    /// <summary>
+    /// Gets a <see cref="ILogicLooper"/> instance from the pool. This is useful when you want to explicitly register multiple actions on the same loop thread.
+    /// </summary>
+    /// <returns></returns>
+    ILogicLooper GetLooper();
 }

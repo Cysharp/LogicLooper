@@ -43,4 +43,24 @@ public class LogicLooperPoolTest
 
         executedCount.Should().Be(actionCount * loopCount);
     }
+
+    [Fact]
+    public void GetLooper()
+    {
+        using var pool = new LogicLooperPool(60, 4, new FakeSequentialLogicLooperPoolBalancer());
+        pool.GetLooper().Should().Be(pool.Loopers[0]);
+        pool.GetLooper().Should().Be(pool.Loopers[1]);
+        pool.GetLooper().Should().Be(pool.Loopers[2]);
+        pool.GetLooper().Should().Be(pool.Loopers[3]);
+        pool.GetLooper().Should().Be(pool.Loopers[0]);
+    }
+
+    class FakeSequentialLogicLooperPoolBalancer : ILogicLooperPoolBalancer
+    {
+        private int _count;
+        public Cysharp.Threading.LogicLooper GetPooledLooper(Cysharp.Threading.LogicLooper[] pooledLoopers)
+        {
+            return pooledLoopers[_count++ % pooledLoopers.Length];
+        }
+    }
 }

@@ -26,4 +26,13 @@ public class ManualLogicLooperPoolTest
         pool.Loopers[0].ApproximatelyRunningActions.Should().Be(0);
         t1.IsCompletedSuccessfully.Should().BeTrue();
     }
+
+    [Fact]
+    public void GetLooper()
+    {
+        var pool = new ManualLogicLooperPool(60.0);
+        var looper = pool.GetLooper();
+
+        looper.Should().Be(pool.FakeLooper);
+    }
 }
