@@ -166,6 +166,13 @@
       </tr>
       <tr>
         <td>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_GetLooper">GetLooper()</a>
+        </td>
+        <td class="markdown level1 summary"><p>Gets a <a class="xref" href="Cysharp.Threading.ILogicLooper.html">ILogicLooper</a> instance from the pool. This is useful when you want to explicitly register multiple actions on the same loop thread.</p>
+</td>
+      </tr>
+      <tr>
+        <td>
           <a class="xref" href="Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_">RegisterActionAsync(LogicLooperActionDelegate)</a>
         </td>
         <td class="markdown level1 summary"><p>Registers a loop-frame action to a pooled looper and returns <see cref="!:Task"></see> to wait for completion.</p>
@@ -334,6 +341,37 @@ An asynchronous action is executed across multiple frames, differ from the synch
   </div>
 
   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </section>
+  <section>
+  <a id="Cysharp_Threading_ManualLogicLooperPool_GetLooper_" data-uid="Cysharp.Threading.ManualLogicLooperPool.GetLooper*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooperPool_GetLooper" data-uid="Cysharp.Threading.ManualLogicLooperPool.GetLooper">GetLooper()</h4>
+  <div class="markdown level1 summary"><p>Gets a <a class="xref" href="Cysharp.Threading.ILogicLooper.html">ILogicLooper</a> instance from the pool. This is useful when you want to explicitly register multiple actions on the same loop thread.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ILogicLooper GetLooper()</code></pre>
+  </div>
+
+  
+  <section>
+  <h5 class="returns">Returns</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><a class="xref" href="Cysharp.Threading.ILogicLooper.html">ILogicLooper</a></dt>
+    <dd></dd>
+  </dl>
+  </section>
   
   
   

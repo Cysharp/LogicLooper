@@ -478,6 +478,19 @@ references:
   commentId: T:Cysharp.Threading.ILogicLooperPool
   fullName: Cysharp.Threading.ILogicLooperPool
   nameWithType: ILogicLooperPool
+- uid: Cysharp.Threading.ILogicLooperPool.GetLooper
+  name: GetLooper()
+  href: api/Cysharp.Threading.ILogicLooperPool.html#Cysharp_Threading_ILogicLooperPool_GetLooper
+  commentId: M:Cysharp.Threading.ILogicLooperPool.GetLooper
+  fullName: Cysharp.Threading.ILogicLooperPool.GetLooper()
+  nameWithType: ILogicLooperPool.GetLooper()
+- uid: Cysharp.Threading.ILogicLooperPool.GetLooper*
+  name: GetLooper
+  href: api/Cysharp.Threading.ILogicLooperPool.html#Cysharp_Threading_ILogicLooperPool_GetLooper_
+  commentId: Overload:Cysharp.Threading.ILogicLooperPool.GetLooper
+  isSpec: "True"
+  fullName: Cysharp.Threading.ILogicLooperPool.GetLooper
+  nameWithType: ILogicLooperPool.GetLooper
 - uid: Cysharp.Threading.ILogicLooperPool.Loopers
   name: Loopers
   href: api/Cysharp.Threading.ILogicLooperPool.html#Cysharp_Threading_ILogicLooperPool_Loopers
@@ -1061,6 +1074,19 @@ references:
   isSpec: "True"
   fullName: Cysharp.Threading.LogicLooperPool.Dispose
   nameWithType: LogicLooperPool.Dispose
+- uid: Cysharp.Threading.LogicLooperPool.GetLooper
+  name: GetLooper()
+  href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_GetLooper
+  commentId: M:Cysharp.Threading.LogicLooperPool.GetLooper
+  fullName: Cysharp.Threading.LogicLooperPool.GetLooper()
+  nameWithType: LogicLooperPool.GetLooper()
+- uid: Cysharp.Threading.LogicLooperPool.GetLooper*
+  name: GetLooper
+  href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_GetLooper_
+  commentId: Overload:Cysharp.Threading.LogicLooperPool.GetLooper
+  isSpec: "True"
+  fullName: Cysharp.Threading.LogicLooperPool.GetLooper
+  nameWithType: LogicLooperPool.GetLooper
 - uid: Cysharp.Threading.LogicLooperPool.InitializeSharedPool(System.Int32,System.Int32,Cysharp.Threading.ILogicLooperPoolBalancer)
   name: InitializeSharedPool(Int32, Int32, ILogicLooperPoolBalancer)
   href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_InitializeSharedPool_System_Int32_System_Int32_Cysharp_Threading_ILogicLooperPoolBalancer_
@@ -1364,6 +1390,19 @@ references:
   isSpec: "True"
   fullName: Cysharp.Threading.ManualLogicLooperPool.FakeLooper
   nameWithType: ManualLogicLooperPool.FakeLooper
+- uid: Cysharp.Threading.ManualLogicLooperPool.GetLooper
+  name: GetLooper()
+  href: api/Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_GetLooper
+  commentId: M:Cysharp.Threading.ManualLogicLooperPool.GetLooper
+  fullName: Cysharp.Threading.ManualLogicLooperPool.GetLooper()
+  nameWithType: ManualLogicLooperPool.GetLooper()
+- uid: Cysharp.Threading.ManualLogicLooperPool.GetLooper*
+  name: GetLooper
+  href: api/Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_GetLooper_
+  commentId: Overload:Cysharp.Threading.ManualLogicLooperPool.GetLooper
+  isSpec: "True"
+  fullName: Cysharp.Threading.ManualLogicLooperPool.GetLooper
+  nameWithType: ManualLogicLooperPool.GetLooper
 - uid: Cysharp.Threading.ManualLogicLooperPool.Loopers
   name: Loopers
   href: api/Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_Loopers
