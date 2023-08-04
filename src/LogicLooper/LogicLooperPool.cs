@@ -41,25 +41,29 @@ public sealed partial class LogicLooperPool : ILogicLooperPool, IDisposable
 
     /// <inheritdoc />
     public Task RegisterActionAsync(LogicLooperActionDelegate loopAction)
-        => _balancer.GetPooledLooper(_loopers).RegisterActionAsync(loopAction);
+        => GetLooper().RegisterActionAsync(loopAction);
 
     /// <inheritdoc />
     public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state)
-        => _balancer.GetPooledLooper(_loopers).RegisterActionAsync(loopAction, state);
+        => GetLooper().RegisterActionAsync(loopAction, state);
 
     /// <inheritdoc />
     public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
-        => _balancer.GetPooledLooper(_loopers).RegisterActionAsync(loopAction);
+        => GetLooper().RegisterActionAsync(loopAction);
 
     /// <inheritdoc />
     public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
-        => _balancer.GetPooledLooper(_loopers).RegisterActionAsync(loopAction, state);
+        => GetLooper().RegisterActionAsync(loopAction, state);
 
     /// <inheritdoc />
     public async Task ShutdownAsync(TimeSpan shutdownDelay)
     {
         await Task.WhenAll(_loopers.Select(x => x.ShutdownAsync(shutdownDelay)));
     }
+
+    /// <inheritdoc />
+    public ILogicLooper GetLooper()
+        => _balancer.GetPooledLooper(_loopers);
 
     public void Dispose()
     {

@@ -43,37 +43,29 @@ public sealed class ManualLogicLooperPool : ILogicLooperPool
 
     /// <inheritdoc />
     public void Dispose()
-    {
-        Loopers[0].Dispose();
-    }
+        => Loopers[0].Dispose();
 
     /// <inheritdoc />
     public Task RegisterActionAsync(LogicLooperActionDelegate loopAction)
-    {
-        return Loopers[0].RegisterActionAsync(loopAction);
-    }
+        => Loopers[0].RegisterActionAsync(loopAction);
 
     /// <inheritdoc />
     public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state)
-    {
-        return Loopers[0].RegisterActionAsync(loopAction, state);
-    }
+        => Loopers[0].RegisterActionAsync(loopAction, state);
 
     /// <inheritdoc />
     public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
-    {
-        return Loopers[0].RegisterActionAsync(loopAction);
-    }
+        => Loopers[0].RegisterActionAsync(loopAction);
 
     /// <inheritdoc />
     public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
-    {
-        return Loopers[0].RegisterActionAsync(loopAction, state);
-    }
+        => Loopers[0].RegisterActionAsync(loopAction, state);
 
     /// <inheritdoc />
     public Task ShutdownAsync(TimeSpan shutdownDelay)
-    {
-        return Loopers[0].ShutdownAsync(shutdownDelay);
-    }
+        => Loopers[0].ShutdownAsync(shutdownDelay);
+
+    /// <inheritdoc />
+    public ILogicLooper GetLooper()
+        => Loopers[0];
 }

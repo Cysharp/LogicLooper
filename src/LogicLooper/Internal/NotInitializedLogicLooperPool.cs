@@ -19,5 +19,8 @@ internal class NotInitializedLogicLooperPool : ILogicLooperPool
     public Task ShutdownAsync(TimeSpan shutdownDelay)
         => throw new InvalidOperationException("LogicLooper.Shared is not initialized yet.");
 
+    public ILogicLooper GetLooper()
+        => throw new InvalidOperationException("LogicLooper.Shared is not initialized yet.");
+
     public void Dispose() { }
 }
