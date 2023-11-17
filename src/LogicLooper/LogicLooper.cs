@@ -270,9 +270,32 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
                     // Found an action and invoke it.
                     if (action.Action != null)
                     {
-                        if (!InvokeAction(ctx, ref action))
+                        if (action.LoopActionOverrideState.IsOverridden)
                         {
-                            action = default;
+                            // If the action with fps override haven't reached the next invoke timestamp, we don't need to perform the action.
+                            if (action.LoopActionOverrideState.NextScheduledTimestamp > ctx.FrameBeginTimestamp)
+                            {
+                                continue;
+                            }
+                            
+                            var elapsedTicksFromPreviousFrameOverride = (long)((begin - action.LoopActionOverrideState.LastInvokedAt) * TimestampsToTicks);
+                            var elapsedTimeFromPreviousFrameOverride = TimeSpan.FromTicks(elapsedTicksFromPreviousFrameOverride);
+                            var overrideCtx = new LogicLooperActionContext(this, action.LoopActionOverrideState.Frame++, begin, elapsedTimeFromPreviousFrameOverride, _ctsAction.Token);
+                                                        
+                            if (!InvokeAction(overrideCtx, ref action))
+                            {
+                                action = default;
+                            }
+                            
+                            action.LoopActionOverrideState.LastInvokedAt = begin;
+                            action.LoopActionOverrideState.NextScheduledTimestamp = begin + action.LoopActionOverrideState.TargetFrameTimeTimestamp;
+                        }
+                        else
+                        {
+                            if (!InvokeAction(ctx, ref action))
+                            {
+                                action = default;
+                            }
                         }
                         continue;
                     }
@@ -341,19 +364,8 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     {
         try
         {
-            // If the action haven't reached the next invoke timestamp, we don't need to perform the action.
-            if (action.NextScheduledTimestamp is { } nextScheduledTimestamp && nextScheduledTimestamp > ctx.FrameBeginTimestamp)
-            {
-                return true;
-            }
-            
             var hasNext = action.Invoke(ctx);
-            
-            if (action.TargetFrameTimeTimestampOverride is { } targetFrameTimeTimestampOverride)
-            {
-                action.NextScheduledTimestamp = ctx.FrameBeginTimestamp + targetFrameTimeTimestampOverride;
-            }
-            
+
             if (!hasNext)
             {
                 action.Future.SetResult(true);
@@ -434,10 +446,9 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
         public InternalLogicLooperActionDelegate ActionWrapper { get; }
         public TaskCompletionSource<bool> Future { get; }
         public LooperActionOptions Options { get; }
-        
-        public long? NextScheduledTimestamp { get; set; }
-        public long? TargetFrameTimeTimestampOverride { get; }
 
+        public LoopActionOverrideState LoopActionOverrideState;
+        
         public LooperAction(InternalLogicLooperActionDelegate actionWrapper, Delegate action, object? state, LooperActionOptions options)
         {
             BeginAt = DateTimeOffset.Now;
@@ -446,10 +457,14 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
             State = state;
             Future = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
             Options = options;
+            LoopActionOverrideState = default;
 
             if (options.TargetFrameRateOverride is { } targetFrameRateOverride)
             {
-                TargetFrameTimeTimestampOverride = (long)(TimeSpan.FromMilliseconds(1000 / (double)targetFrameRateOverride).Ticks / TimestampsToTicks);
+                LoopActionOverrideState = new LoopActionOverrideState(isOverridden: true)
+                {
+                    TargetFrameTimeTimestamp = (long)(TimeSpan.FromMilliseconds(1000 / (double)targetFrameRateOverride).Ticks / TimestampsToTicks),
+                };
             }
         }
 
@@ -458,14 +473,19 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
             return ActionWrapper(Action!, ctx, State);
         }
     }
-}
+    
+    internal struct LoopActionOverrideState
+    {
+        public bool IsOverridden { get; }
+    
+        public int Frame { get; set; }
+        public long NextScheduledTimestamp { get; set; }
+        public long LastInvokedAt { get; set; }
+        public long TargetFrameTimeTimestamp { get; set; }
 
-public record LooperActionOptions(int? TargetFrameRateOverride = null)
-{
-    public static LooperActionOptions Default { get; } = new LooperActionOptions();
-
-    public TimeSpan? TargetFrameTimeOverride { get; } =
-        TargetFrameRateOverride is {} targetOverrideFrameTime
-            ? TimeSpan.FromMilliseconds(1000 / (double)TargetFrameRateOverride)
-            : null;
+        public LoopActionOverrideState(bool isOverridden)
+        {
+            IsOverridden = isOverridden;
+        }
+    }
 }

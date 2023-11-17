@@ -300,8 +300,14 @@ public class LogicLooperTest
         var beginTimestamp = DateTime.Now.Ticks;
         var lastTimestamp = beginTimestamp;
         var fps = 0d;
+
+        var lastFrameNum = 0L;
+        var frameCount = -1L; // CurrentFrame will be started from 0
         var task = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
         {
+            frameCount++;
+            lastFrameNum = ctx.CurrentFrame;
+            
             var now = DateTime.Now.Ticks;
             var elapsedFromBeginMilliseconds = (now - beginTimestamp) / TimeSpan.TicksPerMillisecond;
             var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / TimeSpan.TicksPerMillisecond;
@@ -326,6 +332,7 @@ public class LogicLooperTest
 
         looper.ApproximatelyRunningActions.Should().Be(0);
 
+        frameCount.Should().Be(lastFrameNum);
         fps.Should().BeInRange(overrideTargetFps-2, overrideTargetFps + 2);
     }
 }
