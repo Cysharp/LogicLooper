@@ -266,4 +266,66 @@ public class LogicLooperTest
 
         results.Should().BeEquivalentTo(new[] { managedThreadId, managedThreadId, managedThreadId });
     }
+    
+    [Fact]
+    public async Task AsyncAction_Fault()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(60);
+        var count = 0;
+        var runLoopTask = looper.RegisterActionAsync(async (LogicLooperActionContext ctx) =>
+        {
+            count++;
+            await Task.Delay(100);
+            throw new InvalidOperationException();
+            return true;
+        });
+
+        await Assert.ThrowsAsync<InvalidOperationException>(async () => await runLoopTask);
+        await Task.Delay(100);
+        count.Should().Be(1);
+    }
+    
+    
+    [Theory]
+    [InlineData(60, 10)]
+    [InlineData(30, 10)]
+    [InlineData(20, 10)]
+    public async Task TargetFrameRateOverride_1(int targetFps, int overrideTargetFps)
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(targetFps);
+
+        looper.ApproximatelyRunningActions.Should().Be(0);
+        ((int)looper.TargetFrameRate).Should().Be(targetFps);
+
+        var beginTimestamp = DateTime.Now.Ticks;
+        var lastTimestamp = beginTimestamp;
+        var fps = 0d;
+        var task = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+        {
+            var now = DateTime.Now.Ticks;
+            var elapsedFromBeginMilliseconds = (now - beginTimestamp) / TimeSpan.TicksPerMillisecond;
+            var elapsedFromPreviousFrameMilliseconds = (now - lastTimestamp) / TimeSpan.TicksPerMillisecond;
+
+            if (elapsedFromPreviousFrameMilliseconds == 0) return true;
+
+            fps = (fps + (1000 / elapsedFromPreviousFrameMilliseconds)) / 2d;
+
+            lastTimestamp = now;
+
+            return elapsedFromBeginMilliseconds < 3000; // 3 seconds
+        }, LooperActionOptions.Default with { TargetFrameRateOverride = overrideTargetFps });
+
+        // wait for moving action from queue to actions.
+        await Task.Delay(100);
+
+        looper.ApproximatelyRunningActions.Should().Be(1);
+
+        await task;
+
+        await Task.Delay(100);
+
+        looper.ApproximatelyRunningActions.Should().Be(0);
+
+        fps.Should().BeInRange(overrideTargetFps-2, overrideTargetFps + 2);
+    }
 }

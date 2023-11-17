@@ -48,18 +48,34 @@ public sealed class ManualLogicLooperPool : ILogicLooperPool
     /// <inheritdoc />
     public Task RegisterActionAsync(LogicLooperActionDelegate loopAction)
         => Loopers[0].RegisterActionAsync(loopAction);
+    
+    /// <inheritdoc />
+    public Task RegisterActionAsync(LogicLooperActionDelegate loopAction, LooperActionOptions options)
+        => Loopers[0].RegisterActionAsync(loopAction, options);
 
     /// <inheritdoc />
     public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state)
         => Loopers[0].RegisterActionAsync(loopAction, state);
 
     /// <inheritdoc />
+    public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state, LooperActionOptions options)
+        => Loopers[0].RegisterActionAsync(loopAction, state, options);
+
+    /// <inheritdoc />
     public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
         => Loopers[0].RegisterActionAsync(loopAction);
 
     /// <inheritdoc />
+    public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction, LooperActionOptions options)
+        => Loopers[0].RegisterActionAsync(loopAction, options);
+
+    /// <inheritdoc />
     public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
         => Loopers[0].RegisterActionAsync(loopAction, state);
+
+    /// <inheritdoc />
+    public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state, LooperActionOptions options)
+        => Loopers[0].RegisterActionAsync(loopAction, state, options);
 
     /// <inheritdoc />
     public Task ShutdownAsync(TimeSpan shutdownDelay)

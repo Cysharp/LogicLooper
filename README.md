@@ -176,3 +176,23 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
     return true;
 });
 ```
+
+## Experimental
+### async-aware loop actions
+Experimental support for loop actions that can await asynchronous events.
+
+With SynchronizationContext, all asynchronous continuations are executed on the loop thread.
+Please beware that asynchronous actions are executed across multiple frames, unlike synchronous actions.
+
+```csharp
+await looper.RegisterActionAsync(static async (ctx, state) =>
+{
+    state.Add("1"); // Frame: 1
+    await Task.Delay(250);
+    state.Add("2"); // Frame: 2 or later
+    return false;
+});
+```
+
+> [!WARNING]
+> If an action completes immediately (`ValueTask.IsCompleted = true`), there's no performance difference from non-async version. But it is very slow if there's a need to await. This asynchronous support provides as an emergency hatch when it becomes necessary to communicate with the outside at a low frequency. We do not recommended to perform asynchronous processing at a high frequency.

@@ -44,16 +44,32 @@ public sealed partial class LogicLooperPool : ILogicLooperPool, IDisposable
         => GetLooper().RegisterActionAsync(loopAction);
 
     /// <inheritdoc />
+    public Task RegisterActionAsync(LogicLooperActionDelegate loopAction, LooperActionOptions options)
+        => GetLooper().RegisterActionAsync(loopAction, options);
+
+    /// <inheritdoc />
     public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state)
         => GetLooper().RegisterActionAsync(loopAction, state);
+
+    /// <inheritdoc />
+    public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state, LooperActionOptions options)
+        => GetLooper().RegisterActionAsync(loopAction, state, options);
 
     /// <inheritdoc />
     public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
         => GetLooper().RegisterActionAsync(loopAction);
 
     /// <inheritdoc />
+    public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction, LooperActionOptions options)
+        => GetLooper().RegisterActionAsync(loopAction, options);
+
+    /// <inheritdoc />
     public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
         => GetLooper().RegisterActionAsync(loopAction, state);
+
+    /// <inheritdoc />
+    public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state, LooperActionOptions options)
+        => GetLooper().RegisterActionAsync(loopAction, state, options);
 
     /// <inheritdoc />
     public async Task ShutdownAsync(TimeSpan shutdownDelay)
