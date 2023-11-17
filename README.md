@@ -51,6 +51,8 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 - [Advanced](#advanced)
   - [Unit tests / Frame-by-Frame execution](#unit-tests--frame-by-frame-execution)
   - [Coroutine](#coroutine)
+- [Experimental](#experimental)
+  - [async-aware loop actions](#async-aware-loop-actions)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
