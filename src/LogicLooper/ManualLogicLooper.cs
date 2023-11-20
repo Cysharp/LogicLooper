@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Cysharp.Threading;
 
 /// <summary>
@@ -53,7 +55,7 @@ public sealed class ManualLogicLooper : ILogicLooper
     /// <returns></returns>
     public bool Tick()
     {
-        var ctx = new LogicLooperActionContext(this, _frame++, TimeSpan.FromMilliseconds(1000 / TargetFrameRate) /* Fixed Time */, _ctsAction.Token);
+        var ctx = new LogicLooperActionContext(this, _frame++, Stopwatch.GetTimestamp(), TimeSpan.FromMilliseconds(1000 / TargetFrameRate) /* Fixed Time */, _ctsAction.Token);
         var completed = new List<LogicLooper.LooperAction>();
         lock (_actions)
         {
@@ -87,8 +89,12 @@ public sealed class ManualLogicLooper : ILogicLooper
 
     /// <inheritdoc />
     public Task RegisterActionAsync(LogicLooperActionDelegate loopAction)
+        => RegisterActionAsync(loopAction, LooperActionOptions.Default);
+
+    /// <inheritdoc />
+    public Task RegisterActionAsync(LogicLooperActionDelegate loopAction, LooperActionOptions options)
     {
-        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper(), loopAction, default);
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper(), loopAction, default, options);
         lock (_actions)
         {
             _actions.Add(action);
@@ -98,19 +104,27 @@ public sealed class ManualLogicLooper : ILogicLooper
 
     /// <inheritdoc />
     public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state)
+        => RegisterActionAsync(loopAction, state, LooperActionOptions.Default);
+
+    /// <inheritdoc />
+    public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state, LooperActionOptions options)
     {
-        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), loopAction, state);
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), loopAction, state, options);
         lock (_actions)
         {
             _actions.Add(action);
         }
         return action.Future.Task;
     }
-    
+
     /// <inheritdoc />
     public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
+        => RegisterActionAsync(loopAction, LooperActionOptions.Default);
+    
+    /// <inheritdoc />
+    public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction, LooperActionOptions options)
     {
-        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper(), LogicLooper.DelegateHelper.ConvertAsyncToSync(loopAction), default);
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper(), LogicLooper.DelegateHelper.ConvertAsyncToSync(loopAction), default, options);
         lock (_actions)
         {
             _actions.Add(action);
@@ -120,8 +134,12 @@ public sealed class ManualLogicLooper : ILogicLooper
 
     /// <inheritdoc />
     public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
+        => RegisterActionAsync(loopAction, state, LooperActionOptions.Default);
+
+    /// <inheritdoc />
+    public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state, LooperActionOptions options)
     {
-        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), LogicLooper.DelegateHelper.ConvertAsyncToSync(loopAction), state);
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), LogicLooper.DelegateHelper.ConvertAsyncToSync(loopAction), state, options);
         lock (_actions)
         {
             _actions.Add(action);

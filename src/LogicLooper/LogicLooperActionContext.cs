@@ -14,6 +14,11 @@ public readonly struct LogicLooperActionContext
     /// Gets a current frame that elapsed since beginning the looper is started.
     /// </summary>
     public long CurrentFrame { get; }
+    
+    /// <summary>
+    /// Gets a timestamp for begin of the current frame.
+    /// </summary>
+    public long FrameBeginTimestamp { get; }
 
     /// <summary>
     /// Gets an elapsed time since the previous frame has proceeded. This is the equivalent to Time.deltaTime on Unity.
@@ -25,10 +30,11 @@ public readonly struct LogicLooperActionContext
     /// </summary>
     public CancellationToken CancellationToken { get; }
 
-    public LogicLooperActionContext(ILogicLooper looper, long currentFrame, TimeSpan elapsedTimeFromPreviousFrame, CancellationToken cancellationToken)
+    public LogicLooperActionContext(ILogicLooper looper, long currentFrame, long frameBeginTimestamp, TimeSpan elapsedTimeFromPreviousFrame, CancellationToken cancellationToken)
     {
         Looper = looper ?? throw new ArgumentNullException(nameof(looper));
         CurrentFrame = currentFrame;
+        FrameBeginTimestamp = frameBeginTimestamp;
         ElapsedTimeFromPreviousFrame = elapsedTimeFromPreviousFrame;
         CancellationToken = cancellationToken;
     }

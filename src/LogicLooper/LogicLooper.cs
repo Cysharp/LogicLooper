@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Cysharp.Threading.Internal;
 
 // ReSharper disable StringLiteralTypo
@@ -103,8 +104,17 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     /// <param name="loopAction"></param>
     /// <returns></returns>
     public Task RegisterActionAsync(LogicLooperActionDelegate loopAction)
+        => RegisterActionAsync(loopAction, LooperActionOptions.Default);
+
+    /// <summary>
+    /// Registers a loop-frame action to the looper and returns <see cref="Task"/> to wait for completion.
+    /// </summary>
+    /// <param name="loopAction"></param>
+    /// <param name="options"></param>
+    /// <returns></returns>
+    public Task RegisterActionAsync(LogicLooperActionDelegate loopAction, LooperActionOptions options)
     {
-        var action = new LooperAction(DelegateHelper.GetWrapper(), loopAction, null);
+        var action = new LooperAction(DelegateHelper.GetWrapper(), loopAction, null, options);
         return RegisterActionAsyncCore(action);
     }
 
@@ -115,8 +125,18 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     /// <param name="state"></param>
     /// <returns></returns>
     public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state)
+        => RegisterActionAsync(loopAction, state, LooperActionOptions.Default);
+
+    /// <summary>
+    /// Registers a loop-frame action with state object to the looper and returns <see cref="Task"/> to wait for completion.
+    /// </summary>
+    /// <param name="loopAction"></param>
+    /// <param name="state"></param>
+    /// <param name="options"></param>
+    /// <returns></returns>
+    public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state, LooperActionOptions options)
     {
-        var action = new LooperAction(DelegateHelper.GetWrapper<TState>(), loopAction, state);
+        var action = new LooperAction(DelegateHelper.GetWrapper<TState>(), loopAction, state, options);
         return RegisterActionAsyncCore(action);
     }
 
@@ -125,9 +145,18 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     /// </summary>
     /// <param name="loopAction"></param>
     /// <returns></returns>
-    public async Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
+    public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
+        => RegisterActionAsync(loopAction, LooperActionOptions.Default);
+
+    /// <summary>
+    /// [Experimental] Registers a async-aware loop-frame action to the looper and returns <see cref="Task"/> to wait for completion.
+    /// </summary>
+    /// <param name="loopAction"></param>
+    /// <param name="options"></param>
+    /// <returns></returns>
+    public async Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction, LooperActionOptions options)
     {
-        var action = new LooperAction(DelegateHelper.GetWrapper(), DelegateHelper.ConvertAsyncToSync(loopAction), null);
+        var action = new LooperAction(DelegateHelper.GetWrapper(), DelegateHelper.ConvertAsyncToSync(loopAction), null, options);
         await RegisterActionAsyncCore(action);
     }
 
@@ -137,9 +166,19 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     /// <param name="loopAction"></param>
     /// <param name="state"></param>
     /// <returns></returns>
-    public async Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
+    public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
+        => RegisterActionAsync<TState>(loopAction, state, LooperActionOptions.Default);
+
+    /// <summary>
+    /// [Experimental] Registers a async-aware loop-frame action with state object to the looper and returns <see cref="Task"/> to wait for completion.
+    /// </summary>
+    /// <param name="loopAction"></param>
+    /// <param name="state"></param>
+    /// <param name="options"></param>
+    /// <returns></returns>
+    public async Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state, LooperActionOptions options)
     {
-        var action = new LooperAction(DelegateHelper.GetWrapper<TState>(), DelegateHelper.ConvertAsyncToSync(loopAction), state);
+        var action = new LooperAction(DelegateHelper.GetWrapper<TState>(), DelegateHelper.ConvertAsyncToSync(loopAction), state, options);
         await RegisterActionAsyncCore(action);
     }
 
@@ -173,6 +212,11 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
 
     private Task RegisterActionAsyncCore(LooperAction action)
     {
+        if (action.Options.TargetFrameRateOverride is { } targetFrameRateOverride && targetFrameRateOverride > this.TargetFrameRate)
+        {
+            throw new InvalidOperationException("Option 'TargetFrameRateOverride' must be less than Looper's target frame rate.");
+        }
+
         lock (_lockQueue)
         {
             if (_isRunning)
@@ -218,11 +262,11 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
 
             lock (_lockActions)
             {
-                var elapsedTicksFromPreviousFrame = (long)((begin - lastTimestamp) * TimestampsToTicks);
+                var elapsedTicksFromPreviousFrame = ToTick(begin - lastTimestamp);
                 var elapsedTimeFromPreviousFrame = TimeSpan.FromTicks(elapsedTicksFromPreviousFrame);
                 lastTimestamp = begin;
 
-                var ctx = new LogicLooperActionContext(this, _frame++, elapsedTimeFromPreviousFrame, _ctsAction.Token);
+                var ctx = new LogicLooperActionContext(this, _frame++, begin, elapsedTimeFromPreviousFrame, _ctsAction.Token);
 
                 var j = _tail - 1;
                 for (var i = 0; i < _actions.Length; i++)
@@ -232,9 +276,33 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
                     // Found an action and invoke it.
                     if (action.Action != null)
                     {
-                        if (!InvokeAction(ctx, ref action))
+                        if (action.LoopActionOverrideState.IsOverridden)
                         {
-                            action = default;
+                            // If the action with fps override haven't reached the next invoke timestamp, we don't need to perform the action.
+                            if (action.LoopActionOverrideState.NextScheduledTimestamp > ctx.FrameBeginTimestamp)
+                            {
+                                continue;
+                            }
+
+                            var exceededTimestamp = action.LoopActionOverrideState.NextScheduledTimestamp == 0 ? 0 : ctx.FrameBeginTimestamp - action.LoopActionOverrideState.NextScheduledTimestamp;
+                            var elapsedTicksFromPreviousFrameOverride = ToTick(begin - action.LoopActionOverrideState.LastInvokedAt);
+                            var elapsedTimeFromPreviousFrameOverride = TimeSpan.FromTicks(elapsedTicksFromPreviousFrameOverride);
+                            var overrideCtx = new LogicLooperActionContext(this, action.LoopActionOverrideState.Frame++, begin, elapsedTimeFromPreviousFrameOverride, _ctsAction.Token);
+
+                            if (!InvokeAction(overrideCtx, ref action))
+                            {
+                                action = default;
+                            }
+
+                            action.LoopActionOverrideState.LastInvokedAt = begin;
+                            action.LoopActionOverrideState.NextScheduledTimestamp = begin + action.LoopActionOverrideState.TargetFrameTimeTimestamp - exceededTimestamp;
+                        }
+                        else
+                        {
+                            if (!InvokeAction(ctx, ref action))
+                            {
+                                action = default;
+                            }
                         }
                         continue;
                     }
@@ -265,7 +333,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
                     _tail = i;
                     break;
 
-                    NextActionLoop:
+NextActionLoop:
                     continue;
                 }
 
@@ -285,7 +353,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
             }
 
             var now = Stopwatch.GetTimestamp();
-            var elapsedTicks = (now - begin) * TimestampsToTicks;
+            var elapsedTicks = ToTick(now - begin);
             var elapsedMilliseconds = (long)elapsedTicks / TimeSpan.TicksPerMillisecond;
             _lastProcessingDuration = elapsedMilliseconds;
 
@@ -299,11 +367,16 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
         _shutdownTaskAwaiter.SetResult(true);
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static long ToTick(long timestamp)
+        => (long)(timestamp * TimestampsToTicks);
+
     private static bool InvokeAction(in LogicLooperActionContext ctx, ref LooperAction action)
     {
         try
         {
             var hasNext = action.Invoke(ctx);
+
             if (!hasNext)
             {
                 action.Future.SetResult(true);
@@ -370,32 +443,60 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
 
         static class Cache<T>
         {
-            public static InternalLogicLooperActionDelegate Wrapper => (object wrappedDelegate, in LogicLooperActionContext ctx, object? state) => ((LogicLooperActionWithStateDelegate<T>) wrappedDelegate)(ctx, (T) state!);
+            public static InternalLogicLooperActionDelegate Wrapper => (object wrappedDelegate, in LogicLooperActionContext ctx, object? state) => ((LogicLooperActionWithStateDelegate<T>)wrappedDelegate)(ctx, (T)state!);
         }
     }
 
     internal delegate bool InternalLogicLooperActionDelegate(object wrappedDelegate, in LogicLooperActionContext ctx, object? state);
 
-    internal readonly struct LooperAction
+    internal struct LooperAction
     {
         public DateTimeOffset BeginAt { get; }
         public object? State { get; }
         public Delegate? Action { get; }
         public InternalLogicLooperActionDelegate ActionWrapper { get; }
         public TaskCompletionSource<bool> Future { get; }
+        public LooperActionOptions Options { get; }
 
-        public LooperAction(InternalLogicLooperActionDelegate actionWrapper, Delegate action, object? state)
+        public LoopActionOverrideState LoopActionOverrideState;
+
+        public LooperAction(InternalLogicLooperActionDelegate actionWrapper, Delegate action, object? state, LooperActionOptions options)
         {
             BeginAt = DateTimeOffset.Now;
             ActionWrapper = actionWrapper ?? throw new ArgumentNullException(nameof(actionWrapper));
             Action = action ?? throw new ArgumentNullException(nameof(action));
             State = state;
             Future = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            Options = options;
+            LoopActionOverrideState = default;
+
+            if (options.TargetFrameRateOverride is { } targetFrameRateOverride)
+            {
+                LoopActionOverrideState = new LoopActionOverrideState(isOverridden: true)
+                {
+                    TargetFrameTimeTimestamp = (long)(TimeSpan.FromMilliseconds(1000 / (double)targetFrameRateOverride).Ticks / TimestampsToTicks),
+                };
+            }
         }
 
         public bool Invoke(in LogicLooperActionContext ctx)
         {
             return ActionWrapper(Action!, ctx, State);
+        }
+    }
+
+    internal struct LoopActionOverrideState
+    {
+        public bool IsOverridden { get; }
+
+        public int Frame { get; set; }
+        public long NextScheduledTimestamp { get; set; }
+        public long LastInvokedAt { get; set; }
+        public long TargetFrameTimeTimestamp { get; set; }
+
+        public LoopActionOverrideState(bool isOverridden)
+        {
+            IsOverridden = isOverridden;
         }
     }
 }
