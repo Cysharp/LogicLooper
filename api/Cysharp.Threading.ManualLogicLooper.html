@@ -187,7 +187,22 @@
       </tr>
       <tr>
         <td>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_Cysharp_Threading_LooperActionOptions_">RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)</a>
+        </td>
+        <td class="markdown level1 summary"><p>Registers a loop-frame action to the looper and returns <see cref="!:Task"></see> to wait for completion.</p>
+</td>
+      </tr>
+      <tr>
+        <td>
           <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_">RegisterActionAsync(LogicLooperAsyncActionDelegate)</a>
+        </td>
+        <td class="markdown level1 summary"><p>[Experimental] Registers an async-aware loop-frame action to the looper and returns <see cref="!:Task"></see> to wait for completion.
+An asynchronous action is executed across multiple frames, differ from the synchronous version.</p>
+</td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_Cysharp_Threading_LooperActionOptions_">RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)</a>
         </td>
         <td class="markdown level1 summary"><p>[Experimental] Registers an async-aware loop-frame action to the looper and returns <see cref="!:Task"></see> to wait for completion.
 An asynchronous action is executed across multiple frames, differ from the synchronous version.</p>
@@ -202,9 +217,24 @@ An asynchronous action is executed across multiple frames, differ from the synch
       </tr>
       <tr>
         <td>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_">RegisterActionAsync&lt;TState&gt;(LogicLooperActionWithStateDelegate&lt;TState&gt;, TState, LooperActionOptions)</a>
+        </td>
+        <td class="markdown level1 summary"><p>Registers a loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.</p>
+</td>
+      </tr>
+      <tr>
+        <td>
           <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_">RegisterActionAsync&lt;TState&gt;(LogicLooperAsyncActionWithStateDelegate&lt;TState&gt;, TState)</a>
         </td>
-        <td class="markdown level1 summary"><p>[Experimental] Registers an async-aware  loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.
+        <td class="markdown level1 summary"><p>[Experimental] Registers an async-aware loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.
+An asynchronous action is executed across multiple frames, differ from the synchronous version.</p>
+</td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xref" href="Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_">RegisterActionAsync&lt;TState&gt;(LogicLooperAsyncActionWithStateDelegate&lt;TState&gt;, TState, LooperActionOptions)</a>
+        </td>
+        <td class="markdown level1 summary"><p>[Experimental] Registers an async-aware loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.
 An asynchronous action is executed across multiple frames, differ from the synchronous version.</p>
 </td>
       </tr>
@@ -437,7 +467,50 @@ An asynchronous action is executed across multiple frames, differ from the synch
   <h5 class="parameters">Parameters</h5>
   <dl class="cysharpdocfx-valuedefinition">
     <dt><span class="parametername"><code>loopAction</code></span> <a class="xref" href="Cysharp.Threading.LogicLooperActionDelegate.html">LogicLooperActionDelegate</a></dt>
+    <dd><p>The action that is called every frame in the loop.</p>
+</dd>
+  </dl>
+  </section>
+  
+  <section>
+  <h5 class="returns">Returns</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="xref">Task</span></dt>
     <dd></dd>
+  </dl>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </section>
+  <section>
+  <a id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_Cysharp_Threading_LooperActionOptions_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)">RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)</h4>
+  <div class="markdown level1 summary"><p>Registers a loop-frame action to the looper and returns <see cref="!:Task"></see> to wait for completion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task RegisterActionAsync(LogicLooperActionDelegate loopAction, LooperActionOptions options)</code></pre>
+  </div>
+
+  <section>
+  <h5 class="parameters">Parameters</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>loopAction</code></span> <a class="xref" href="Cysharp.Threading.LogicLooperActionDelegate.html">LogicLooperActionDelegate</a></dt>
+    <dd><p>The action that is called every frame in the loop.</p>
+</dd>
+    <dt><span class="parametername"><code>options</code></span> <a class="xref" href="Cysharp.Threading.LooperActionOptions.html">LooperActionOptions</a></dt>
+    <dd><p>The options of the loop action.</p>
+</dd>
   </dl>
   </section>
   
@@ -476,7 +549,51 @@ An asynchronous action is executed across multiple frames, differ from the synch
   <h5 class="parameters">Parameters</h5>
   <dl class="cysharpdocfx-valuedefinition">
     <dt><span class="parametername"><code>loopAction</code></span> <a class="xref" href="Cysharp.Threading.LogicLooperAsyncActionDelegate.html">LogicLooperAsyncActionDelegate</a></dt>
+    <dd><p>The action that is called every frame in the loop.</p>
+</dd>
+  </dl>
+  </section>
+  
+  <section>
+  <h5 class="returns">Returns</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="xref">Task</span></dt>
     <dd></dd>
+  </dl>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </section>
+  <section>
+  <a id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_Cysharp_Threading_LooperActionOptions_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)">RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)</h4>
+  <div class="markdown level1 summary"><p>[Experimental] Registers an async-aware loop-frame action to the looper and returns <see cref="!:Task"></see> to wait for completion.
+An asynchronous action is executed across multiple frames, differ from the synchronous version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction, LooperActionOptions options)</code></pre>
+  </div>
+
+  <section>
+  <h5 class="parameters">Parameters</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>loopAction</code></span> <a class="xref" href="Cysharp.Threading.LogicLooperAsyncActionDelegate.html">LogicLooperAsyncActionDelegate</a></dt>
+    <dd><p>The action that is called every frame in the loop.</p>
+</dd>
+    <dt><span class="parametername"><code>options</code></span> <a class="xref" href="Cysharp.Threading.LooperActionOptions.html">LooperActionOptions</a></dt>
+    <dd><p>The options of the loop action.</p>
+</dd>
   </dl>
   </section>
   
@@ -514,9 +631,63 @@ An asynchronous action is executed across multiple frames, differ from the synch
   <h5 class="parameters">Parameters</h5>
   <dl class="cysharpdocfx-valuedefinition">
     <dt><span class="parametername"><code>loopAction</code></span> <a class="xref" href="Cysharp.Threading.LogicLooperActionWithStateDelegate-1.html">LogicLooperActionWithStateDelegate</a>&lt;TState&gt;</dt>
-    <dd></dd>
+    <dd><p>The action that is called every frame in the loop.</p>
+</dd>
     <dt><span class="parametername"><code>state</code></span> <span class="xref">TState</span></dt>
+    <dd><p>The object pass to the loop action.</p>
+</dd>
+  </dl>
+  </section>
+  
+  <section>
+  <h5 class="returns">Returns</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="xref">Task</span></dt>
     <dd></dd>
+  </dl>
+  </section>
+  
+  <section>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>TState</code></span></dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </section>
+  <section>
+  <a id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)">RegisterActionAsync&lt;TState&gt;(LogicLooperActionWithStateDelegate&lt;TState&gt;, TState, LooperActionOptions)</h4>
+  <div class="markdown level1 summary"><p>Registers a loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task RegisterActionAsync&lt;TState&gt;(LogicLooperActionWithStateDelegate&lt;TState&gt; loopAction, TState state, LooperActionOptions options)</code></pre>
+  </div>
+
+  <section>
+  <h5 class="parameters">Parameters</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>loopAction</code></span> <a class="xref" href="Cysharp.Threading.LogicLooperActionWithStateDelegate-1.html">LogicLooperActionWithStateDelegate</a>&lt;TState&gt;</dt>
+    <dd><p>The action that is called every frame in the loop.</p>
+</dd>
+    <dt><span class="parametername"><code>state</code></span> <span class="xref">TState</span></dt>
+    <dd><p>The object pass to the loop action.</p>
+</dd>
+    <dt><span class="parametername"><code>options</code></span> <a class="xref" href="Cysharp.Threading.LooperActionOptions.html">LooperActionOptions</a></dt>
+    <dd><p>The options of the loop action.</p>
+</dd>
   </dl>
   </section>
   
@@ -549,7 +720,7 @@ An asynchronous action is executed across multiple frames, differ from the synch
   <section>
   <a id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync*"></a>
   <h4 id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0)">RegisterActionAsync&lt;TState&gt;(LogicLooperAsyncActionWithStateDelegate&lt;TState&gt;, TState)</h4>
-  <div class="markdown level1 summary"><p>[Experimental] Registers an async-aware  loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.
+  <div class="markdown level1 summary"><p>[Experimental] Registers an async-aware loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.
 An asynchronous action is executed across multiple frames, differ from the synchronous version.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -562,9 +733,64 @@ An asynchronous action is executed across multiple frames, differ from the synch
   <h5 class="parameters">Parameters</h5>
   <dl class="cysharpdocfx-valuedefinition">
     <dt><span class="parametername"><code>loopAction</code></span> <a class="xref" href="Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate-1.html">LogicLooperAsyncActionWithStateDelegate</a>&lt;TState&gt;</dt>
-    <dd></dd>
+    <dd><p>The action that is called every frame in the loop.</p>
+</dd>
     <dt><span class="parametername"><code>state</code></span> <span class="xref">TState</span></dt>
+    <dd><p>The object pass to the loop action.</p>
+</dd>
+  </dl>
+  </section>
+  
+  <section>
+  <h5 class="returns">Returns</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="xref">Task</span></dt>
     <dd></dd>
+  </dl>
+  </section>
+  
+  <section>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>TState</code></span></dt>
+    <dd></dd>
+  </dl>
+  </section>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </section>
+  <section>
+  <a id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync*"></a>
+  <h4 id="Cysharp_Threading_ManualLogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_" data-uid="Cysharp.Threading.ManualLogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)">RegisterActionAsync&lt;TState&gt;(LogicLooperAsyncActionWithStateDelegate&lt;TState&gt;, TState, LooperActionOptions)</h4>
+  <div class="markdown level1 summary"><p>[Experimental] Registers an async-aware loop-frame action with state object to the looper and returns <see cref="!:Task"></see> to wait for completion.
+An asynchronous action is executed across multiple frames, differ from the synchronous version.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task RegisterActionAsync&lt;TState&gt;(LogicLooperAsyncActionWithStateDelegate&lt;TState&gt; loopAction, TState state, LooperActionOptions options)</code></pre>
+  </div>
+
+  <section>
+  <h5 class="parameters">Parameters</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>loopAction</code></span> <a class="xref" href="Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate-1.html">LogicLooperAsyncActionWithStateDelegate</a>&lt;TState&gt;</dt>
+    <dd><p>The action that is called every frame in the loop.</p>
+</dd>
+    <dt><span class="parametername"><code>state</code></span> <span class="xref">TState</span></dt>
+    <dd><p>The object pass to the loop action.</p>
+</dd>
+    <dt><span class="parametername"><code>options</code></span> <a class="xref" href="Cysharp.Threading.LooperActionOptions.html">LooperActionOptions</a></dt>
+    <dd><p>The options of the loop action.</p>
+</dd>
   </dl>
   </section>
   

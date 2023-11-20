@@ -415,12 +415,24 @@ references:
   commentId: M:Cysharp.Threading.ILogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)
   fullName: Cysharp.Threading.ILogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)
   nameWithType: ILogicLooper.RegisterActionAsync(LogicLooperActionDelegate)
+- uid: Cysharp.Threading.ILogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)
+  href: api/Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ILogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)
+  fullName: Cysharp.Threading.ILogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ILogicLooper.RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)
 - uid: Cysharp.Threading.ILogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   name: RegisterActionAsync(LogicLooperAsyncActionDelegate)
   href: api/Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_
   commentId: M:Cysharp.Threading.ILogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   fullName: Cysharp.Threading.ILogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   nameWithType: ILogicLooper.RegisterActionAsync(LogicLooperAsyncActionDelegate)
+- uid: Cysharp.Threading.ILogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)
+  href: api/Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ILogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)
+  fullName: Cysharp.Threading.ILogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ILogicLooper.RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)
 - uid: Cysharp.Threading.ILogicLooper.RegisterActionAsync*
   name: RegisterActionAsync
   href: api/Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_RegisterActionAsync_
@@ -437,6 +449,15 @@ references:
   fullName.vb: Cysharp.Threading.ILogicLooper.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperActionWithStateDelegate(Of TState), TState)
   nameWithType: ILogicLooper.RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState)
   nameWithType.vb: ILogicLooper.RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState)
+- uid: Cysharp.Threading.ILogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  href: api/Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ILogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name.vb: RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState, LooperActionOptions)
+  fullName: Cysharp.Threading.ILogicLooper.RegisterActionAsync<TState>(Cysharp.Threading.LogicLooperActionWithStateDelegate<TState>, TState, Cysharp.Threading.LooperActionOptions)
+  fullName.vb: Cysharp.Threading.ILogicLooper.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperActionWithStateDelegate(Of TState), TState, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ILogicLooper.RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  nameWithType.vb: ILogicLooper.RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState, LooperActionOptions)
 - uid: Cysharp.Threading.ILogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0)
   name: RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState)
   href: api/Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_
@@ -446,6 +467,15 @@ references:
   fullName.vb: Cysharp.Threading.ILogicLooper.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate(Of TState), TState)
   nameWithType: ILogicLooper.RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState)
   nameWithType.vb: ILogicLooper.RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState)
+- uid: Cysharp.Threading.ILogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  href: api/Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ILogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name.vb: RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState, LooperActionOptions)
+  fullName: Cysharp.Threading.ILogicLooper.RegisterActionAsync<TState>(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate<TState>, TState, Cysharp.Threading.LooperActionOptions)
+  fullName.vb: Cysharp.Threading.ILogicLooper.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate(Of TState), TState, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ILogicLooper.RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  nameWithType.vb: ILogicLooper.RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState, LooperActionOptions)
 - uid: Cysharp.Threading.ILogicLooper.ShutdownAsync(TimeSpan)
   name: ShutdownAsync(TimeSpan)
   href: api/Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_ShutdownAsync_TimeSpan_
@@ -510,12 +540,24 @@ references:
   commentId: M:Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)
   fullName: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)
   nameWithType: ILogicLooperPool.RegisterActionAsync(LogicLooperActionDelegate)
+- uid: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)
+  href: api/Cysharp.Threading.ILogicLooperPool.html#Cysharp_Threading_ILogicLooperPool_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)
+  fullName: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ILogicLooperPool.RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)
 - uid: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   name: RegisterActionAsync(LogicLooperAsyncActionDelegate)
   href: api/Cysharp.Threading.ILogicLooperPool.html#Cysharp_Threading_ILogicLooperPool_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_
   commentId: M:Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   fullName: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   nameWithType: ILogicLooperPool.RegisterActionAsync(LogicLooperAsyncActionDelegate)
+- uid: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)
+  href: api/Cysharp.Threading.ILogicLooperPool.html#Cysharp_Threading_ILogicLooperPool_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)
+  fullName: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ILogicLooperPool.RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)
 - uid: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync*
   name: RegisterActionAsync
   href: api/Cysharp.Threading.ILogicLooperPool.html#Cysharp_Threading_ILogicLooperPool_RegisterActionAsync_
@@ -532,6 +574,15 @@ references:
   fullName.vb: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperActionWithStateDelegate(Of TState), TState)
   nameWithType: ILogicLooperPool.RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState)
   nameWithType.vb: ILogicLooperPool.RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState)
+- uid: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  href: api/Cysharp.Threading.ILogicLooperPool.html#Cysharp_Threading_ILogicLooperPool_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ILogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name.vb: RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState, LooperActionOptions)
+  fullName: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync<TState>(Cysharp.Threading.LogicLooperActionWithStateDelegate<TState>, TState, Cysharp.Threading.LooperActionOptions)
+  fullName.vb: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperActionWithStateDelegate(Of TState), TState, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ILogicLooperPool.RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  nameWithType.vb: ILogicLooperPool.RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState, LooperActionOptions)
 - uid: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0)
   name: RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState)
   href: api/Cysharp.Threading.ILogicLooperPool.html#Cysharp_Threading_ILogicLooperPool_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_
@@ -541,6 +592,15 @@ references:
   fullName.vb: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate(Of TState), TState)
   nameWithType: ILogicLooperPool.RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState)
   nameWithType.vb: ILogicLooperPool.RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState)
+- uid: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  href: api/Cysharp.Threading.ILogicLooperPool.html#Cysharp_Threading_ILogicLooperPool_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ILogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name.vb: RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState, LooperActionOptions)
+  fullName: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync<TState>(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate<TState>, TState, Cysharp.Threading.LooperActionOptions)
+  fullName.vb: Cysharp.Threading.ILogicLooperPool.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate(Of TState), TState, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ILogicLooperPool.RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  nameWithType.vb: ILogicLooperPool.RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState, LooperActionOptions)
 - uid: Cysharp.Threading.ILogicLooperPool.ShutdownAsync(TimeSpan)
   name: ShutdownAsync(TimeSpan)
   href: api/Cysharp.Threading.ILogicLooperPool.html#Cysharp_Threading_ILogicLooperPool_ShutdownAsync_TimeSpan_
@@ -672,12 +732,24 @@ references:
   commentId: M:Cysharp.Threading.LogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)
   fullName: Cysharp.Threading.LogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)
   nameWithType: LogicLooper.RegisterActionAsync(LogicLooperActionDelegate)
+- uid: Cysharp.Threading.LogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)
+  href: api/Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.LogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)
+  fullName: Cysharp.Threading.LogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate, Cysharp.Threading.LooperActionOptions)
+  nameWithType: LogicLooper.RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)
 - uid: Cysharp.Threading.LogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   name: RegisterActionAsync(LogicLooperAsyncActionDelegate)
   href: api/Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_
   commentId: M:Cysharp.Threading.LogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   fullName: Cysharp.Threading.LogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   nameWithType: LogicLooper.RegisterActionAsync(LogicLooperAsyncActionDelegate)
+- uid: Cysharp.Threading.LogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)
+  href: api/Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.LogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)
+  fullName: Cysharp.Threading.LogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate, Cysharp.Threading.LooperActionOptions)
+  nameWithType: LogicLooper.RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)
 - uid: Cysharp.Threading.LogicLooper.RegisterActionAsync*
   name: RegisterActionAsync
   href: api/Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_RegisterActionAsync_
@@ -694,6 +766,15 @@ references:
   fullName.vb: Cysharp.Threading.LogicLooper.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperActionWithStateDelegate(Of TState), TState)
   nameWithType: LogicLooper.RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState)
   nameWithType.vb: LogicLooper.RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState)
+- uid: Cysharp.Threading.LogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  href: api/Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.LogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name.vb: RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState, LooperActionOptions)
+  fullName: Cysharp.Threading.LogicLooper.RegisterActionAsync<TState>(Cysharp.Threading.LogicLooperActionWithStateDelegate<TState>, TState, Cysharp.Threading.LooperActionOptions)
+  fullName.vb: Cysharp.Threading.LogicLooper.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperActionWithStateDelegate(Of TState), TState, Cysharp.Threading.LooperActionOptions)
+  nameWithType: LogicLooper.RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  nameWithType.vb: LogicLooper.RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState, LooperActionOptions)
 - uid: Cysharp.Threading.LogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0)
   name: RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState)
   href: api/Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_
@@ -703,6 +784,15 @@ references:
   fullName.vb: Cysharp.Threading.LogicLooper.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate(Of TState), TState)
   nameWithType: LogicLooper.RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState)
   nameWithType.vb: LogicLooper.RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState)
+- uid: Cysharp.Threading.LogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  href: api/Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.LogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name.vb: RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState, LooperActionOptions)
+  fullName: Cysharp.Threading.LogicLooper.RegisterActionAsync<TState>(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate<TState>, TState, Cysharp.Threading.LooperActionOptions)
+  fullName.vb: Cysharp.Threading.LogicLooper.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate(Of TState), TState, Cysharp.Threading.LooperActionOptions)
+  nameWithType: LogicLooper.RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  nameWithType.vb: LogicLooper.RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState, LooperActionOptions)
 - uid: Cysharp.Threading.LogicLooper.ShutdownAsync(TimeSpan)
   name: ShutdownAsync(TimeSpan)
   href: api/Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_ShutdownAsync_TimeSpan_
@@ -735,12 +825,12 @@ references:
   commentId: T:Cysharp.Threading.LogicLooperActionContext
   fullName: Cysharp.Threading.LogicLooperActionContext
   nameWithType: LogicLooperActionContext
-- uid: Cysharp.Threading.LogicLooperActionContext.#ctor(Cysharp.Threading.ILogicLooper,System.Int64,TimeSpan,CancellationToken)
-  name: LogicLooperActionContext(ILogicLooper, Int64, TimeSpan, CancellationToken)
-  href: api/Cysharp.Threading.LogicLooperActionContext.html#Cysharp_Threading_LogicLooperActionContext__ctor_Cysharp_Threading_ILogicLooper_System_Int64_TimeSpan_CancellationToken_
-  commentId: M:Cysharp.Threading.LogicLooperActionContext.#ctor(Cysharp.Threading.ILogicLooper,System.Int64,TimeSpan,CancellationToken)
-  fullName: Cysharp.Threading.LogicLooperActionContext.LogicLooperActionContext(Cysharp.Threading.ILogicLooper, System.Int64, TimeSpan, CancellationToken)
-  nameWithType: LogicLooperActionContext.LogicLooperActionContext(ILogicLooper, Int64, TimeSpan, CancellationToken)
+- uid: Cysharp.Threading.LogicLooperActionContext.#ctor(Cysharp.Threading.ILogicLooper,System.Int64,System.Int64,TimeSpan,CancellationToken)
+  name: LogicLooperActionContext(ILogicLooper, Int64, Int64, TimeSpan, CancellationToken)
+  href: api/Cysharp.Threading.LogicLooperActionContext.html#Cysharp_Threading_LogicLooperActionContext__ctor_Cysharp_Threading_ILogicLooper_System_Int64_System_Int64_TimeSpan_CancellationToken_
+  commentId: M:Cysharp.Threading.LogicLooperActionContext.#ctor(Cysharp.Threading.ILogicLooper,System.Int64,System.Int64,TimeSpan,CancellationToken)
+  fullName: Cysharp.Threading.LogicLooperActionContext.LogicLooperActionContext(Cysharp.Threading.ILogicLooper, System.Int64, System.Int64, TimeSpan, CancellationToken)
+  nameWithType: LogicLooperActionContext.LogicLooperActionContext(ILogicLooper, Int64, Int64, TimeSpan, CancellationToken)
 - uid: Cysharp.Threading.LogicLooperActionContext.#ctor*
   name: LogicLooperActionContext
   href: api/Cysharp.Threading.LogicLooperActionContext.html#Cysharp_Threading_LogicLooperActionContext__ctor_
@@ -787,6 +877,19 @@ references:
   isSpec: "True"
   fullName: Cysharp.Threading.LogicLooperActionContext.ElapsedTimeFromPreviousFrame
   nameWithType: LogicLooperActionContext.ElapsedTimeFromPreviousFrame
+- uid: Cysharp.Threading.LogicLooperActionContext.FrameBeginTimestamp
+  name: FrameBeginTimestamp
+  href: api/Cysharp.Threading.LogicLooperActionContext.html#Cysharp_Threading_LogicLooperActionContext_FrameBeginTimestamp
+  commentId: P:Cysharp.Threading.LogicLooperActionContext.FrameBeginTimestamp
+  fullName: Cysharp.Threading.LogicLooperActionContext.FrameBeginTimestamp
+  nameWithType: LogicLooperActionContext.FrameBeginTimestamp
+- uid: Cysharp.Threading.LogicLooperActionContext.FrameBeginTimestamp*
+  name: FrameBeginTimestamp
+  href: api/Cysharp.Threading.LogicLooperActionContext.html#Cysharp_Threading_LogicLooperActionContext_FrameBeginTimestamp_
+  commentId: Overload:Cysharp.Threading.LogicLooperActionContext.FrameBeginTimestamp
+  isSpec: "True"
+  fullName: Cysharp.Threading.LogicLooperActionContext.FrameBeginTimestamp
+  nameWithType: LogicLooperActionContext.FrameBeginTimestamp
 - uid: Cysharp.Threading.LogicLooperActionContext.Looper
   name: Looper
   href: api/Cysharp.Threading.LogicLooperActionContext.html#Cysharp_Threading_LogicLooperActionContext_Looper
@@ -1119,12 +1222,24 @@ references:
   commentId: M:Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)
   fullName: Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)
   nameWithType: LogicLooperPool.RegisterActionAsync(LogicLooperActionDelegate)
+- uid: Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)
+  href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)
+  fullName: Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate, Cysharp.Threading.LooperActionOptions)
+  nameWithType: LogicLooperPool.RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)
 - uid: Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   name: RegisterActionAsync(LogicLooperAsyncActionDelegate)
   href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_
   commentId: M:Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   fullName: Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   nameWithType: LogicLooperPool.RegisterActionAsync(LogicLooperAsyncActionDelegate)
+- uid: Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)
+  href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)
+  fullName: Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate, Cysharp.Threading.LooperActionOptions)
+  nameWithType: LogicLooperPool.RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)
 - uid: Cysharp.Threading.LogicLooperPool.RegisterActionAsync*
   name: RegisterActionAsync
   href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_RegisterActionAsync_
@@ -1141,6 +1256,15 @@ references:
   fullName.vb: Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperActionWithStateDelegate(Of TState), TState)
   nameWithType: LogicLooperPool.RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState)
   nameWithType.vb: LogicLooperPool.RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState)
+- uid: Cysharp.Threading.LogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.LogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name.vb: RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState, LooperActionOptions)
+  fullName: Cysharp.Threading.LogicLooperPool.RegisterActionAsync<TState>(Cysharp.Threading.LogicLooperActionWithStateDelegate<TState>, TState, Cysharp.Threading.LooperActionOptions)
+  fullName.vb: Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperActionWithStateDelegate(Of TState), TState, Cysharp.Threading.LooperActionOptions)
+  nameWithType: LogicLooperPool.RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  nameWithType.vb: LogicLooperPool.RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState, LooperActionOptions)
 - uid: Cysharp.Threading.LogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0)
   name: RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState)
   href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_
@@ -1150,6 +1274,15 @@ references:
   fullName.vb: Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate(Of TState), TState)
   nameWithType: LogicLooperPool.RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState)
   nameWithType.vb: LogicLooperPool.RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState)
+- uid: Cysharp.Threading.LogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.LogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name.vb: RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState, LooperActionOptions)
+  fullName: Cysharp.Threading.LogicLooperPool.RegisterActionAsync<TState>(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate<TState>, TState, Cysharp.Threading.LooperActionOptions)
+  fullName.vb: Cysharp.Threading.LogicLooperPool.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate(Of TState), TState, Cysharp.Threading.LooperActionOptions)
+  nameWithType: LogicLooperPool.RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  nameWithType.vb: LogicLooperPool.RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState, LooperActionOptions)
 - uid: Cysharp.Threading.LogicLooperPool.Shared
   name: Shared
   href: api/Cysharp.Threading.LogicLooperPool.html#Cysharp_Threading_LogicLooperPool_Shared
@@ -1176,6 +1309,54 @@ references:
   isSpec: "True"
   fullName: Cysharp.Threading.LogicLooperPool.ShutdownAsync
   nameWithType: LogicLooperPool.ShutdownAsync
+- uid: Cysharp.Threading.LooperActionOptions
+  name: LooperActionOptions
+  href: api/Cysharp.Threading.LooperActionOptions.html
+  commentId: T:Cysharp.Threading.LooperActionOptions
+  fullName: Cysharp.Threading.LooperActionOptions
+  nameWithType: LooperActionOptions
+- uid: Cysharp.Threading.LooperActionOptions.#ctor(System.Nullable{System.Int32})
+  name: LooperActionOptions(Nullable<Int32>)
+  href: api/Cysharp.Threading.LooperActionOptions.html#Cysharp_Threading_LooperActionOptions__ctor_System_Nullable_System_Int32__
+  commentId: M:Cysharp.Threading.LooperActionOptions.#ctor(System.Nullable{System.Int32})
+  name.vb: LooperActionOptions(Nullable(Of Int32))
+  fullName: Cysharp.Threading.LooperActionOptions.LooperActionOptions(System.Nullable<System.Int32>)
+  fullName.vb: Cysharp.Threading.LooperActionOptions.LooperActionOptions(System.Nullable(Of System.Int32))
+  nameWithType: LooperActionOptions.LooperActionOptions(Nullable<Int32>)
+  nameWithType.vb: LooperActionOptions.LooperActionOptions(Nullable(Of Int32))
+- uid: Cysharp.Threading.LooperActionOptions.#ctor*
+  name: LooperActionOptions
+  href: api/Cysharp.Threading.LooperActionOptions.html#Cysharp_Threading_LooperActionOptions__ctor_
+  commentId: Overload:Cysharp.Threading.LooperActionOptions.#ctor
+  isSpec: "True"
+  fullName: Cysharp.Threading.LooperActionOptions.LooperActionOptions
+  nameWithType: LooperActionOptions.LooperActionOptions
+- uid: Cysharp.Threading.LooperActionOptions.Default
+  name: Default
+  href: api/Cysharp.Threading.LooperActionOptions.html#Cysharp_Threading_LooperActionOptions_Default
+  commentId: P:Cysharp.Threading.LooperActionOptions.Default
+  fullName: Cysharp.Threading.LooperActionOptions.Default
+  nameWithType: LooperActionOptions.Default
+- uid: Cysharp.Threading.LooperActionOptions.Default*
+  name: Default
+  href: api/Cysharp.Threading.LooperActionOptions.html#Cysharp_Threading_LooperActionOptions_Default_
+  commentId: Overload:Cysharp.Threading.LooperActionOptions.Default
+  isSpec: "True"
+  fullName: Cysharp.Threading.LooperActionOptions.Default
+  nameWithType: LooperActionOptions.Default
+- uid: Cysharp.Threading.LooperActionOptions.TargetFrameRateOverride
+  name: TargetFrameRateOverride
+  href: api/Cysharp.Threading.LooperActionOptions.html#Cysharp_Threading_LooperActionOptions_TargetFrameRateOverride
+  commentId: P:Cysharp.Threading.LooperActionOptions.TargetFrameRateOverride
+  fullName: Cysharp.Threading.LooperActionOptions.TargetFrameRateOverride
+  nameWithType: LooperActionOptions.TargetFrameRateOverride
+- uid: Cysharp.Threading.LooperActionOptions.TargetFrameRateOverride*
+  name: TargetFrameRateOverride
+  href: api/Cysharp.Threading.LooperActionOptions.html#Cysharp_Threading_LooperActionOptions_TargetFrameRateOverride_
+  commentId: Overload:Cysharp.Threading.LooperActionOptions.TargetFrameRateOverride
+  isSpec: "True"
+  fullName: Cysharp.Threading.LooperActionOptions.TargetFrameRateOverride
+  nameWithType: LooperActionOptions.TargetFrameRateOverride
 - uid: Cysharp.Threading.ManualLogicLooper
   name: ManualLogicLooper
   href: api/Cysharp.Threading.ManualLogicLooper.html
@@ -1253,12 +1434,24 @@ references:
   commentId: M:Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)
   fullName: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)
   nameWithType: ManualLogicLooper.RegisterActionAsync(LogicLooperActionDelegate)
+- uid: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)
+  href: api/Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)
+  fullName: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ManualLogicLooper.RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)
 - uid: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   name: RegisterActionAsync(LogicLooperAsyncActionDelegate)
   href: api/Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_
   commentId: M:Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   fullName: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   nameWithType: ManualLogicLooper.RegisterActionAsync(LogicLooperAsyncActionDelegate)
+- uid: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)
+  href: api/Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)
+  fullName: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ManualLogicLooper.RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)
 - uid: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync*
   name: RegisterActionAsync
   href: api/Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync_
@@ -1275,6 +1468,15 @@ references:
   fullName.vb: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperActionWithStateDelegate(Of TState), TState)
   nameWithType: ManualLogicLooper.RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState)
   nameWithType.vb: ManualLogicLooper.RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState)
+- uid: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  href: api/Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ManualLogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name.vb: RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState, LooperActionOptions)
+  fullName: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync<TState>(Cysharp.Threading.LogicLooperActionWithStateDelegate<TState>, TState, Cysharp.Threading.LooperActionOptions)
+  fullName.vb: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperActionWithStateDelegate(Of TState), TState, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ManualLogicLooper.RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  nameWithType.vb: ManualLogicLooper.RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState, LooperActionOptions)
 - uid: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0)
   name: RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState)
   href: api/Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_
@@ -1284,6 +1486,15 @@ references:
   fullName.vb: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate(Of TState), TState)
   nameWithType: ManualLogicLooper.RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState)
   nameWithType.vb: ManualLogicLooper.RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState)
+- uid: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  href: api/Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ManualLogicLooper.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name.vb: RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState, LooperActionOptions)
+  fullName: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync<TState>(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate<TState>, TState, Cysharp.Threading.LooperActionOptions)
+  fullName.vb: Cysharp.Threading.ManualLogicLooper.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate(Of TState), TState, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ManualLogicLooper.RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  nameWithType.vb: ManualLogicLooper.RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState, LooperActionOptions)
 - uid: Cysharp.Threading.ManualLogicLooper.ShutdownAsync(TimeSpan)
   name: ShutdownAsync(TimeSpan)
   href: api/Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_ShutdownAsync_TimeSpan_
@@ -1422,12 +1633,24 @@ references:
   commentId: M:Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)
   fullName: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate)
   nameWithType: ManualLogicLooperPool.RegisterActionAsync(LogicLooperActionDelegate)
+- uid: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)
+  href: api/Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_RegisterActionAsync_Cysharp_Threading_LogicLooperActionDelegate_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate,Cysharp.Threading.LooperActionOptions)
+  fullName: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperActionDelegate, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ManualLogicLooperPool.RegisterActionAsync(LogicLooperActionDelegate, LooperActionOptions)
 - uid: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   name: RegisterActionAsync(LogicLooperAsyncActionDelegate)
   href: api/Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_
   commentId: M:Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   fullName: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate)
   nameWithType: ManualLogicLooperPool.RegisterActionAsync(LogicLooperAsyncActionDelegate)
+- uid: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)
+  href: api/Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_RegisterActionAsync_Cysharp_Threading_LogicLooperAsyncActionDelegate_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate,Cysharp.Threading.LooperActionOptions)
+  fullName: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Cysharp.Threading.LogicLooperAsyncActionDelegate, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ManualLogicLooperPool.RegisterActionAsync(LogicLooperAsyncActionDelegate, LooperActionOptions)
 - uid: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync*
   name: RegisterActionAsync
   href: api/Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_RegisterActionAsync_
@@ -1444,6 +1667,15 @@ references:
   fullName.vb: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperActionWithStateDelegate(Of TState), TState)
   nameWithType: ManualLogicLooperPool.RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState)
   nameWithType.vb: ManualLogicLooperPool.RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState)
+- uid: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  href: api/Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_RegisterActionAsync__1_Cysharp_Threading_LogicLooperActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name.vb: RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState, LooperActionOptions)
+  fullName: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync<TState>(Cysharp.Threading.LogicLooperActionWithStateDelegate<TState>, TState, Cysharp.Threading.LooperActionOptions)
+  fullName.vb: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperActionWithStateDelegate(Of TState), TState, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ManualLogicLooperPool.RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  nameWithType.vb: ManualLogicLooperPool.RegisterActionAsync(Of TState)(LogicLooperActionWithStateDelegate(Of TState), TState, LooperActionOptions)
 - uid: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0)
   name: RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState)
   href: api/Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_
@@ -1453,6 +1685,15 @@ references:
   fullName.vb: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate(Of TState), TState)
   nameWithType: ManualLogicLooperPool.RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState)
   nameWithType.vb: ManualLogicLooperPool.RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState)
+- uid: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name: RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  href: api/Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_RegisterActionAsync__1_Cysharp_Threading_LogicLooperAsyncActionWithStateDelegate___0____0_Cysharp_Threading_LooperActionOptions_
+  commentId: M:Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync``1(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate{``0},``0,Cysharp.Threading.LooperActionOptions)
+  name.vb: RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState, LooperActionOptions)
+  fullName: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync<TState>(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate<TState>, TState, Cysharp.Threading.LooperActionOptions)
+  fullName.vb: Cysharp.Threading.ManualLogicLooperPool.RegisterActionAsync(Of TState)(Cysharp.Threading.LogicLooperAsyncActionWithStateDelegate(Of TState), TState, Cysharp.Threading.LooperActionOptions)
+  nameWithType: ManualLogicLooperPool.RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState>, TState, LooperActionOptions)
+  nameWithType.vb: ManualLogicLooperPool.RegisterActionAsync(Of TState)(LogicLooperAsyncActionWithStateDelegate(Of TState), TState, LooperActionOptions)
 - uid: Cysharp.Threading.ManualLogicLooperPool.ShutdownAsync(TimeSpan)
   name: ShutdownAsync(TimeSpan)
   href: api/Cysharp.Threading.ManualLogicLooperPool.html#Cysharp_Threading_ManualLogicLooperPool_ShutdownAsync_TimeSpan_
