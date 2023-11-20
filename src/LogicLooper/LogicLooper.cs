@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Cysharp.Threading.Internal;
 
 // ReSharper disable StringLiteralTypo
@@ -104,7 +105,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     /// <returns></returns>
     public Task RegisterActionAsync(LogicLooperActionDelegate loopAction)
         => RegisterActionAsync(loopAction, LooperActionOptions.Default);
-    
+
     /// <summary>
     /// Registers a loop-frame action to the looper and returns <see cref="Task"/> to wait for completion.
     /// </summary>
@@ -125,7 +126,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     /// <returns></returns>
     public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state)
         => RegisterActionAsync(loopAction, state, LooperActionOptions.Default);
-    
+
     /// <summary>
     /// Registers a loop-frame action with state object to the looper and returns <see cref="Task"/> to wait for completion.
     /// </summary>
@@ -146,7 +147,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     /// <returns></returns>
     public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction)
         => RegisterActionAsync(loopAction, LooperActionOptions.Default);
-    
+
     /// <summary>
     /// [Experimental] Registers a async-aware loop-frame action to the looper and returns <see cref="Task"/> to wait for completion.
     /// </summary>
@@ -167,7 +168,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     /// <returns></returns>
     public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state)
         => RegisterActionAsync<TState>(loopAction, state, LooperActionOptions.Default);
-    
+
     /// <summary>
     /// [Experimental] Registers a async-aware loop-frame action with state object to the looper and returns <see cref="Task"/> to wait for completion.
     /// </summary>
@@ -256,7 +257,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
 
             lock (_lockActions)
             {
-                var elapsedTicksFromPreviousFrame = (long)((begin - lastTimestamp) * TimestampsToTicks);
+                var elapsedTicksFromPreviousFrame = ToTick(begin - lastTimestamp);
                 var elapsedTimeFromPreviousFrame = TimeSpan.FromTicks(elapsedTicksFromPreviousFrame);
                 lastTimestamp = begin;
 
@@ -277,18 +278,19 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
                             {
                                 continue;
                             }
-                            
-                            var elapsedTicksFromPreviousFrameOverride = (long)((begin - action.LoopActionOverrideState.LastInvokedAt) * TimestampsToTicks);
+
+                            var exceededTimestamp = action.LoopActionOverrideState.NextScheduledTimestamp == 0 ? 0 : ctx.FrameBeginTimestamp - action.LoopActionOverrideState.NextScheduledTimestamp;
+                            var elapsedTicksFromPreviousFrameOverride = ToTick(begin - action.LoopActionOverrideState.LastInvokedAt);
                             var elapsedTimeFromPreviousFrameOverride = TimeSpan.FromTicks(elapsedTicksFromPreviousFrameOverride);
                             var overrideCtx = new LogicLooperActionContext(this, action.LoopActionOverrideState.Frame++, begin, elapsedTimeFromPreviousFrameOverride, _ctsAction.Token);
-                                                        
+
                             if (!InvokeAction(overrideCtx, ref action))
                             {
                                 action = default;
                             }
-                            
+
                             action.LoopActionOverrideState.LastInvokedAt = begin;
-                            action.LoopActionOverrideState.NextScheduledTimestamp = begin + action.LoopActionOverrideState.TargetFrameTimeTimestamp;
+                            action.LoopActionOverrideState.NextScheduledTimestamp = begin + action.LoopActionOverrideState.TargetFrameTimeTimestamp - exceededTimestamp;
                         }
                         else
                         {
@@ -326,7 +328,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
                     _tail = i;
                     break;
 
-                    NextActionLoop:
+NextActionLoop:
                     continue;
                 }
 
@@ -346,7 +348,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
             }
 
             var now = Stopwatch.GetTimestamp();
-            var elapsedTicks = (now - begin) * TimestampsToTicks;
+            var elapsedTicks = ToTick(now - begin);
             var elapsedMilliseconds = (long)elapsedTicks / TimeSpan.TicksPerMillisecond;
             _lastProcessingDuration = elapsedMilliseconds;
 
@@ -359,6 +361,10 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
 
         _shutdownTaskAwaiter.SetResult(true);
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static long ToTick(long timestamp)
+        => (long)(timestamp * TimestampsToTicks);
 
     private static bool InvokeAction(in LogicLooperActionContext ctx, ref LooperAction action)
     {
@@ -432,7 +438,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
 
         static class Cache<T>
         {
-            public static InternalLogicLooperActionDelegate Wrapper => (object wrappedDelegate, in LogicLooperActionContext ctx, object? state) => ((LogicLooperActionWithStateDelegate<T>) wrappedDelegate)(ctx, (T) state!);
+            public static InternalLogicLooperActionDelegate Wrapper => (object wrappedDelegate, in LogicLooperActionContext ctx, object? state) => ((LogicLooperActionWithStateDelegate<T>)wrappedDelegate)(ctx, (T)state!);
         }
     }
 
@@ -448,7 +454,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
         public LooperActionOptions Options { get; }
 
         public LoopActionOverrideState LoopActionOverrideState;
-        
+
         public LooperAction(InternalLogicLooperActionDelegate actionWrapper, Delegate action, object? state, LooperActionOptions options)
         {
             BeginAt = DateTimeOffset.Now;
@@ -473,11 +479,11 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
             return ActionWrapper(Action!, ctx, State);
         }
     }
-    
+
     internal struct LoopActionOverrideState
     {
         public bool IsOverridden { get; }
-    
+
         public int Frame { get; set; }
         public long NextScheduledTimestamp { get; set; }
         public long LastInvokedAt { get; set; }
