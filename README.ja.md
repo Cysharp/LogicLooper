@@ -196,7 +196,7 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 {
     // Something to do (低頻度) ...
     return true;
-}, LoopActionOptions.Default with { TargetFrameRateOverride = 10 }); // 10 fps で呼び出される
+}, LooperActionOptions.Default with { TargetFrameRateOverride = 10 }); // 10 fps で呼び出される
 ```
 
 注意点として大元のループ自体の実行頻度によってアクションの実行粒度が変わります。これは Looper のターゲットフレームレートよりも正確性が劣ることがあるということを意味します。
