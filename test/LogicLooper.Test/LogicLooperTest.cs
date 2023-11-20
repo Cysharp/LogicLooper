@@ -284,8 +284,7 @@ public class LogicLooperTest
         await Task.Delay(100);
         count.Should().Be(1);
     }
-    
-    
+
     [Theory]
     [InlineData(60, 10)]
     [InlineData(30, 10)]
@@ -334,5 +333,13 @@ public class LogicLooperTest
 
         frameCount.Should().Be(lastFrameNum);
         fps.Should().BeInRange(overrideTargetFps-2, overrideTargetFps + 2);
+    }
+
+    [Fact]
+    public async Task TargetFrameRateOverride_Invalid()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(30);
+
+        await Assert.ThrowsAsync<InvalidOperationException>(async () => await looper.RegisterActionAsync((in LogicLooperActionContext _) => false, LooperActionOptions.Default with { TargetFrameRateOverride = 31 }));
     }
 }

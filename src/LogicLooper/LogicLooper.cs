@@ -212,6 +212,11 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
 
     private Task RegisterActionAsyncCore(LooperAction action)
     {
+        if (action.Options.TargetFrameRateOverride is { } targetFrameRateOverride && targetFrameRateOverride > this.TargetFrameRate)
+        {
+            throw new InvalidOperationException("Option 'TargetFrameRateOverride' must be less than Looper's target frame rate.");
+        }
+
         lock (_lockQueue)
         {
             if (_isRunning)
