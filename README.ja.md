@@ -46,6 +46,9 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 - [上級編](#%E4%B8%8A%E7%B4%9A%E7%B7%A8)
   - [ユニットテスト / フレーム単位実行](#%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88--%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E5%8D%98%E4%BD%8D%E5%AE%9F%E8%A1%8C)
   - [Coroutine](#coroutine)
+  - [TargetFrameRateOverride](#targetframerateoverride)
+- [Experimental](#experimental)
+  - [async 対応ループアクション](#async-%E5%AF%BE%E5%BF%9C%E3%83%AB%E3%83%BC%E3%83%97%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -173,3 +176,46 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
     return true;
 });
 ```
+
+### TargetFrameRateOverride
+
+アクションごとにフレームレートのオーバーライドが可能です。これは例えば大元のループは 30fps で動くことを期待しながらも、一部のアクションは 5fps で呼び出されてほしいといった複数のフレームレートを混在させたいケースで役立ちます。
+ループを実行する Looper ごとにフレームレートを設定することもできますが LogicLooper のデザインは1ループ1スレッドとなっているため、原則としてコア数に準じた Looper 数を期待しています。アクションごとにフレームレートを設定することでワークロードが変化する場合でも Looper の数を固定できます。
+
+```csharp
+using var looper = new LogicLooper(60); // 60 fps でループは実行する
+
+await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+{
+    // Something to do ...
+    return true;
+}); // 60 fps で呼び出される
+
+
+await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+{
+    // Something to do (低頻度) ...
+    return true;
+}, LoopActionOptions.Default with { TargetFrameRateOverride = 10 }); // 10 fps で呼び出される
+```
+
+注意点として大元のループ自体の実行頻度によってアクションの実行粒度が変わります。これは Looper のターゲットフレームレートよりも正確性が劣ることがあるということを意味します。
+
+## Experimental
+### async 対応ループアクション
+ループアクションで非同期イベントを待機できる試験的なサポートを提供します。
+
+SynchronizationContext を利用して、すべての非同期メソッドの継続はループスレッド上で実行されます。しかし非同期を待機するアクションは同期的に完了するアクションと異なり複数のフレームにまたがって実行されることに注意が必要です。
+
+```csharp
+await looper.RegisterActionAsync(static async (ctx, state) =>
+{
+    state.Add("1"); // Frame: 1
+    await Task.Delay(250);
+    state.Add("2"); // Frame: 2 or later
+    return false;
+});
+```
+
+> [!WARNING]
+> もしアクションが同期的に完了する場合 (つまり非同期メソッドであっても `ValueTask.IsCompleted = true` となる状況)、async ではないバージョンとパフォーマンスの差はありません。しかし await して非同期処理に対して継続実行する必要がある場合にはとても低速になります。この非同期サポートは低頻度の外部との通信を目的とした緊急ハッチ的な役割を提供します。高頻度での非同期処理を実行することは強く非推奨です。

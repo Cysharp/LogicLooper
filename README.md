@@ -51,6 +51,7 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 - [Advanced](#advanced)
   - [Unit tests / Frame-by-Frame execution](#unit-tests--frame-by-frame-execution)
   - [Coroutine](#coroutine)
+  - [TargetFrameRateOverride](#targetframerateoverride)
 - [Experimental](#experimental)
   - [async-aware loop actions](#async-aware-loop-actions)
 
@@ -178,6 +179,30 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
     return true;
 });
 ```
+
+### TargetFrameRateOverride
+
+`TargetFrameRateOverride` option allows to override the frame rate for each action. This can be useful in cases where you want to mix multiple frame rates, such as expecting the main loop to run at 30fps, but wanting some actions to be called at 5fps.
+
+You can also set the frame rate for each Looper that executes the loops, but the design of LogicLooper is 1-loop per thread, so in principle we expect a number of Loopers in accordance with the number of cores. By setting the frame rate for each action, you can keep the number of Loopers fixed even if the workload changes.
+
+```csharp
+using var looper = new LogicLooper(60); // 60 fps
+
+await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+{
+    // Something to do ...
+    return true;
+}); // The action will be called at 60fps.
+
+await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+{
+    // Something to do (low priority) ...
+    return true;
+}, LoopActionOptions.Default with { TargetFrameRateOverride = 10 }); // The action will be called at 10fps.
+```
+
+The granularity of action execution changes based on the execution frequency of the main loop itself. This means that the accuracy may be inferior to the target frame rate of the Looper.
 
 ## Experimental
 ### async-aware loop actions
