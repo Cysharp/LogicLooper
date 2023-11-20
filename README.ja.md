@@ -1,5 +1,5 @@
 # LogicLooper
-.NET Core でのサーバーアプリケーションでループを使用したプログラミングモデルを実装するためのライブラリです。
+.NET でのサーバーアプリケーションでループを使用したプログラミングモデルを実装するためのライブラリです。
 主にサーバーサイドにロジックがあるゲームサーバーのようなユースケースにフォーカスしています。
 
 例えば次のようなゲームループがある場合、これらを集約して素朴な `Task` による駆動よりも効率の良い形で動かす方法を提供します。
@@ -196,7 +196,7 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 {
     // Something to do (低頻度) ...
     return true;
-}, LoopActionOptions.Default with { TargetFrameRateOverride = 10 }); // 10 fps で呼び出される
+}, LooperActionOptions.Default with { TargetFrameRateOverride = 10 }); // 10 fps で呼び出される
 ```
 
 注意点として大元のループ自体の実行頻度によってアクションの実行粒度が変わります。これは Looper のターゲットフレームレートよりも正確性が劣ることがあるということを意味します。
