@@ -199,7 +199,7 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 {
     // Something to do (low priority) ...
     return true;
-}, LoopActionOptions.Default with { TargetFrameRateOverride = 10 }); // The action will be called at 10fps.
+}, LooperActionOptions.Default with { TargetFrameRateOverride = 10 }); // The action will be called at 10fps.
 ```
 
 The granularity of action execution changes based on the execution frequency of the main loop itself. This means that the accuracy may be inferior to the target frame rate of the Looper.
