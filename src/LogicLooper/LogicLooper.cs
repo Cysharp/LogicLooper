@@ -48,30 +48,25 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     private int _isShuttingDown = 0;
     private long _frame = 0;
 
-    /// <summary>
-    /// Gets a unique identifier of the looper.
-    /// </summary>
+    /// <inheritdoc/>
     public int Id => _looperId;
 
-    /// <summary>
-    /// Gets an approximately count of running actions.
-    /// </summary>
+    /// <inheritdoc/>
     public int ApproximatelyRunningActions => _tail;
 
-    /// <summary>
-    /// Gets a duration of the last processed frame.
-    /// </summary>
+    /// <inheritdoc/>
     public TimeSpan LastProcessingDuration => TimeSpan.FromMilliseconds(_lastProcessingDuration);
 
-    /// <summary>
-    /// Gets a target frame rate of the looper.
-    /// </summary>
+    /// <inheritdoc/>
     public double TargetFrameRate => _targetFrameRate;
 
     /// <summary>
     /// Gets a unique identifier of the managed thread.
     /// </summary>
     internal int ThreadId => _runLoopThread.ManagedThreadId;
+
+    /// <inheritdoc/>
+    public long CurrentFrame => _frame;
 
     public LogicLooper(int targetFrameRate, int initialActionsCapacity = 16)
         : this(TimeSpan.FromMilliseconds(1000 / (double)targetFrameRate), initialActionsCapacity)

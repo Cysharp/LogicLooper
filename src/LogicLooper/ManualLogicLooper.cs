@@ -23,6 +23,9 @@ public sealed class ManualLogicLooper : ILogicLooper
     /// <inheritdoc />
     public double TargetFrameRate { get; }
 
+    /// <inheritdoc />
+    public long CurrentFrame => _frame;
+
     public ManualLogicLooper(double targetFrameRate)
     {
         if (targetFrameRate == 0) throw new ArgumentOutOfRangeException(nameof(targetFrameRate), "TargetFrameRate must be greater than 0.");
