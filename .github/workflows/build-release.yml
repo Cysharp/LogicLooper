@@ -12,52 +12,27 @@ on:
         default: false
         type: boolean
 
-env:
-  GIT_TAG: ${{ github.event.inputs.tag }}
-  DRY_RUN: ${{ github.event.inputs.dry-run }}
-
 jobs:
   build-dotnet:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
-      - run: dotnet build -c Release -p:VersionPrefix=${{ env.GIT_TAG }} -p:DefineConstants=RUNNING_IN_CI
+      - run: dotnet build -c Release -p:VersionPrefix=${{ inputs.tag }} -p:DefineConstants=RUNNING_IN_CI
       - run: dotnet test -c Release --no-build
-      - run: dotnet pack -c Release --no-build -p:VersionPrefix=${{ env.GIT_TAG }} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -o ./publish
+      - run: dotnet pack -c Release --no-build -p:VersionPrefix=${{ inputs.tag }} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -o ./publish
       - uses: actions/upload-artifact@v2
         with:
           name: nuget
           path: ./publish
 
   create-release:
-    if: github.event.inputs.dry-run == 'false'
     needs: [build-dotnet]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
-      # tag
-      - uses: actions/checkout@v3
-      - name: tag
-        run: git tag ${{ env.GIT_TAG }}
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-          tags: true
-      # Create Releases
-      - uses: actions/create-release@v1
-        id: create_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.GIT_TAG }}
-          release_name: Ver.${{ env.GIT_TAG }}
-          draft: true
-          prerelease: false
-      # Download (All) Artifacts to current directory
-      - uses: actions/download-artifact@v2
-      # Upload to NuGet
-      - run: dotnet nuget push "./nuget/*.nupkg" -s https://www.nuget.org/api/v2/package -k ${{ secrets.NUGET_KEY }}
-      - run: dotnet nuget push "./nuget/*.snupkg" -s https://www.nuget.org/api/v2/package -k ${{ secrets.NUGET_KEY }}
+    uses: Cysharp/Actions/.github/workflows/create-release.yaml@main
+    with:
+      commit-id: ${{ github.sha }}
+      tag: ${{ inputs.tag }}
+      dry-run: ${{ inputs.dry-run }}
+      nuget-push: true
+      release-upload: false
+    secrets: inherit
