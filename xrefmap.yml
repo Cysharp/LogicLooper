@@ -383,6 +383,19 @@ references:
   isSpec: "True"
   fullName: Cysharp.Threading.ILogicLooper.ApproximatelyRunningActions
   nameWithType: ILogicLooper.ApproximatelyRunningActions
+- uid: Cysharp.Threading.ILogicLooper.CurrentFrame
+  name: CurrentFrame
+  href: api/Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_CurrentFrame
+  commentId: P:Cysharp.Threading.ILogicLooper.CurrentFrame
+  fullName: Cysharp.Threading.ILogicLooper.CurrentFrame
+  nameWithType: ILogicLooper.CurrentFrame
+- uid: Cysharp.Threading.ILogicLooper.CurrentFrame*
+  name: CurrentFrame
+  href: api/Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_CurrentFrame_
+  commentId: Overload:Cysharp.Threading.ILogicLooper.CurrentFrame
+  isSpec: "True"
+  fullName: Cysharp.Threading.ILogicLooper.CurrentFrame
+  nameWithType: ILogicLooper.CurrentFrame
 - uid: Cysharp.Threading.ILogicLooper.Id
   name: Id
   href: api/Cysharp.Threading.ILogicLooper.html#Cysharp_Threading_ILogicLooper_Id
@@ -687,6 +700,19 @@ references:
   isSpec: "True"
   fullName: Cysharp.Threading.LogicLooper.Current
   nameWithType: LogicLooper.Current
+- uid: Cysharp.Threading.LogicLooper.CurrentFrame
+  name: CurrentFrame
+  href: api/Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_CurrentFrame
+  commentId: P:Cysharp.Threading.LogicLooper.CurrentFrame
+  fullName: Cysharp.Threading.LogicLooper.CurrentFrame
+  nameWithType: LogicLooper.CurrentFrame
+- uid: Cysharp.Threading.LogicLooper.CurrentFrame*
+  name: CurrentFrame
+  href: api/Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_CurrentFrame_
+  commentId: Overload:Cysharp.Threading.LogicLooper.CurrentFrame
+  isSpec: "True"
+  fullName: Cysharp.Threading.LogicLooper.CurrentFrame
+  nameWithType: LogicLooper.CurrentFrame
 - uid: Cysharp.Threading.LogicLooper.Dispose
   name: Dispose()
   href: api/Cysharp.Threading.LogicLooper.html#Cysharp_Threading_LogicLooper_Dispose
@@ -1389,6 +1415,19 @@ references:
   isSpec: "True"
   fullName: Cysharp.Threading.ManualLogicLooper.ApproximatelyRunningActions
   nameWithType: ManualLogicLooper.ApproximatelyRunningActions
+- uid: Cysharp.Threading.ManualLogicLooper.CurrentFrame
+  name: CurrentFrame
+  href: api/Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_CurrentFrame
+  commentId: P:Cysharp.Threading.ManualLogicLooper.CurrentFrame
+  fullName: Cysharp.Threading.ManualLogicLooper.CurrentFrame
+  nameWithType: ManualLogicLooper.CurrentFrame
+- uid: Cysharp.Threading.ManualLogicLooper.CurrentFrame*
+  name: CurrentFrame
+  href: api/Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_CurrentFrame_
+  commentId: Overload:Cysharp.Threading.ManualLogicLooper.CurrentFrame
+  isSpec: "True"
+  fullName: Cysharp.Threading.ManualLogicLooper.CurrentFrame
+  nameWithType: ManualLogicLooper.CurrentFrame
 - uid: Cysharp.Threading.ManualLogicLooper.Dispose
   name: Dispose()
   href: api/Cysharp.Threading.ManualLogicLooper.html#Cysharp_Threading_ManualLogicLooper_Dispose
