@@ -11,7 +11,7 @@ public interface ILogicLooper : IDisposable
     int Id { get; }
 
     /// <summary>
-    /// Gets an approximately count of running actions.
+    /// Gets an approximate count of running actions.
     /// </summary>
     int ApproximatelyRunningActions { get; }
 
@@ -24,6 +24,11 @@ public interface ILogicLooper : IDisposable
     /// Gets a target frame rate of the looper.
     /// </summary>
     double TargetFrameRate { get; }
+
+    /// <summary>
+    /// Gets a current frame that elapsed since beginning the looper is started.
+    /// </summary>
+    long CurrentFrame { get; }
 
     /// <summary>
     /// Registers a loop-frame action to the looper and returns <see cref="Task"/> to wait for completion.

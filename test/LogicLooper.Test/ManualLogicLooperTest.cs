@@ -53,12 +53,16 @@ public class ManualLogicLooperTest
         looper.ApproximatelyRunningActions.Should().Be(1);
 
         count.Should().Be(0);
+        looper.CurrentFrame.Should().Be(0);
         looper.Tick().Should().BeTrue();
         count.Should().Be(1);
+        looper.CurrentFrame.Should().Be(1);
         looper.Tick().Should().BeTrue();
         count.Should().Be(2);
+        looper.CurrentFrame.Should().Be(2);
         looper.Tick().Should().BeFalse();
         count.Should().Be(3);
+        looper.CurrentFrame.Should().Be(3);
 
         looper.ApproximatelyRunningActions.Should().Be(0);
         t1.IsCompletedSuccessfully.Should().BeTrue();
