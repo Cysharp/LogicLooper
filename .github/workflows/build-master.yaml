@@ -18,9 +18,12 @@ jobs:
       - run: dotnet build -c Debug -p:DefineConstants=RUNNING_IN_CI
       - run: dotnet pack ./src/LogicLooper/LogicLooper.csproj -c Debug --no-build -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
       - run: dotnet test -c Debug --no-build
-      - uses: actions/upload-artifact@v4
+      - uses: Cysharp/Actions/.github/actions/upload-artifact@main
         with:
+          name: nuget
           path: ./src/LogicLooper/bin/Debug/*.*nupkg
+          retention-days: 1
+
   test-release-build:
     name: Run tests using Release build
     needs: [ build-debug ]
