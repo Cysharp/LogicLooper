@@ -62,20 +62,29 @@ public sealed class ManualLogicLooper : ILogicLooper
         var completed = new List<LogicLooper.LooperAction>();
         lock (_actions)
         {
-            foreach (var action in _actions.ToArray())
+            var origCurrentLogicLooper = LogicLooper.Current;
+            try
             {
-                if (!InvokeAction(ctx, action))
+                LogicLooper.Current = this;
+                foreach (var action in _actions.ToArray())
                 {
-                    completed.Add(action);
+                    if (!InvokeAction(ctx, action))
+                    {
+                        completed.Add(action);
+                    }
                 }
-            }
 
-            foreach (var completedAction in completed)
+                foreach (var completedAction in completed)
+                {
+                    _actions.Remove(completedAction);
+                }
+
+                return _actions.Count != 0;
+            }
+            finally
             {
-                _actions.Remove(completedAction);
+                LogicLooper.Current = origCurrentLogicLooper;
             }
-
-            return _actions.Count != 0;
         }
     }
 

@@ -22,12 +22,18 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     private static int _looperSequence = 0;
 
     [ThreadStatic]
-    private static LogicLooper? _threadLocalLooper = default;
+    private static ILogicLooper? _threadLocalLooper = default;
 
     /// <summary>
     /// Gets a looper of the current thread.
     /// </summary>
-    public static LogicLooper? Current => _threadLocalLooper;
+    public static ILogicLooper? Current
+    {
+        get => _threadLocalLooper;
+
+        // NOTE: Setter to set from ManualLogicLooper for testing purposes
+        internal set => _threadLocalLooper = value;
+    }
 
     private readonly int _looperId;
     private readonly Thread _runLoopThread;
@@ -235,8 +241,9 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
 
     private static void StartRunLoop(object? state)
     {
-        _threadLocalLooper = ((LogicLooper)state!);
-        _threadLocalLooper.RunLoop();
+        var logicLooper = ((LogicLooper)state!);
+        _threadLocalLooper = logicLooper;
+        logicLooper.RunLoop();
     }
 
     private void RunLoop()
