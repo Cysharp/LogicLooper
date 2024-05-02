@@ -175,4 +175,24 @@ public class ManualLogicLooperTest
         looper.ApproximatelyRunningActions.Should().Be(0);
         t1.IsCompletedSuccessfully.Should().BeTrue();
     }
+
+    [Fact]
+    public void LogicLooper_Current()
+    {
+        Cysharp.Threading.LogicLooper.Current.Should().BeNull();
+
+        var looper = new ManualLogicLooper(60.0);
+        looper.TargetFrameRate.Should().Be(60.0);
+
+        var currentLogicLooperInAction = default(ILogicLooper);
+        looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+        {
+            currentLogicLooperInAction = Cysharp.Threading.LogicLooper.Current;
+            return false;
+        });
+        looper.Tick();
+
+        currentLogicLooperInAction.Should().Be(looper);
+        Cysharp.Threading.LogicLooper.Current.Should().BeNull();
+    }
 }
