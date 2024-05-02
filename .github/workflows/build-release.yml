@@ -36,4 +36,5 @@ jobs:
       dry-run: ${{ inputs.dry-run }}
       nuget-push: true
       release-upload: false
+      release-format: '{0}'
     secrets: inherit
