@@ -277,7 +277,6 @@ public class LogicLooperTest
             count++;
             await Task.Delay(100);
             throw new InvalidOperationException();
-            return true;
         });
 
         await Assert.ThrowsAsync<InvalidOperationException>(async () => await runLoopTask);
