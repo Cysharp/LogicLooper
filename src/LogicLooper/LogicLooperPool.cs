@@ -1,3 +1,5 @@
+using Cysharp.Threading.Internal;
+
 namespace Cysharp.Threading;
 
 /// <summary>
@@ -7,6 +9,7 @@ public sealed partial class LogicLooperPool : ILogicLooperPool, IDisposable
 {
     private readonly LogicLooper[] _loopers;
     private readonly ILogicLooperPoolBalancer _balancer;
+    private readonly CancellationTokenSource _shutdownTokenSource = new();
 
     /// <inheritdoc />
     public IReadOnlyList<ILogicLooper> Loopers => _loopers;
@@ -93,5 +96,6 @@ public sealed partial class LogicLooperPool : ILogicLooperPool, IDisposable
             {
             }
         }
+        _shutdownTokenSource.Cancel();
     }
 }
