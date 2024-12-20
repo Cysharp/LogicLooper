@@ -341,4 +341,47 @@ public class LogicLooperTest
 
         await Assert.ThrowsAsync<InvalidOperationException>(async () => await looper.RegisterActionAsync((in LogicLooperActionContext _) => false, LooperActionOptions.Default with { TargetFrameRateOverride = 31 }));
     }
+
+    [Fact]
+    public async Task TargetFrameRateOverride_2()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(30);
+
+        looper.ApproximatelyRunningActions.Should().Be(0);
+
+        var lastFrameNum = 0L;
+        var overriddenFrameCount = -1L;
+        var cts = new CancellationTokenSource();
+
+        _ = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+        {
+            return ctx.CurrentFrame != 4;
+        });
+        _ = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+        {
+            return ctx.CurrentFrame != 3;
+        });
+        _ = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+        {
+            return ctx.CurrentFrame != 2;
+        });
+        _ = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+        {
+            return ctx.CurrentFrame != 1;
+        });
+
+        var task = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+        {
+            overriddenFrameCount++;
+            return !cts.IsCancellationRequested;
+        }, LooperActionOptions.Default with { TargetFrameRateOverride = 1 /* 1 frame per second */ });
+
+        // wait for moving action from queue to actions.
+        await Task.Delay(1100);
+        cts.Cancel();
+
+        looper.ApproximatelyRunningActions.Should().Be(1);
+
+        overriddenFrameCount.Should().Be(1);
+    }
 }

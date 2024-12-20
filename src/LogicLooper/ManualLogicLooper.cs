@@ -106,7 +106,7 @@ public sealed class ManualLogicLooper : ILogicLooper
     /// <inheritdoc />
     public Task RegisterActionAsync(LogicLooperActionDelegate loopAction, LooperActionOptions options)
     {
-        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper(), loopAction, default, options);
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper(), loopAction, default, options, TimeProvider.System);
         lock (_actions)
         {
             _actions.Add(action);
@@ -121,7 +121,7 @@ public sealed class ManualLogicLooper : ILogicLooper
     /// <inheritdoc />
     public Task RegisterActionAsync<TState>(LogicLooperActionWithStateDelegate<TState> loopAction, TState state, LooperActionOptions options)
     {
-        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), loopAction, state, options);
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), loopAction, state, options, TimeProvider.System);
         lock (_actions)
         {
             _actions.Add(action);
@@ -136,7 +136,7 @@ public sealed class ManualLogicLooper : ILogicLooper
     /// <inheritdoc />
     public Task RegisterActionAsync(LogicLooperAsyncActionDelegate loopAction, LooperActionOptions options)
     {
-        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper(), LogicLooper.DelegateHelper.ConvertAsyncToSync(loopAction), default, options);
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper(), LogicLooper.DelegateHelper.ConvertAsyncToSync(loopAction), default, options, TimeProvider.System);
         lock (_actions)
         {
             _actions.Add(action);
@@ -151,7 +151,7 @@ public sealed class ManualLogicLooper : ILogicLooper
     /// <inheritdoc />
     public Task RegisterActionAsync<TState>(LogicLooperAsyncActionWithStateDelegate<TState> loopAction, TState state, LooperActionOptions options)
     {
-        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), LogicLooper.DelegateHelper.ConvertAsyncToSync(loopAction), state, options);
+        var action = new LogicLooper.LooperAction(LogicLooper.DelegateHelper.GetWrapper<TState>(), LogicLooper.DelegateHelper.ConvertAsyncToSync(loopAction), state, options, TimeProvider.System);
         lock (_actions)
         {
             _actions.Add(action);
