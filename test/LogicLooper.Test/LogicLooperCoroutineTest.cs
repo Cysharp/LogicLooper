@@ -18,19 +18,19 @@ public class LogicLooperCoroutineTest
                 startFrame = ctx.CurrentFrame;
                 coroutine = ctx.RunCoroutine(async ctx2 =>
                 {
-                    ctx2.CurrentFrame.Should().Be(startFrame);
+                    Assert.Equal(startFrame, ctx2.CurrentFrame);
                         
                     await ctx2.DelayFrame(60);
 
-                    ctx2.CurrentFrame.Should().Be(startFrame + 60);
+                    Assert.Equal(startFrame + 60, ctx2.CurrentFrame);
 
                     await ctx2.DelayNextFrame();
 
-                    ctx2.CurrentFrame.Should().Be(startFrame + 61);
+                    Assert.Equal(startFrame + 61, ctx2.CurrentFrame);
 
                     await ctx2.Delay(TimeSpan.FromMilliseconds(16.66666));
 
-                    ctx2.CurrentFrame.Should().Be(startFrame + 62);
+                    Assert.Equal(startFrame + 62, ctx2.CurrentFrame);
                 });
             }
 
@@ -40,9 +40,9 @@ public class LogicLooperCoroutineTest
         if (coroutine.Exception != null)
             throw coroutine.Exception;
 
-        coroutine.IsCompleted.Should().BeTrue();
-        coroutine.IsCompletedSuccessfully.Should().BeTrue();
-        coroutine.IsFaulted.Should().BeFalse();
+        Assert.True(coroutine.IsCompleted);
+        Assert.True(coroutine.IsCompletedSuccessfully);
+        Assert.False(coroutine.IsFaulted);
     }
 
     [Fact]
@@ -59,19 +59,19 @@ public class LogicLooperCoroutineTest
                 startFrame = ctx.CurrentFrame;
                 coroutine = ctx.RunCoroutine(async ctx2 =>
                 {
-                    ctx2.CurrentFrame.Should().Be(startFrame);
+                    Assert.Equal(startFrame, ctx2.CurrentFrame);
 
                     await ctx2.DelayFrame(60);
 
-                    ctx2.CurrentFrame.Should().Be(startFrame + 60);
+                    Assert.Equal(startFrame + 60, ctx2.CurrentFrame);
 
                     await ctx2.DelayNextFrame();
 
-                    ctx2.CurrentFrame.Should().Be(startFrame + 61);
+                    Assert.Equal(startFrame + 61, ctx2.CurrentFrame);
 
                     await ctx2.Delay(TimeSpan.FromMilliseconds(16.66666));
 
-                    ctx2.CurrentFrame.Should().Be(startFrame + 62);
+                    Assert.Equal(startFrame + 62, ctx2.CurrentFrame);
 
                     return 12345;
                 });
@@ -83,11 +83,11 @@ public class LogicLooperCoroutineTest
         if (coroutine.Exception != null)
             throw coroutine.Exception;
 
-        coroutine.IsCompleted.Should().BeTrue();
-        coroutine.IsCompletedSuccessfully.Should().BeTrue();
-        coroutine.IsFaulted.Should().BeFalse();
+        Assert.True(coroutine.IsCompleted);
+        Assert.True(coroutine.IsCompletedSuccessfully);
+        Assert.False(coroutine.IsFaulted);
 
-        coroutine.Result.Should().Be(12345);
+        Assert.Equal(12345, coroutine.Result);
     }
 
     [Fact]
@@ -104,7 +104,7 @@ public class LogicLooperCoroutineTest
                 startFrame = ctx.CurrentFrame;
                 coroutine = ctx.RunCoroutine(async ctx2 =>
                 {
-                    ctx2.CurrentFrame.Should().Be(startFrame);
+                    Assert.Equal(startFrame, ctx2.CurrentFrame);
 
                     await ctx2.DelayFrame(5);
 
@@ -115,12 +115,12 @@ public class LogicLooperCoroutineTest
             return !coroutine.IsCompleted;
         });
 
-        coroutine.IsCompleted.Should().BeTrue();
-        coroutine.IsCompletedSuccessfully.Should().BeFalse();
-        coroutine.IsFaulted.Should().BeTrue();
+        Assert.True(coroutine.IsCompleted);
+        Assert.False(coroutine.IsCompletedSuccessfully);
+        Assert.True(coroutine.IsFaulted);
 
-        coroutine.Exception.Should().NotBeNull();
-        coroutine.Exception.Message.Should().Be("ThrownFromCoroutine");
+        Assert.NotNull(coroutine.Exception);
+        Assert.Equal("ThrownFromCoroutine", coroutine.Exception.Message);
     }
 
     [Fact]
@@ -137,7 +137,7 @@ public class LogicLooperCoroutineTest
                 startFrame = ctx.CurrentFrame;
                 coroutine = ctx.RunCoroutine(async ctx2 =>
                 {
-                    ctx2.CurrentFrame.Should().Be(startFrame);
+                    Assert.Equal(startFrame, ctx2.CurrentFrame);
 
                     await ctx2.DelayFrame(5);
 
@@ -152,12 +152,12 @@ public class LogicLooperCoroutineTest
             return !coroutine.IsCompleted;
         });
 
-        coroutine.IsCompleted.Should().BeTrue();
-        coroutine.IsCompletedSuccessfully.Should().BeFalse();
-        coroutine.IsFaulted.Should().BeTrue();
+        Assert.True(coroutine.IsCompleted);
+        Assert.False(coroutine.IsCompletedSuccessfully);
+        Assert.True(coroutine.IsFaulted);
 
-        coroutine.Exception.Should().NotBeNull();
-        coroutine.Exception.Message.Should().Be("ThrownFromCoroutine");
+        Assert.NotNull(coroutine.Exception);
+        Assert.Equal("ThrownFromCoroutine", coroutine.Exception.Message);
     }
 
 
@@ -189,11 +189,11 @@ public class LogicLooperCoroutineTest
                         {
                             for (var k = 0; k < coroutineLoopCount; k++)
                             {
-                                ctx2.Looper.Should().Be(looper);
+                                Assert.Equal(looper, ctx2.Looper);
 
                                 await ctx2.DelayFrame(1);
 
-                                ctx2.Looper.Should().Be(looper);
+                                Assert.Equal(looper, ctx2.Looper);
 
                                 Interlocked.Increment(ref count);
                             }
@@ -215,7 +215,7 @@ public class LogicLooperCoroutineTest
 
         await Task.WhenAll(tasks);
 
-        count.Should().Be(loopsCount * coroutineCountPerLoop * coroutineLoopCount);
+        Assert.Equal(loopsCount * coroutineCountPerLoop * coroutineLoopCount, count);
     }
 
     [Fact]
@@ -232,15 +232,15 @@ public class LogicLooperCoroutineTest
                 startFrame = ctx.CurrentFrame;
                 coroutine = ctx.RunCoroutine(async ctx2 =>
                 {
-                    ctx2.CurrentFrame.Should().Be(startFrame);
+                    Assert.Equal(startFrame, ctx2.CurrentFrame);
 
                     await ctx2.DelayNextFrame();
 
-                    ctx2.CurrentFrame.Should().Be(startFrame + 1);
+                    Assert.Equal(startFrame + 1, ctx2.CurrentFrame);
 
                     await ctx2.DelayNextFrame();
 
-                    ctx2.CurrentFrame.Should().Be(startFrame + 2);
+                    Assert.Equal(startFrame + 2, ctx2.CurrentFrame);
                 });
             }
 
@@ -250,9 +250,9 @@ public class LogicLooperCoroutineTest
         if (coroutine.Exception != null)
             throw coroutine.Exception;
 
-        coroutine.IsCompleted.Should().BeTrue();
-        coroutine.IsCompletedSuccessfully.Should().BeTrue();
-        coroutine.IsFaulted.Should().BeFalse();
+        Assert.True(coroutine.IsCompleted);
+        Assert.True(coroutine.IsCompletedSuccessfully);
+        Assert.False(coroutine.IsFaulted);
     }
 
     [Fact]
@@ -269,15 +269,15 @@ public class LogicLooperCoroutineTest
                 startFrame = ctx.CurrentFrame;
                 coroutine = ctx.RunCoroutine(async ctx2 =>
                 {
-                    ctx2.CurrentFrame.Should().Be(startFrame);
+                    Assert.Equal(startFrame, ctx2.CurrentFrame);
 
                     await ctx2.DelayFrame(30);
 
-                    ctx2.CurrentFrame.Should().Be(startFrame + 30);
+                    Assert.Equal(startFrame + 30, ctx2.CurrentFrame);
 
                     await ctx2.DelayFrame(30);
 
-                    ctx2.CurrentFrame.Should().Be(startFrame + 30 + 30);
+                    Assert.Equal(startFrame + 30 + 30, ctx2.CurrentFrame);
                 });
             }
 
@@ -287,9 +287,9 @@ public class LogicLooperCoroutineTest
         if (coroutine.Exception != null)
             throw coroutine.Exception;
 
-        coroutine.IsCompleted.Should().BeTrue();
-        coroutine.IsCompletedSuccessfully.Should().BeTrue();
-        coroutine.IsFaulted.Should().BeFalse();
+        Assert.True(coroutine.IsCompleted);
+        Assert.True(coroutine.IsCompletedSuccessfully);
+        Assert.False(coroutine.IsFaulted);
     }
 
     [Fact]
@@ -306,15 +306,15 @@ public class LogicLooperCoroutineTest
                 startFrame = ctx.CurrentFrame;
                 coroutine = ctx.RunCoroutine(async ctx2 =>
                 {
-                    ctx2.CurrentFrame.Should().Be(startFrame);
+                    Assert.Equal(startFrame, ctx2.CurrentFrame);
 
                     await ctx2.Delay(TimeSpan.FromMilliseconds(16.66666));
 
-                    ctx2.CurrentFrame.Should().Be(startFrame + 1);
+                    Assert.Equal(startFrame + 1, ctx2.CurrentFrame);
 
                     await ctx2.Delay(TimeSpan.FromMilliseconds(33.33333));
 
-                    ctx2.CurrentFrame.Should().Be(startFrame + 1 + 2);
+                    Assert.Equal(startFrame + 1 + 2, ctx2.CurrentFrame);
                 });
             }
 
@@ -324,8 +324,8 @@ public class LogicLooperCoroutineTest
         if (coroutine.Exception != null)
             throw coroutine.Exception;
 
-        coroutine.IsCompleted.Should().BeTrue();
-        coroutine.IsCompletedSuccessfully.Should().BeTrue();
-        coroutine.IsFaulted.Should().BeFalse();
+        Assert.True(coroutine.IsCompleted);
+        Assert.True(coroutine.IsCompletedSuccessfully);
+        Assert.False(coroutine.IsFaulted);
     }
 }

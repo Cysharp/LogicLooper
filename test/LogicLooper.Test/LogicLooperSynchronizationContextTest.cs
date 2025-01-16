@@ -25,17 +25,17 @@ public class LogicLooperSynchronizationContextTest
             count++;
         }, null);
 
-        count.Should().Be(0);
+        Assert.Equal(0, count);
         looper.Tick();
-        count.Should().Be(3);
+        Assert.Equal(3, count);
         looper.Tick();
-        count.Should().Be(3);
+        Assert.Equal(3, count);
         syncContext.Post(_ =>
         {
             count++;
         }, null);
         looper.Tick();
-        count.Should().Be(4);
+        Assert.Equal(4, count);
     }
 
     [Fact]
@@ -55,15 +55,15 @@ public class LogicLooperSynchronizationContextTest
         });
 
         looper.Tick();
-        result.Should().BeEquivalentTo(new[] { "1" });
+        Assert.Equal(new[] { "1" }, result);
 
         await Task.Delay(500).ConfigureAwait(false);
 
         looper.Tick(); // Run continuation
         looper.Tick(); // Wait for complete action
-        result.Should().BeEquivalentTo(new[] { "1", "2" });
+        Assert.Equal(new[] { "1", "2" }, result);
 
-        task.IsCompleted.Should().BeTrue();
+        Assert.True(task.IsCompleted);
     }
 
     [Fact]
@@ -74,10 +74,10 @@ public class LogicLooperSynchronizationContextTest
         SynchronizationContext.SetSynchronizationContext(syncContext); // This context is used when advancing frame within the Tick method. Use `ConfigureAwait(false)` in the following codes.
         var t = looper.RegisterActionAsync((in LogicLooperActionContext ctx) => false);
 
-        looper.ApproximatelyRunningActions.Should().Be(1);
+        Assert.Equal(1, looper.ApproximatelyRunningActions);
         looper.Tick();
-        looper.ApproximatelyRunningActions.Should().Be(0);
-        t.IsCompleted.Should().BeTrue();
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
+        Assert.True(t.IsCompleted);
     }
     
     [Fact]
@@ -92,14 +92,14 @@ public class LogicLooperSynchronizationContextTest
             return false;
         });
 
-        looper.ApproximatelyRunningActions.Should().Be(1); // User-Action
+        Assert.Equal(1, looper.ApproximatelyRunningActions); // User-Action
         looper.Tick();
         await Task.Delay(100).ConfigureAwait(false);
-        looper.ApproximatelyRunningActions.Should().Be(2); // User-Action + DequeLoopAction
+        Assert.Equal(2, looper.ApproximatelyRunningActions); // User-Action + DequeLoopAction
         looper.Tick(); // Run continuation
         looper.Tick(); // Wait for complete action
-        t.IsCompleted.Should().BeTrue();
-        looper.ApproximatelyRunningActions.Should().Be(1); // DequeueLoopAction
+        Assert.True(t.IsCompleted);
+        Assert.Equal(1, looper.ApproximatelyRunningActions); // DequeueLoopAction
     }
 
 }

@@ -8,8 +8,8 @@ public class ManualLogicLooperPoolTest
     public void Create()
     {
         var pool = new ManualLogicLooperPool(60.0);
-        pool.Loopers.Should().HaveCount(1);
-        pool.FakeLooper.TargetFrameRate.Should().Be(60.0);
+        Assert.Single(pool.Loopers);
+        Assert.Equal(60.0, pool.FakeLooper.TargetFrameRate);
     }
 
     [Fact]
@@ -21,10 +21,10 @@ public class ManualLogicLooperPoolTest
         {
             return false;
         });
-        pool.Loopers[0].ApproximatelyRunningActions.Should().Be(1);
+        Assert.Equal(1, pool.Loopers[0].ApproximatelyRunningActions);
         pool.Tick();
-        pool.Loopers[0].ApproximatelyRunningActions.Should().Be(0);
-        t1.IsCompletedSuccessfully.Should().BeTrue();
+        Assert.Equal(0, pool.Loopers[0].ApproximatelyRunningActions);
+        Assert.True(t1.IsCompletedSuccessfully);
     }
 
     [Fact]
@@ -33,6 +33,6 @@ public class ManualLogicLooperPoolTest
         var pool = new ManualLogicLooperPool(60.0);
         var looper = pool.GetLooper();
 
-        looper.Should().Be(pool.FakeLooper);
+        Assert.Equal(pool.FakeLooper, looper);
     }
 }

@@ -45,8 +45,8 @@ public class StressTest
             Thread.Sleep(100);
         }
 
-        launchedCount.Should().Be(actionCount);
-        executedCount.Should().Be(actionCount * loopCount);
+        Assert.Equal(actionCount, launchedCount);
+        Assert.Equal(actionCount * loopCount, executedCount);
     }
 
     [Theory]
@@ -57,8 +57,8 @@ public class StressTest
     {
         using var looper = new Cysharp.Threading.LogicLooper(targetFps);
 
-        looper.ApproximatelyRunningActions.Should().Be(0);
-        looper.TargetFrameRate.Should().BeInRange(targetFps-1, targetFps+1);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
+        Assert.InRange(looper.TargetFrameRate, targetFps - 1, targetFps + 1);
 
         var executedCount = 0;
         var launchedCount = 0;
@@ -96,7 +96,7 @@ public class StressTest
             Thread.Sleep(100);
         }
 
-        launchedCount.Should().Be(actionCount);
-        executedCount.Should().Be(actionCount * loopCount);
+        Assert.Equal(actionCount, launchedCount);
+        Assert.Equal(actionCount * loopCount, executedCount);
     }
 }
