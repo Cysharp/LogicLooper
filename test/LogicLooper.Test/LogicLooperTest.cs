@@ -12,8 +12,8 @@ public class LogicLooperTest
     {
         using var looper = new Cysharp.Threading.LogicLooper(TimeSpan.FromMilliseconds(targetFrameTimeMs));
 
-        looper.ApproximatelyRunningActions.Should().Be(0);
-        looper.TargetFrameRate.Should().Be(1000 / (double)targetFrameTimeMs);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
+        Assert.Equal(1000 / (double)targetFrameTimeMs, looper.TargetFrameRate);
 
         var beginTimestamp = DateTime.Now.Ticks;
         var lastTimestamp = beginTimestamp;
@@ -36,15 +36,15 @@ public class LogicLooperTest
         // wait for moving action from queue to actions.
         await Task.Delay(100);
 
-        looper.ApproximatelyRunningActions.Should().Be(1);
+        Assert.Equal(1, looper.ApproximatelyRunningActions);
 
         await task;
 
         await Task.Delay(100);
 
-        looper.ApproximatelyRunningActions.Should().Be(0);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
 
-        fps.Should().BeInRange(looper.TargetFrameRate - 2, looper.TargetFrameRate + 2);
+        Assert.InRange(fps, looper.TargetFrameRate - 2, looper.TargetFrameRate + 2);
     }
 
     [Theory]
@@ -55,8 +55,8 @@ public class LogicLooperTest
     {
         using var looper = new Cysharp.Threading.LogicLooper(targetFps);
 
-        looper.ApproximatelyRunningActions.Should().Be(0);
-        ((int)looper.TargetFrameRate).Should().Be(targetFps);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
+        Assert.Equal(targetFps, ((int)looper.TargetFrameRate));
 
         var beginTimestamp = DateTime.Now.Ticks;
         var lastTimestamp = beginTimestamp;
@@ -79,15 +79,15 @@ public class LogicLooperTest
         // wait for moving action from queue to actions.
         await Task.Delay(100);
 
-        looper.ApproximatelyRunningActions.Should().Be(1);
+        Assert.Equal(1, looper.ApproximatelyRunningActions);
 
         await task;
 
         await Task.Delay(100);
 
-        looper.ApproximatelyRunningActions.Should().Be(0);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
 
-        fps.Should().BeInRange(targetFps-2, targetFps + 2);
+        Assert.InRange(fps, targetFps - 2, targetFps + 2);
     }
 
     [Fact]
@@ -103,7 +103,7 @@ public class LogicLooperTest
         });
 
         await Task.Delay(100);
-        count.Should().Be(1);
+        Assert.Equal(1, count);
     }
 
     [Fact]
@@ -119,7 +119,7 @@ public class LogicLooperTest
         }));
 
         await Task.Delay(100);
-        count.Should().Be(1);
+        Assert.Equal(1, count);
     }
 
     [Fact]
@@ -135,7 +135,7 @@ public class LogicLooperTest
         });
 
         await Task.Delay(100);
-        currentFrame.Should().Be(10);
+        Assert.Equal(10, currentFrame);
     }
 
     [Fact]
@@ -144,12 +144,12 @@ public class LogicLooperTest
         using var looper = new Cysharp.Threading.LogicLooper(60);
 
         var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) => !ctx.CancellationToken.IsCancellationRequested);
-        runLoopTask.IsCompleted.Should().BeFalse();
+        Assert.False(runLoopTask.IsCompleted);
 
         var shutdownTask = looper.ShutdownAsync(TimeSpan.FromMilliseconds(500));
         await Task.Delay(50);
-        runLoopTask.IsCompleted.Should().BeTrue();
-        shutdownTask.IsCompleted.Should().BeFalse();
+        Assert.True(runLoopTask.IsCompleted);
+        Assert.False(shutdownTask.IsCompleted);
 
         await shutdownTask;
     }
@@ -166,16 +166,16 @@ public class LogicLooperTest
             count++;
             return !ctx.CancellationToken.IsCancellationRequested;
         });
-        runLoopTask.IsCompleted.Should().BeFalse();
+        Assert.False(runLoopTask.IsCompleted);
 
         var shutdownTask = looper.ShutdownAsync(TimeSpan.FromMilliseconds(500));
         await Task.Delay(50);
-        runLoopTask.IsCompleted.Should().BeTrue();
+        Assert.True(runLoopTask.IsCompleted);
         var count2 = count;
-        shutdownTask.IsCompleted.Should().BeFalse();
+        Assert.False(shutdownTask.IsCompleted);
 
         await shutdownTask;
-        count.Should().Be(count);
+        Assert.Equal(count, count);
     }
 
     [Fact]
@@ -189,7 +189,7 @@ public class LogicLooperTest
             signal.Set();
             return !ctx.CancellationToken.IsCancellationRequested;
         });
-        runLoopTask.IsCompleted.Should().BeFalse();
+        Assert.False(runLoopTask.IsCompleted);
 
         signal.Wait();
         var shutdownTask = looper.ShutdownAsync(TimeSpan.Zero);
@@ -213,7 +213,7 @@ public class LogicLooperTest
         await Task.Delay(1000);
         await looper.ShutdownAsync(TimeSpan.Zero);
 
-        looper.LastProcessingDuration.TotalMilliseconds.Should().BeInRange(95, 105);
+        Assert.InRange(looper.LastProcessingDuration.TotalMilliseconds, 95, 105);
     }
 
     [Fact]
@@ -240,7 +240,7 @@ public class LogicLooperTest
         await runLoopTask;
 
         // 2 x 3
-        results.Should().BeEquivalentTo(new[] { managedThreadId, managedThreadId, managedThreadId, managedThreadId, managedThreadId, managedThreadId });
+        Assert.Equal(new[] { managedThreadId, managedThreadId, managedThreadId, managedThreadId, managedThreadId, managedThreadId }, results);
     }
 
     [Fact]
@@ -264,7 +264,7 @@ public class LogicLooperTest
 
         await runLoopTask;
 
-        results.Should().BeEquivalentTo(new[] { managedThreadId, managedThreadId, managedThreadId });
+        Assert.Equal(new[] { managedThreadId, managedThreadId, managedThreadId }, results);
     }
     
     [Fact]
@@ -281,7 +281,7 @@ public class LogicLooperTest
 
         await Assert.ThrowsAsync<InvalidOperationException>(async () => await runLoopTask);
         await Task.Delay(100);
-        count.Should().Be(1);
+        Assert.Equal(1, count);
     }
 
     [Theory]
@@ -292,8 +292,8 @@ public class LogicLooperTest
     {
         using var looper = new Cysharp.Threading.LogicLooper(targetFps);
 
-        looper.ApproximatelyRunningActions.Should().Be(0);
-        ((int)looper.TargetFrameRate).Should().Be(targetFps);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
+        Assert.Equal(targetFps, ((int)looper.TargetFrameRate));
 
         var beginTimestamp = DateTime.Now.Ticks;
         var lastTimestamp = beginTimestamp;
@@ -322,16 +322,16 @@ public class LogicLooperTest
         // wait for moving action from queue to actions.
         await Task.Delay(100);
 
-        looper.ApproximatelyRunningActions.Should().Be(1);
+        Assert.Equal(1, looper.ApproximatelyRunningActions);
 
         await task;
 
         await Task.Delay(100);
 
-        looper.ApproximatelyRunningActions.Should().Be(0);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
 
-        frameCount.Should().Be(lastFrameNum);
-        fps.Should().BeInRange(overrideTargetFps-2, overrideTargetFps + 2);
+        Assert.Equal(lastFrameNum, frameCount);
+        Assert.InRange(fps, overrideTargetFps - 2, overrideTargetFps + 2);
     }
 
     [Fact]
@@ -347,7 +347,7 @@ public class LogicLooperTest
     {
         using var looper = new Cysharp.Threading.LogicLooper(30);
 
-        looper.ApproximatelyRunningActions.Should().Be(0);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
 
         var lastFrameNum = 0L;
         var overriddenFrameCount = -1L;
@@ -380,8 +380,8 @@ public class LogicLooperTest
         await Task.Delay(1100);
         cts.Cancel();
 
-        looper.ApproximatelyRunningActions.Should().Be(1);
+        Assert.Equal(1, looper.ApproximatelyRunningActions);
 
-        overriddenFrameCount.Should().Be(1);
+        Assert.Equal(1, overriddenFrameCount);
     }
 }

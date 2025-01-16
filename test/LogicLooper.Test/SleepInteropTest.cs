@@ -12,7 +12,7 @@ public class SleepInteropTest
         SleepInterop.Sleep(1);
         var end = Stopwatch.GetTimestamp();
         var elapsed = Stopwatch.GetElapsedTime(begin, end);
-        elapsed.TotalMilliseconds.Should().BeLessThan(16);
+        Assert.True(elapsed.TotalMilliseconds < 16);
     }
 
     [Fact]
@@ -22,7 +22,7 @@ public class SleepInteropTest
         SleepInterop.Sleep(17);
         var end = Stopwatch.GetTimestamp();
         var elapsed = Stopwatch.GetElapsedTime(begin, end);
-        elapsed.TotalMilliseconds.Should().BeGreaterThan(16);
+        Assert.True(elapsed.TotalMilliseconds > 16);
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class SleepInteropTest
         }).ToArray();
         foreach (var thread in threads)
         {
-            thread.Join(TimeSpan.FromSeconds(10)).Should().BeTrue();
+            Assert.True(thread.Join(TimeSpan.FromSeconds(10)));
         }
     }
 }

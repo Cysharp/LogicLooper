@@ -8,16 +8,16 @@ public class LogicLooperPoolTest
     public void Create()
     {
         using var pool = new LogicLooperPool(60, 4, RoundRobinLogicLooperPoolBalancer.Instance);
-        pool.Loopers.Should().HaveCount(4);
-        pool.Loopers[0].TargetFrameRate.Should().BeInRange(60, 60.1);
+        Assert.Equal(4, pool.Loopers.Count());
+        Assert.InRange(pool.Loopers[0].TargetFrameRate, 60, 60.1);
     }
 
     [Fact]
     public void Create_TimeSpan()
     {
         using var pool = new LogicLooperPool(TimeSpan.FromMilliseconds(16.666), 4, RoundRobinLogicLooperPoolBalancer.Instance);
-        pool.Loopers.Should().HaveCount(4);
-        pool.Loopers[0].TargetFrameRate.Should().BeInRange(60, 60.1);
+        Assert.Equal(4, pool.Loopers.Count());
+        Assert.InRange(pool.Loopers[0].TargetFrameRate, 60, 60.1);
     }
 
     [Fact]
@@ -41,18 +41,18 @@ public class LogicLooperPoolTest
 
         Thread.Sleep(1000);
 
-        executedCount.Should().Be(actionCount * loopCount);
+        Assert.Equal(actionCount * loopCount, executedCount);
     }
 
     [Fact]
     public void GetLooper()
     {
         using var pool = new LogicLooperPool(60, 4, new FakeSequentialLogicLooperPoolBalancer());
-        pool.GetLooper().Should().Be(pool.Loopers[0]);
-        pool.GetLooper().Should().Be(pool.Loopers[1]);
-        pool.GetLooper().Should().Be(pool.Loopers[2]);
-        pool.GetLooper().Should().Be(pool.Loopers[3]);
-        pool.GetLooper().Should().Be(pool.Loopers[0]);
+        Assert.Equal(pool.Loopers[0], pool.GetLooper());
+        Assert.Equal(pool.Loopers[1], pool.GetLooper());
+        Assert.Equal(pool.Loopers[2], pool.GetLooper());
+        Assert.Equal(pool.Loopers[3], pool.GetLooper());
+        Assert.Equal(pool.Loopers[0], pool.GetLooper());
     }
 
     class FakeSequentialLogicLooperPoolBalancer : ILogicLooperPoolBalancer

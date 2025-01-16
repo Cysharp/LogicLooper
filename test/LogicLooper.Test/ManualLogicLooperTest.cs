@@ -8,7 +8,7 @@ public class ManualLogicLooperTest
     public void Elapsed()
     {
         var looper = new ManualLogicLooper(60.0);
-        looper.TargetFrameRate.Should().Be(60.0);
+        Assert.Equal(60.0, looper.TargetFrameRate);
 
         var elapsed = default(TimeSpan);
         looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -18,14 +18,14 @@ public class ManualLogicLooperTest
         });
         looper.Tick();
 
-        elapsed.Should().BeCloseTo(TimeSpan.FromMilliseconds(1000 / 60), precision: 1);
+        Assert.InRange(elapsed.TotalMilliseconds, 16.6666, 16.9999);
     }
 
     [Fact]
     public void Elapsed_2()
     {
         var looper = new ManualLogicLooper(30.0);
-        looper.TargetFrameRate.Should().Be(30.0);
+        Assert.Equal(30.0, looper.TargetFrameRate);
 
         var elapsed = default(TimeSpan);
         looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -35,14 +35,14 @@ public class ManualLogicLooperTest
         });
         looper.Tick();
 
-        elapsed.Should().BeCloseTo(TimeSpan.FromMilliseconds(1000 / 30), precision: 1);
+        Assert.InRange(elapsed.TotalMilliseconds, 33.3333, 33.9999);
     }
 
     [Fact]
     public void Tick()
     {
         var looper = new ManualLogicLooper(60.0);
-        looper.ApproximatelyRunningActions.Should().Be(0);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
 
         var count = 0;
         var t1 = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -50,29 +50,29 @@ public class ManualLogicLooperTest
             count++;
             return count != 3;
         });
-        looper.ApproximatelyRunningActions.Should().Be(1);
+        Assert.Equal(1, looper.ApproximatelyRunningActions);
 
-        count.Should().Be(0);
-        looper.CurrentFrame.Should().Be(0);
-        looper.Tick().Should().BeTrue();
-        count.Should().Be(1);
-        looper.CurrentFrame.Should().Be(1);
-        looper.Tick().Should().BeTrue();
-        count.Should().Be(2);
-        looper.CurrentFrame.Should().Be(2);
-        looper.Tick().Should().BeFalse();
-        count.Should().Be(3);
-        looper.CurrentFrame.Should().Be(3);
+        Assert.Equal(0, count);
+        Assert.Equal(0, looper.CurrentFrame);
+        Assert.True(looper.Tick());
+        Assert.Equal(1, count);
+        Assert.Equal(1, looper.CurrentFrame);
+        Assert.True(looper.Tick());
+        Assert.Equal(2, count);
+        Assert.Equal(2, looper.CurrentFrame);
+        Assert.False(looper.Tick());
+        Assert.Equal(3, count);
+        Assert.Equal(3, looper.CurrentFrame);
 
-        looper.ApproximatelyRunningActions.Should().Be(0);
-        t1.IsCompletedSuccessfully.Should().BeTrue();
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
+        Assert.True(t1.IsCompletedSuccessfully);
     }
 
     [Fact]
     public void Tick_Multiple()
     {
         var looper = new ManualLogicLooper(60.0);
-        looper.ApproximatelyRunningActions.Should().Be(0);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
 
         var count = 0;
         var t1 = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -85,30 +85,30 @@ public class ManualLogicLooperTest
             count++;
             return count != 7;
         });
-        looper.ApproximatelyRunningActions.Should().Be(2);
+        Assert.Equal(2, looper.ApproximatelyRunningActions);
 
-        count.Should().Be(0);
-        looper.Tick().Should().BeTrue();
-        count.Should().Be(2);
-        looper.Tick().Should().BeTrue();
-        count.Should().Be(4);
-        looper.Tick().Should().BeTrue();
-        count.Should().Be(6);
-        looper.ApproximatelyRunningActions.Should().Be(1);
-        t1.IsCompletedSuccessfully.Should().BeTrue();
+        Assert.Equal(0, count);
+        Assert.True(looper.Tick());
+        Assert.Equal(2, count);
+        Assert.True(looper.Tick());
+        Assert.Equal(4, count);
+        Assert.True(looper.Tick());
+        Assert.Equal(6, count);
+        Assert.Equal(1, looper.ApproximatelyRunningActions);
+        Assert.True(t1.IsCompletedSuccessfully);
 
-        looper.Tick().Should().BeFalse();
-        count.Should().Be(7);
+        Assert.False(looper.Tick());
+        Assert.Equal(7, count);
 
-        looper.ApproximatelyRunningActions.Should().Be(0);
-        t2.IsCompletedSuccessfully.Should().BeTrue();
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
+        Assert.True(t2.IsCompletedSuccessfully);
     }
 
     [Fact]
     public void Tick_Count()
     {
         var looper = new ManualLogicLooper(60.0);
-        looper.ApproximatelyRunningActions.Should().Be(0);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
 
         var count = 0;
         var t1 = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -116,19 +116,19 @@ public class ManualLogicLooperTest
             count++;
             return count != 3;
         });
-        looper.ApproximatelyRunningActions.Should().Be(1);
+        Assert.Equal(1, looper.ApproximatelyRunningActions);
 
-        looper.Tick(3).Should().BeFalse();
+        Assert.False(looper.Tick(3));
 
-        looper.ApproximatelyRunningActions.Should().Be(0);
-        t1.IsCompletedSuccessfully.Should().BeTrue();
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
+        Assert.True(t1.IsCompletedSuccessfully);
     }
 
     [Fact]
     public void TickWhile()
     {
         var looper = new ManualLogicLooper(60.0);
-        looper.ApproximatelyRunningActions.Should().Be(0);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
 
         var count = 0;
         var t1 = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -136,16 +136,16 @@ public class ManualLogicLooperTest
             count++;
             return true;
         });
-        looper.ApproximatelyRunningActions.Should().Be(1);
+        Assert.Equal(1, looper.ApproximatelyRunningActions);
 
-        count.Should().Be(0);
+        Assert.Equal(0, count);
 
         looper.TickWhile(() => count != 6);
 
-        count.Should().Be(6);
+        Assert.Equal(6, count);
 
-        looper.ApproximatelyRunningActions.Should().Be(1);
-        t1.IsCompletedSuccessfully.Should().BeFalse();
+        Assert.Equal(1, looper.ApproximatelyRunningActions);
+        Assert.False(t1.IsCompletedSuccessfully);
     }
 
 
@@ -153,7 +153,7 @@ public class ManualLogicLooperTest
     public void RegisterActionAsync_State()
     {
         var looper = new ManualLogicLooper(60.0);
-        looper.ApproximatelyRunningActions.Should().Be(0);
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
 
         var count = 0;
         var tuple = Tuple.Create("Foo", 123);
@@ -164,25 +164,25 @@ public class ManualLogicLooperTest
             count++;
             return count != 3;
         }, tuple);
-        looper.ApproximatelyRunningActions.Should().Be(1);
+        Assert.Equal(1, looper.ApproximatelyRunningActions);
 
-        looper.Tick().Should().BeTrue();
-        looper.Tick().Should().BeTrue();
-        looper.Tick().Should().BeFalse();
-        count.Should().Be(3);
-        receivedState.Should().Be(tuple);
+        Assert.True(looper.Tick());
+        Assert.True(looper.Tick());
+        Assert.False(looper.Tick());
+        Assert.Equal(3, count);
+        Assert.Equal(tuple, receivedState);
 
-        looper.ApproximatelyRunningActions.Should().Be(0);
-        t1.IsCompletedSuccessfully.Should().BeTrue();
+        Assert.Equal(0, looper.ApproximatelyRunningActions);
+        Assert.True(t1.IsCompletedSuccessfully);
     }
 
     [Fact]
     public void LogicLooper_Current()
     {
-        Cysharp.Threading.LogicLooper.Current.Should().BeNull();
+        Assert.Null(Cysharp.Threading.LogicLooper.Current);
 
         var looper = new ManualLogicLooper(60.0);
-        looper.TargetFrameRate.Should().Be(60.0);
+        Assert.Equal(60.0, looper.TargetFrameRate);
 
         var currentLogicLooperInAction = default(ILogicLooper);
         looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
@@ -192,7 +192,7 @@ public class ManualLogicLooperTest
         });
         looper.Tick();
 
-        currentLogicLooperInAction.Should().Be(looper);
-        Cysharp.Threading.LogicLooper.Current.Should().BeNull();
+        Assert.Equal(looper, currentLogicLooperInAction);
+        Assert.Null(Cysharp.Threading.LogicLooper.Current);
     }
 }
