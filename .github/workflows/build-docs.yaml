@@ -8,7 +8,11 @@ on:
 jobs:
   run-docfx:
     if: ${{ !(contains(github.event.head_commit.message, '[skip ci]') || contains(github.event.head_commit.message, '[ci skip]')) }}
-    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - uses: Cysharp/Actions/.github/actions/checkout@main
       - uses: Cysharp/Actions/.github/actions/checkout@main
