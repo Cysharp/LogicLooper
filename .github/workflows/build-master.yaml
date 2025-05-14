@@ -32,7 +32,7 @@ jobs:
     needs: [ build-debug ]
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest ]
+        os: [ ubuntu-24.04, windows-2025 ]
     permissions:
       contents: read
     runs-on: ${{ matrix.os }}
