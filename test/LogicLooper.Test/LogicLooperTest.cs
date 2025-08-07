@@ -1,4 +1,4 @@
-using Cysharp.Threading;
+﻿using Cysharp.Threading;
 using Cysharp.Threading.Internal;
 
 namespace LogicLooper.Test;
@@ -384,4 +384,37 @@ public class LogicLooperTest
 
         Assert.Equal(1, overriddenFrameCount);
     }
+
+    [Fact]
+    public async Task Dispose_DisallowOnLoopThread()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(30);
+        Exception? ex = default;
+
+        await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+        {
+            ex = Record.Exception(() => looper.Dispose());
+            return false;
+        });
+
+        Assert.NotNull(ex);
+        Assert.IsType<InvalidOperationException>(ex);
+    }
+
+    [Fact]
+    public async Task Dispose_OutsideTheLoop()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(30);
+        Exception? ex = default;
+
+        var t = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+        {
+            return true;
+        });
+
+        await Task.Delay(100);
+
+        looper.Dispose();
+    }
+
 }
