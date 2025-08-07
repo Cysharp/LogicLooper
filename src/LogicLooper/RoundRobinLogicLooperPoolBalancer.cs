@@ -2,7 +2,7 @@
 
 public class RoundRobinLogicLooperPoolBalancer : ILogicLooperPoolBalancer
 {
-    private int _index = 0;
+    private int _index = -1;
 
     public static ILogicLooperPoolBalancer Instance { get; } = new RoundRobinLogicLooperPoolBalancer();
 
