@@ -1,4 +1,4 @@
-using Cysharp.Threading.Internal;
+﻿using Cysharp.Threading.Internal;
 
 // ReSharper disable StringLiteralTypo
 // ReSharper disable IdentifierTypo
@@ -187,6 +187,11 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     /// <param name="shutdownDelay"></param>
     public async Task ShutdownAsync(TimeSpan shutdownDelay)
     {
+        if (_runLoopThread == Thread.CurrentThread)
+        {
+            throw new InvalidOperationException("Cannot dispose the looper from the run loop thread. ShutdownAsync or Dispose must be called outside the loop.");
+        }
+
         if (Interlocked.CompareExchange(ref _isShuttingDown, 1, 0) == 0)
         {
             _ctsAction.Cancel();
