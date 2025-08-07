@@ -1,4 +1,4 @@
-using Cysharp.Threading.Internal;
+﻿using Cysharp.Threading.Internal;
 
 namespace Cysharp.Threading;
 
@@ -15,13 +15,19 @@ public sealed partial class LogicLooperPool
     /// <param name="targetFrameRate"></param>
     /// <param name="looperCount"></param>
     /// <param name="balancer"></param>
-    public static void InitializeSharedPool(int targetFrameRate, int looperCount = 0, ILogicLooperPoolBalancer? balancer = null)
+    /// <param name="looperFactory"></param>
+    public static void InitializeSharedPool(int targetFrameRate, int looperCount = 0, ILogicLooperPoolBalancer? balancer = null, ILogicLooperPoolLooperFactory? looperFactory = null)
     {
         if (looperCount == 0)
         {
             looperCount = Math.Max(1, Environment.ProcessorCount - 1);
         }
 
-        Shared = new LogicLooperPool(targetFrameRate, looperCount, balancer ?? RoundRobinLogicLooperPoolBalancer.Instance);
+        Shared = new LogicLooperPool(
+            targetFrameRate,
+            looperCount,
+            balancer ?? RoundRobinLogicLooperPoolBalancer.Instance,
+            looperFactory ?? DefaultLogicLooperPoolLooperFactory.Instance
+        );
     }
 }
