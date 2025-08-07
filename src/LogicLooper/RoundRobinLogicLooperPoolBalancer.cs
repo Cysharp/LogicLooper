@@ -1,4 +1,4 @@
-namespace Cysharp.Threading;
+﻿namespace Cysharp.Threading;
 
 public class RoundRobinLogicLooperPoolBalancer : ILogicLooperPoolBalancer
 {
@@ -9,7 +9,7 @@ public class RoundRobinLogicLooperPoolBalancer : ILogicLooperPoolBalancer
     protected RoundRobinLogicLooperPoolBalancer()
     { }
 
-    public LogicLooper GetPooledLooper(LogicLooper[] pooledLoopers)
+    public ILogicLooper GetPooledLooper(ILogicLooper[] pooledLoopers)
     {
         return pooledLoopers[Interlocked.Increment(ref _index) % pooledLoopers.Length];
     }
