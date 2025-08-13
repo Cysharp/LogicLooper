@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Internal;
+﻿using System.Diagnostics;
+using Cysharp.Threading.Internal;
 
 // ReSharper disable StringLiteralTypo
 // ReSharper disable IdentifierTypo
@@ -43,6 +44,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     private readonly object _lockQueue = new object();
     private readonly int _growFactor = 2;
     private readonly TimeProvider _timeProvider;
+    private readonly LogicLooperTracker _tracker;
 
     private int _tail = 0;
     private bool _isRunning = false;
@@ -77,6 +79,10 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     }
 
     public LogicLooper(TimeSpan targetFrameTime, int initialActionsCapacity = 16)
+        : this(targetFrameTime, initialActionsCapacity, TimeProvider.System, LogicLooperTracker.Instance)
+    {}
+
+    internal /* for UnitTest */ LogicLooper(TimeSpan targetFrameTime, int initialActionsCapacity, TimeProvider timeProvider, LogicLooperTracker tracker)
     {
         _targetFrameRate = 1000 / targetFrameTime.TotalMilliseconds;
         _looperId = Interlocked.Increment(ref _looperSequence);
@@ -86,15 +92,18 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
         _registerQueue = new MinimumQueue<LooperAction>(10);
         _runLoopThread = new Thread(StartRunLoop)
         {
-            Name = $"{typeof(LogicLooper).Name}-{_looperId}",
+            Name = $"{nameof(LogicLooper)}-{_looperId}",
             IsBackground = true,
             Priority = ThreadPriority.AboveNormal,
         };
         _shutdownTaskAwaiter = new TaskCompletionSource<bool>();
         _actions = new LooperAction[initialActionsCapacity];
-        _timeProvider = TimeProvider.System;
+        _timeProvider = timeProvider;
+        _tracker = tracker;
 
         _runLoopThread.Start(this);
+
+        _tracker.Register(this);
     }
 
     /// <summary>
@@ -211,7 +220,28 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
 
     public void Dispose()
     {
-        ShutdownAsync(TimeSpan.Zero).GetAwaiter().GetResult();
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
+    private void Dispose(bool disposing)
+    {
+        try
+        {
+            if (disposing)
+            {
+                ShutdownAsync(TimeSpan.Zero).GetAwaiter().GetResult();
+            }
+        }
+        finally
+        {
+            _tracker.Unregister(this);
+        }
+    }
+
+    ~LogicLooper()
+    {
+        Dispose(false);
     }
 
     private Task RegisterActionAsyncCore(LooperAction action)
