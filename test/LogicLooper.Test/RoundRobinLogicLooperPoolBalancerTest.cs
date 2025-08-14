@@ -7,7 +7,7 @@ public class RoundRobinLogicLooperPoolBalancerTest
     [Fact]
     public void GetPooledLooper_ReturnsLoopersInRoundRobinOrder()
     {
-        var balancer = RoundRobinLogicLooperPoolBalancer.Instance;
+        var balancer = new RoundRobinLogicLooperPoolBalancer();
         var loopers = new ILogicLooper[]
         {
             new ManualLogicLooper(1),

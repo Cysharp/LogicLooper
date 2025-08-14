@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		.github\workflows\build-master.yaml = .github\workflows\build-master.yaml
-		.github\workflows\build-release.yml = .github\workflows\build-release.yml
+		.github\workflows\build-release.yaml = .github\workflows\build-release.yaml
 		Directory.Build.props = Directory.Build.props
 		README.ja.md = README.ja.md
 		README.md = README.md
@@ -21,6 +21,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{159ED9FB-ED03-4B01-B22B-3826301E74A6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoopHostingApp", "samples\LoopHostingApp\LoopHostingApp.csproj", "{6AFDB90D-8198-45F1-A963-425ED604E24F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicLooper.Diagnostics", "src\LogicLooper.Diagnostics\LogicLooper.Diagnostics.csproj", "{731F91B3-8764-9802-0605-5886F1F0C090}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{6AFDB90D-8198-45F1-A963-425ED604E24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AFDB90D-8198-45F1-A963-425ED604E24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AFDB90D-8198-45F1-A963-425ED604E24F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{731F91B3-8764-9802-0605-5886F1F0C090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{731F91B3-8764-9802-0605-5886F1F0C090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{731F91B3-8764-9802-0605-5886F1F0C090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{731F91B3-8764-9802-0605-5886F1F0C090}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

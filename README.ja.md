@@ -43,6 +43,7 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
   - [一つのループ](#%E4%B8%80%E3%81%A4%E3%81%AE%E3%83%AB%E3%83%BC%E3%83%97)
   - [LooperPool を使用した複数の Looper](#looperpool-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E8%A4%87%E6%95%B0%E3%81%AE-looper)
   - [Microsoft.Extensions.Hosting との統合](#microsoftextensionshosting-%E3%81%A8%E3%81%AE%E7%B5%B1%E5%90%88)
+  - [メトリクス](#%E3%83%A1%E3%83%88%E3%83%AA%E3%82%AF%E3%82%B9)
 - [上級編](#%E4%B8%8A%E7%B4%9A%E7%B7%A8)
   - [ユニットテスト / フレーム単位実行](#%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88--%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E5%8D%98%E4%BD%8D%E5%AE%9F%E8%A1%8C)
   - [Coroutine](#coroutine)
@@ -111,6 +112,27 @@ await looperPool.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 
 ### Microsoft.Extensions.Hosting との統合
 [samples/LoopHostingApp](samples/LoopHostingApp) をご覧ください。`IHostedService` と組み合わせることでサーバーのライフサイクルなどを考慮した実装を行えます。
+
+### メトリクス
+
+LogicLooper は Metric API を使用してメトリクスを提供します。これにより LogicLooper や登録されているアクションの数、ループ当たりの実行時間といったものを取得できます。
+
+メトリクスの取得を有効化するには LogicLooper.Diagnostics パッケージをインストールして `AddLogicLooperMetrics` を呼び出します。
+
+```csharp
+services.AddLogicLooperMetrics();
+```
+
+|Instrumentation|Unit|Description|
+|---|---|---|
+|LogicLooper.shared_pool.loopers|`{looper}`|LogicLooperPool.Shared で稼働している LogicLooper インスタンスの数|
+|LogicLooper.shared_pool.running_actions|`{action}`|LogicLooperPool.Shared で稼働している LogicLooper に登録されているアクションの数|
+|LogicLooper.running_loopers|`{looper}`|プロセスで稼働している LogicLooper インスタンスの数|
+|LogicLooper.running_actions|`{action}`|プロセスで稼働している LogicLooper に登録されているアクションの数|
+|LogicLooper.processing_duration_min|`ms`|プロセスで稼働しているループの1ループの実行時間 (最小)|
+|LogicLooper.processing_duration_max|`ms`|プロセスで稼働しているループの1ループの実行時間 (最大)|
+|LogicLooper.processing_duration_avg|`ms`|プロセスで稼働しているループの1ループの実行時間 (平均)|
+
 
 ## 上級編
 ### ユニットテスト / フレーム単位実行

@@ -48,6 +48,7 @@ await looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
   - [Single-loop application](#single-loop-application)
   - [Multiple-loop application using LooperPool](#multiple-loop-application-using-looperpool)
   - [Integrate with Microsoft.Extensions.Hosting](#integrate-with-microsoftextensionshosting)
+  - [Metrics](#metrics)
 - [Advanced](#advanced)
   - [Unit tests / Frame-by-Frame execution](#unit-tests--frame-by-frame-execution)
   - [Coroutine](#coroutine)
@@ -115,6 +116,27 @@ await looperPool.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 
 ### Integrate with Microsoft.Extensions.Hosting
 See [samples/LoopHostingApp](samples/LoopHostingApp).
+
+### Metrics
+
+LogicLooper provides metrics using the Metric API. This allows you to obtain the number of LogicLoopers and registered actions, as well as the execution time per loop.
+
+To enable metrics collection, install the `LogicLooper.Diagnostics` package and call `AddLogicLooperMetrics`.
+
+```csharp
+services.AddLogicLooperMetrics();
+```
+
+|Instrumentation|Unit|Description|
+|---|---|---|
+|LogicLooper.shared_pool.loopers|`{looper}`|Number of LogicLooper instances running in LogicLooperPool.Shared|
+|LogicLooper.shared_pool.running_actions|`{action}`|Number of actions registered in LogicLooperPool.Shared that are running in LogicLooper|
+|LogicLooper.running_loopers|`{looper}`|Number of LogicLooper instances running in the process|
+|LogicLooper.running_actions|`{action}`|Number of actions registered in LogicLooper that are running in the process|
+|LogicLooper.processing_duration_min|`ms`|Minimum execution time of one loop in the process for LogicLooper|
+|LogicLooper.processing_duration_max|`ms`|Maximum execution time of one loop in the process for LogicLooper|
+|LogicLooper.processing_duration_avg|`ms`|Average execution time of one loop in the process for LogicLooper|
+
 
 ## Advanced
 ### Unit tests / Frame-by-Frame execution
