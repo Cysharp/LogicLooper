@@ -19,7 +19,9 @@ jobs:
       - uses: Cysharp/Actions/.github/actions/checkout@main
       - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
       - run: dotnet build -c Debug -p:DefineConstants=RUNNING_IN_CI
-      - run: dotnet pack ./src/LogicLooper/LogicLooper.csproj -c Debug --no-build -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+      - run: |
+          dotnet pack ./src/LogicLooper/LogicLooper.csproj -c Debug --no-build -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+          dotnet pack ./src/LogicLooper.Diagnostics/LogicLooper.Diagnostics.csproj -c Debug --no-build -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
       - run: dotnet test -c Debug --no-build
       - uses: Cysharp/Actions/.github/actions/upload-artifact@main
         with:

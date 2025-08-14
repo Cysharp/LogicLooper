@@ -17,6 +17,17 @@ internal class LogicLooperTracker
         }
     }
 
+    public int ApproximatelyRunningActions
+    {
+        get
+        {
+            lock (_loopers)
+            {
+                return _loopers.Sum(x => x.ApproximatelyRunningActions);
+            }
+        }
+    }
+
     public IReadOnlyList<LogicLooper> GetLoopersSnapshot()
     {
         lock (_loopers)
