@@ -6,7 +6,7 @@ public class RoundRobinLogicLooperPoolBalancer : ILogicLooperPoolBalancer
 
     public static ILogicLooperPoolBalancer Instance { get; } = new RoundRobinLogicLooperPoolBalancer();
 
-    protected RoundRobinLogicLooperPoolBalancer()
+    internal RoundRobinLogicLooperPoolBalancer()
     { }
 
     public ILogicLooper GetPooledLooper(ILogicLooper[] pooledLoopers)
