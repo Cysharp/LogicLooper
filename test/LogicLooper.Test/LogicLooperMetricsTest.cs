@@ -17,7 +17,7 @@ public class LogicLooperMetricsTest
         var tracker = new LogicLooperTracker();
 
         // Act
-        using var metrics = new LogicLooperMetrics(testMeterFactory, TimeProvider.System, tracker, () => throw new NotSupportedException());
+        using var metrics = new LogicLooperMetrics(testMeterFactory, TimeProvider.System, tracker, () => throw new NotSupportedException(), 1, 10);
         using var logicLooper1 = new Cysharp.Threading.LogicLooper(TimeSpan.FromMilliseconds(100), 16, TimeProvider.System, tracker);
         using var logicLooper2 = new Cysharp.Threading.LogicLooper(TimeSpan.FromMilliseconds(100), 16, TimeProvider.System, tracker);
 
@@ -40,7 +40,7 @@ public class LogicLooperMetricsTest
             new AnonymousLogicLooperPoolLooperFactory(x => new Cysharp.Threading.LogicLooper(x,16, TimeProvider.System, tracker)));
 
         // Act
-        using var metrics = new LogicLooperMetrics(testMeterFactory, TimeProvider.System, tracker, () => pool);
+        using var metrics = new LogicLooperMetrics(testMeterFactory, TimeProvider.System, tracker, () => pool, 1, 10);
 
         // Assert
         collector.RecordObservableInstruments();
@@ -61,7 +61,7 @@ public class LogicLooperMetricsTest
             new AnonymousLogicLooperPoolLooperFactory(x => new Cysharp.Threading.LogicLooper(x, 16, TimeProvider.System, tracker)));
 
         // Act
-        using var metrics = new LogicLooperMetrics(testMeterFactory, TimeProvider.System, tracker, () => pool);
+        using var metrics = new LogicLooperMetrics(testMeterFactory, TimeProvider.System, tracker, () => pool, 1, 10);
         pool.RegisterActionAsync((in LogicLooperActionContext ctx) => true);
         pool.RegisterActionAsync((in LogicLooperActionContext ctx) => true);
 
