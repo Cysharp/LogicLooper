@@ -112,6 +112,27 @@ await looperPool.RegisterActionAsync((in LogicLooperActionContext ctx) =>
 ### Microsoft.Extensions.Hosting との統合
 [samples/LoopHostingApp](samples/LoopHostingApp) をご覧ください。`IHostedService` と組み合わせることでサーバーのライフサイクルなどを考慮した実装を行えます。
 
+### メトリクス
+
+LogicLooper は Metric API を使用してメトリクスを提供します。これにより LogicLooper や登録されているアクションの数、ループ当たりの実行時間といったものを取得できます。
+
+メトリクスの取得を有効化するには LogicLooper.Diagnostics パッケージをインストールして `AddLogicLooperMetrics` を呼び出します。
+
+```csharp
+services.AddLogicLooperMetrics();
+```
+
+|Instrumentation|Unit|Description|
+|---|---|---|
+|LogicLooper.shared_pool.loopers|`{looper}`|LogicLooperPool.Shared で稼働している LogicLooper インスタンスの数|
+|LogicLooper.shared_pool.running_actions|`{action}`|LogicLooperPool.Shared で稼働している LogicLooper に登録されているアクションの数|
+|LogicLooper.running_loopers|`{looper}`|プロセスで稼働している LogicLooper インスタンスの数|
+|LogicLooper.running_actions|`{action}`|プロセスで稼働している LogicLooper に登録されているアクションの数|
+|LogicLooper.processing_duration_min|`ms`|プロセスで稼働しているループの1ループの実行時間 (最小)|
+|LogicLooper.processing_duration_max|`ms`|プロセスで稼働しているループの1ループの実行時間 (最大)|
+|LogicLooper.processing_duration_avg|`ms`|プロセスで稼働しているループの1ループの実行時間 (平均)|
+
+
 ## 上級編
 ### ユニットテスト / フレーム単位実行
 LogicLooper と共にユニットテストを記述する場合やフレームを手動で更新したいような場合には `ManualLogicLooper` / `ManualLogicLooperPool` を利用できます。
