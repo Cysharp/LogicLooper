@@ -20,6 +20,8 @@ jobs:
           repository: Cysharp/DocfxTemplate
           path: docs/_DocfxTemplate
       - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
+      - name: dotnet tool restore
+        run: dotnet tool restore
       - name: Docfx metadata
         run: dotnet docfx metadata docs/docfx.json
       - name: Docfx build
