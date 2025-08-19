@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  build-debug:
+  build:
     name: Build and run tests
     permissions:
       contents: read
@@ -18,29 +18,11 @@ jobs:
     steps:
       - uses: Cysharp/Actions/.github/actions/checkout@main
       - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
-      - run: dotnet build -c Debug -p:DefineConstants=RUNNING_IN_CI
-      - run: |
-          dotnet pack ./src/LogicLooper/LogicLooper.csproj -c Debug --no-build -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
-          dotnet pack ./src/LogicLooper.Diagnostics/LogicLooper.Diagnostics.csproj -c Debug --no-build -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
-      - run: dotnet test -c Debug --no-build
+      - run: dotnet build -c Release -p:DefineConstants=RUNNING_IN_CI
+      - run: dotnet test -c Release --no-build
+      - run: dotnet pack -c Release --no-build  -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg -o artifacts
       - uses: Cysharp/Actions/.github/actions/upload-artifact@main
         with:
           name: nuget
-          path: ./src/LogicLooper/bin/Debug/*.*nupkg
+          path: artifacts/*.*nupkg
           retention-days: 1
-
-  test-release-build:
-    name: Run tests using Release build
-    needs: [ build-debug ]
-    strategy:
-      matrix:
-        os: [ ubuntu-24.04, windows-2025 ]
-    permissions:
-      contents: read
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 10
-    steps:
-      - uses: Cysharp/Actions/.github/actions/checkout@main
-      - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
-      - run: dotnet build -c Release -p:DefineConstants=RUNNING_IN_CI
-      - run: dotnet test -c Release --no-build
