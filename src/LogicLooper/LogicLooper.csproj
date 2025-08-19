@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <None Include="Icon.png" Pack="true" PackagePath="/" />
-    <None Include="..\..\README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0' OR $(TargetFramework) == 'netstandard2.1'">
