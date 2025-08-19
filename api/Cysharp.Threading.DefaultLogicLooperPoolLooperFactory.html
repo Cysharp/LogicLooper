@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>LogicLooperCoroutine&lt;TResult&gt; Class
+    <title>DefaultLogicLooperPoolLooperFactory Class
  | LogicLooper </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="LogicLooperCoroutine&lt;TResult&gt; Class
+    <meta name="title" content="DefaultLogicLooperPoolLooperFactory Class
  | LogicLooper ">
     <meta name="generator" content="docfx ">
   
@@ -71,39 +71,36 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Cysharp.Threading.LogicLooperCoroutine`1">
+            <article class="content wrap" id="_content" data-uid="Cysharp.Threading.DefaultLogicLooperPoolLooperFactory">
 
-  <h1 id="Cysharp_Threading_LogicLooperCoroutine_1" data-uid="Cysharp.Threading.LogicLooperCoroutine`1" class="text-break">LogicLooperCoroutine&lt;TResult&gt; Class
+  <h1 id="Cysharp_Threading_DefaultLogicLooperPoolLooperFactory" data-uid="Cysharp.Threading.DefaultLogicLooperPoolLooperFactory" class="text-break">DefaultLogicLooperPoolLooperFactory Class
 </h1>
   <h6><strong>Namespace</strong>: <a class="xref" href="Cysharp.html">Cysharp</a>.<a class="xref" href="Cysharp.Threading.html">Threading</a></h6>
   <h6><strong>Assembly</strong>: Cysharp.Threading.LogicLooper.dll</h6>
 
-  <div class="markdown level0 summary"><p>Represents a coroutine-like operation.</p>
+  <div class="markdown level0 summary"><p>Provides a default implementation of <a class="xref" href="Cysharp.Threading.ILogicLooperPoolLooperFactory.html">ILogicLooperPoolLooperFactory</a> for creating logic loopers with a
+specified target frame time.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public sealed class LogicLooperCoroutine&lt;TResult&gt; : LogicLooperCoroutine</code></pre>
+    <pre><code class="lang- hljs">public class DefaultLogicLooperPoolLooperFactory : ILogicLooperPoolLooperFactory</code></pre>
   </div>
 
   <div class="inheritance">
     <h5>Inheritance</h5>
     <span><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></span> → 
-    <span><a class="xref" href="Cysharp.Threading.LogicLooperCoroutine.html">LogicLooperCoroutine</a></span> → 
-    <span class="xref">LogicLooperCoroutine&lt;TResult&gt;</span>
+    <span class="xref">DefaultLogicLooperPoolLooperFactory</span>
+  </div>
+
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Cysharp.Threading.ILogicLooperPoolLooperFactory.html">ILogicLooperPoolLooperFactory</a></div>
   </div>
 
 
 
 
-
-  <section>
-  <h4 class="typeParameters">Type Parameters</h4>
-  <dl class="cysharpdocfx-valuedefinition">
-    <dt><span class="parametername"><code>TResult</code></span></dt>
-    <dd></dd>
-  </dl>
-  </section>
 
 
   <h3 id="members">Members</h3>
@@ -119,9 +116,29 @@
     <tbody>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LogicLooperCoroutine-1.html#Cysharp_Threading_LogicLooperCoroutine_1_Result">Result</a>
+          <a class="xref" href="Cysharp.Threading.DefaultLogicLooperPoolLooperFactory.html#Cysharp_Threading_DefaultLogicLooperPoolLooperFactory_Instance">Instance</a>
         </td>
-        <td class="markdown level1 summary"><p>Represents a coroutine-like operation.</p>
+        <td class="markdown level1 summary"><p>Gets the singleton instance of the <a class="xref" href="Cysharp.Threading.ILogicLooperPoolLooperFactory.html">ILogicLooperPoolLooperFactory</a> used to create logic looper pool
+looper objects.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h4>Methods
+</h4>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <a class="xref" href="Cysharp.Threading.DefaultLogicLooperPoolLooperFactory.html#Cysharp_Threading_DefaultLogicLooperPoolLooperFactory_Create_System_TimeSpan_">Create(TimeSpan)</a>
+        </td>
+        <td class="markdown level1 summary"><p>Creates a new <a class="xref" href="Cysharp.Threading.ILogicLooper.html">ILogicLooper</a> instance configured to operate with the specified target frame time.</p>
 </td>
       </tr>
     </tbody>
@@ -130,14 +147,15 @@
   <h3 id="properties">Properties
 </h3>
   <section>
-  <a id="Cysharp_Threading_LogicLooperCoroutine_1_Result_" data-uid="Cysharp.Threading.LogicLooperCoroutine`1.Result*"></a>
-  <h4 id="Cysharp_Threading_LogicLooperCoroutine_1_Result" data-uid="Cysharp.Threading.LogicLooperCoroutine`1.Result">Result</h4>
-  <div class="markdown level1 summary"><p>Represents a coroutine-like operation.</p>
+  <a id="Cysharp_Threading_DefaultLogicLooperPoolLooperFactory_Instance_" data-uid="Cysharp.Threading.DefaultLogicLooperPoolLooperFactory.Instance*"></a>
+  <h4 id="Cysharp_Threading_DefaultLogicLooperPoolLooperFactory_Instance" data-uid="Cysharp.Threading.DefaultLogicLooperPoolLooperFactory.Instance">Instance</h4>
+  <div class="markdown level1 summary"><p>Gets the singleton instance of the <a class="xref" href="Cysharp.Threading.ILogicLooperPoolLooperFactory.html">ILogicLooperPoolLooperFactory</a> used to create logic looper pool
+looper objects.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public TResult? Result { get; }</code></pre>
+    <pre><code class="lang- hljs">public static ILogicLooperPoolLooperFactory Instance { get; }</code></pre>
   </div>
 
 
@@ -147,7 +165,7 @@
   <section>
   <h5 class="propertyValue">Property Value</h5>
   <dl class="cysharpdocfx-valuedefinition">
-    <dt><span class="xref">TResult</span></dt>
+    <dt><a class="xref" href="Cysharp.Threading.ILogicLooperPoolLooperFactory.html">ILogicLooperPoolLooperFactory</a></dt>
     <dd></dd>
   </dl>
   </section>
@@ -160,7 +178,51 @@
 
 
   </section>
+  <h3 id="methods">Methods
+</h3>
+  <section>
+  <a id="Cysharp_Threading_DefaultLogicLooperPoolLooperFactory_Create_" data-uid="Cysharp.Threading.DefaultLogicLooperPoolLooperFactory.Create*"></a>
+  <h4 id="Cysharp_Threading_DefaultLogicLooperPoolLooperFactory_Create_System_TimeSpan_" data-uid="Cysharp.Threading.DefaultLogicLooperPoolLooperFactory.Create(System.TimeSpan)">Create(TimeSpan)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Cysharp.Threading.ILogicLooper.html">ILogicLooper</a> instance configured to operate with the specified target frame time.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
 
+  <div class="codewrapper">
+    <pre><code class="lang- hljs">public ILogicLooper Create(TimeSpan targetFrameTime)</code></pre>
+  </div>
+
+  <section>
+  <h5 class="parameters">Parameters</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><span class="parametername"><code>targetFrameTime</code></span> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a></dt>
+    <dd></dd>
+  </dl>
+  </section>
+
+  <section>
+  <h5 class="returns">Returns</h5>
+  <dl class="cysharpdocfx-valuedefinition">
+    <dt><a class="xref" href="Cysharp.Threading.ILogicLooper.html">ILogicLooper</a></dt>
+    <dd></dd>
+  </dl>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+  </section>
+
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Cysharp.Threading.ILogicLooperPoolLooperFactory.html">ILogicLooperPoolLooperFactory</a>
+  </div>
 
 
 </article>

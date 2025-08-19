@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>LooperActionOptions Class
+    <title>LogicLooperMetrics Class
  | LogicLooper </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="LooperActionOptions Class
+    <meta name="title" content="LogicLooperMetrics Class
  | LogicLooper ">
     <meta name="generator" content="docfx ">
   
@@ -71,30 +71,29 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Cysharp.Threading.LooperActionOptions">
+            <article class="content wrap" id="_content" data-uid="Cysharp.Threading.Diagnostics.LogicLooperMetrics">
 
-  <h1 id="Cysharp_Threading_LooperActionOptions" data-uid="Cysharp.Threading.LooperActionOptions" class="text-break">LooperActionOptions Class
+  <h1 id="Cysharp_Threading_Diagnostics_LogicLooperMetrics" data-uid="Cysharp.Threading.Diagnostics.LogicLooperMetrics" class="text-break">LogicLooperMetrics Class
 </h1>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Cysharp.html">Cysharp</a>.<a class="xref" href="Cysharp.Threading.html">Threading</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Cysharp.html">Cysharp</a>.<a class="xref" href="Cysharp.Threading.html">Threading</a>.<a class="xref" href="Cysharp.Threading.Diagnostics.html">Diagnostics</a></h6>
   <h6><strong>Assembly</strong>: Cysharp.Threading.LogicLooper.dll</h6>
 
-  <div class="markdown level0 summary"><p>Provides options for the loop-action.</p>
-</div>
+  <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public record LooperActionOptions : IEquatable&lt;LooperActionOptions&gt;</code></pre>
+    <pre><code class="lang- hljs">public class LogicLooperMetrics : IDisposable</code></pre>
   </div>
 
   <div class="inheritance">
     <h5>Inheritance</h5>
     <span><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></span> → 
-    <span class="xref">LooperActionOptions</span>
+    <span class="xref">LogicLooperMetrics</span>
   </div>
 
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Cysharp.Threading.LooperActionOptions.html">LooperActionOptions</a>&gt;</div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
   </div>
 
 
@@ -115,14 +114,19 @@
     <tbody>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LooperActionOptions.html#Cysharp_Threading_LooperActionOptions__ctor_System_Nullable_System_Int32__">LooperActionOptions(int?)</a>
+          <a class="xref" href="Cysharp.Threading.Diagnostics.LogicLooperMetrics.html#Cysharp_Threading_Diagnostics_LogicLooperMetrics__ctor">LogicLooperMetrics()</a>
         </td>
-        <td class="markdown level1 summary"><p>Provides options for the loop-action.</p>
-</td>
+        <td class="markdown level1 summary"></td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xref" href="Cysharp.Threading.Diagnostics.LogicLooperMetrics.html#Cysharp_Threading_Diagnostics_LogicLooperMetrics__ctor_System_Diagnostics_Metrics_IMeterFactory_">LogicLooperMetrics(IMeterFactory)</a>
+        </td>
+        <td class="markdown level1 summary"></td>
       </tr>
     </tbody>
   </table>
-  <h4>Properties
+  <h4>Fields
 </h4>
   <table class="table table-condensed">
     <thead>
@@ -134,17 +138,27 @@
     <tbody>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LooperActionOptions.html#Cysharp_Threading_LooperActionOptions_Default">Default</a>
+          <a class="xref" href="Cysharp.Threading.Diagnostics.LogicLooperMetrics.html#Cysharp_Threading_Diagnostics_LogicLooperMetrics_MeterName">MeterName</a>
         </td>
-        <td class="markdown level1 summary"><p>Provides options for the loop-action.</p>
-</td>
+        <td class="markdown level1 summary"></td>
       </tr>
+    </tbody>
+  </table>
+  <h4>Methods
+</h4>
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
       <tr>
         <td>
-          <a class="xref" href="Cysharp.Threading.LooperActionOptions.html#Cysharp_Threading_LooperActionOptions_TargetFrameRateOverride">TargetFrameRateOverride</a>
+          <a class="xref" href="Cysharp.Threading.Diagnostics.LogicLooperMetrics.html#Cysharp_Threading_Diagnostics_LogicLooperMetrics_Dispose">Dispose()</a>
         </td>
-        <td class="markdown level1 summary"><p>Set a override value for the target frame rate. LogicLooper tries to get as close to the target value as possible, but it is not as accurate as the Looper's frame rate.</p>
-</td>
+        <td class="markdown level1 summary"></td>
       </tr>
     </tbody>
   </table>
@@ -152,22 +166,43 @@
   <h3 id="constructors">Constructors
 </h3>
   <section>
-  <a id="Cysharp_Threading_LooperActionOptions__ctor_" data-uid="Cysharp.Threading.LooperActionOptions.#ctor*"></a>
-  <h4 id="Cysharp_Threading_LooperActionOptions__ctor_System_Nullable_System_Int32__" data-uid="Cysharp.Threading.LooperActionOptions.#ctor(System.Nullable{System.Int32})">LooperActionOptions(int?)</h4>
-  <div class="markdown level1 summary"><p>Provides options for the loop-action.</p>
-</div>
+  <a id="Cysharp_Threading_Diagnostics_LogicLooperMetrics__ctor_" data-uid="Cysharp.Threading.Diagnostics.LogicLooperMetrics.#ctor*"></a>
+  <h4 id="Cysharp_Threading_Diagnostics_LogicLooperMetrics__ctor" data-uid="Cysharp.Threading.Diagnostics.LogicLooperMetrics.#ctor">LogicLooperMetrics()</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public LooperActionOptions(int? TargetFrameRateOverride = null)</code></pre>
+    <pre><code class="lang- hljs">public LogicLooperMetrics()</code></pre>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </section>
+  <section>
+  <a id="Cysharp_Threading_Diagnostics_LogicLooperMetrics__ctor_" data-uid="Cysharp.Threading.Diagnostics.LogicLooperMetrics.#ctor*"></a>
+  <h4 id="Cysharp_Threading_Diagnostics_LogicLooperMetrics__ctor_System_Diagnostics_Metrics_IMeterFactory_" data-uid="Cysharp.Threading.Diagnostics.LogicLooperMetrics.#ctor(System.Diagnostics.Metrics.IMeterFactory)">LogicLooperMetrics(IMeterFactory)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang- hljs">public LogicLooperMetrics(IMeterFactory meterFactory)</code></pre>
   </div>
 
   <section>
   <h5 class="parameters">Parameters</h5>
   <dl class="cysharpdocfx-valuedefinition">
-    <dt><span class="parametername"><code>TargetFrameRateOverride</code></span> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
-    <dd><p>Set a override value for the target frame rate. LogicLooper tries to get as close to the target value as possible, but it is not as accurate as the Looper's frame rate.</p>
-</dd>
+    <dt><span class="parametername"><code>meterFactory</code></span> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.diagnostics.metrics.imeterfactory">IMeterFactory</a></dt>
+    <dd></dd>
   </dl>
   </section>
 
@@ -183,27 +218,24 @@
 
 
   </section>
-  <h3 id="properties">Properties
+  <h3 id="fields">Fields
 </h3>
   <section>
-  <a id="Cysharp_Threading_LooperActionOptions_Default_" data-uid="Cysharp.Threading.LooperActionOptions.Default*"></a>
-  <h4 id="Cysharp_Threading_LooperActionOptions_Default" data-uid="Cysharp.Threading.LooperActionOptions.Default">Default</h4>
-  <div class="markdown level1 summary"><p>Provides options for the loop-action.</p>
-</div>
+  <h4 id="Cysharp_Threading_Diagnostics_LogicLooperMetrics_MeterName" data-uid="Cysharp.Threading.Diagnostics.LogicLooperMetrics.MeterName">MeterName</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public static LooperActionOptions Default { get; }</code></pre>
+    <pre><code class="lang- hljs">public const string MeterName = &quot;LogicLooper&quot;</code></pre>
   </div>
 
 
 
 
-
   <section>
-  <h5 class="propertyValue">Property Value</h5>
+  <h5 class="fieldValue">Field Value</h5>
   <dl class="cysharpdocfx-valuedefinition">
-    <dt><a class="xref" href="Cysharp.Threading.LooperActionOptions.html">LooperActionOptions</a></dt>
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
     <dd></dd>
   </dl>
   </section>
@@ -215,29 +247,24 @@
 
 
 
+
   </section>
+  <h3 id="methods">Methods
+</h3>
   <section>
-  <a id="Cysharp_Threading_LooperActionOptions_TargetFrameRateOverride_" data-uid="Cysharp.Threading.LooperActionOptions.TargetFrameRateOverride*"></a>
-  <h4 id="Cysharp_Threading_LooperActionOptions_TargetFrameRateOverride" data-uid="Cysharp.Threading.LooperActionOptions.TargetFrameRateOverride">TargetFrameRateOverride</h4>
-  <div class="markdown level1 summary"><p>Set a override value for the target frame rate. LogicLooper tries to get as close to the target value as possible, but it is not as accurate as the Looper's frame rate.</p>
-</div>
+  <a id="Cysharp_Threading_Diagnostics_LogicLooperMetrics_Dispose_" data-uid="Cysharp.Threading.Diagnostics.LogicLooperMetrics.Dispose*"></a>
+  <h4 id="Cysharp_Threading_Diagnostics_LogicLooperMetrics_Dispose" data-uid="Cysharp.Threading.Diagnostics.LogicLooperMetrics.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
 
   <div class="codewrapper">
-    <pre><code class="lang- hljs">public int? TargetFrameRateOverride { get; init; }</code></pre>
+    <pre><code class="lang- hljs">public void Dispose()</code></pre>
   </div>
 
 
 
 
 
-  <section>
-  <h5 class="propertyValue">Property Value</h5>
-  <dl class="cysharpdocfx-valuedefinition">
-    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a>?</dt>
-    <dd></dd>
-  </dl>
-  </section>
 
 
 
@@ -250,7 +277,7 @@
 
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.iequatable-1">IEquatable&lt;T&gt;</a>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
   </div>
 
 
