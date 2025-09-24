@@ -18,10 +18,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\LogicLooper\Icon.png" Pack="true" PackagePath="/" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Diagnostics" Version="9.0.8" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.8" />
   </ItemGroup>

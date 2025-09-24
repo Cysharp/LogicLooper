@@ -5,6 +5,7 @@
     <LangVersion>latest</LangVersion>
 
     <!-- NuGet Package Information -->
+    <IsPackable>false</IsPackable>
     <Description>A library for building server application using loop-action programming model on .NET. This library focuses on building game servers with server-side logic.</Description>
     <PackageVersion>$(Version)</PackageVersion>
     <Company>Cysharp</Company>
@@ -20,6 +21,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Icon.png" Pack="true" PackagePath="\" />
     <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)LICENSE" />
   </ItemGroup>
 </Project>
