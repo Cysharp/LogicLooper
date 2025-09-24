@@ -6,7 +6,6 @@
     <NoWarn>1998</NoWarn>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\src\LogicLooper\opensource.snk</AssemblyOriginatorKeyFile>
-    <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
