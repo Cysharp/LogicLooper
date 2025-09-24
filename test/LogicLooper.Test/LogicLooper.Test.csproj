@@ -4,8 +4,6 @@
     <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <NoWarn>1998</NoWarn>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\src\LogicLooper\opensource.snk</AssemblyOriginatorKeyFile>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
