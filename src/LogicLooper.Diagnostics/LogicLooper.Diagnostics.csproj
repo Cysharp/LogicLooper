@@ -6,8 +6,6 @@
     <Nullable>enable</Nullable>
     <RootNamespace>Cysharp.Threading</RootNamespace>
     <AssemblyName>Cysharp.Threading.LogicLooper.Diagnostics</AssemblyName>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\LogicLooper\opensource.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
 

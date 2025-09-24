@@ -3,6 +3,8 @@
   <PropertyGroup>
     <VersionPrefix>1.5.0</VersionPrefix>
     <LangVersion>latest</LangVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)opensource.snk</AssemblyOriginatorKeyFile>
 
     <!-- NuGet Package Information -->
     <IsPackable>false</IsPackable>

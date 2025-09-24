@@ -7,8 +7,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Cysharp.Threading</RootNamespace>
     <AssemblyName>Cysharp.Threading.LogicLooper</AssemblyName>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>opensource.snk</AssemblyOriginatorKeyFile>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
