@@ -34,6 +34,7 @@ jobs:
     needs: [build-dotnet]
     permissions:
       contents: write
+      id-token: write # required for NuGet Trusted Publish
     uses: Cysharp/Actions/.github/workflows/create-release.yaml@main
     with:
       commit-id: ${{ github.sha }}
@@ -41,5 +42,5 @@ jobs:
       dry-run: ${{ inputs.dry-run }}
       nuget-push: true
       release-upload: false
-      release-format: '{0}'
+      release-format: "{0}"
     secrets: inherit
