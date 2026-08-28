@@ -141,6 +141,34 @@ public class LogicLooperPoolTest
         Assert.True(looperFactory.CreatedLoopers[3].IsShutdownRequested);
     }
 
+    [Fact]
+    public async Task OperationsAfterDispose_ThrowObjectDisposedException()
+    {
+        var looperFactory = new FakeLogicLooperPoolLooperFactory();
+        var pool = new LogicLooperPool(60, 4, RoundRobinLogicLooperPoolBalancer.Instance, looperFactory);
+
+        pool.Dispose();
+
+        LogicLooperActionDelegate action = (in LogicLooperActionContext _) => false;
+        LogicLooperActionWithStateDelegate<int> actionWithState = (in LogicLooperActionContext _, int _) => false;
+        LogicLooperAsyncActionDelegate asyncAction = _ => ValueTask.FromResult(false);
+        LogicLooperAsyncActionWithStateDelegate<int> asyncActionWithState = (_, _) => ValueTask.FromResult(false);
+
+        Assert.Throws<ObjectDisposedException>(() => { _ = pool.RegisterActionAsync(action); });
+        Assert.Throws<ObjectDisposedException>(() => { _ = pool.RegisterActionAsync(action, LooperActionOptions.Default); });
+        Assert.Throws<ObjectDisposedException>(() => { _ = pool.RegisterActionAsync(actionWithState, 0); });
+        Assert.Throws<ObjectDisposedException>(() => { _ = pool.RegisterActionAsync(actionWithState, 0, LooperActionOptions.Default); });
+        Assert.Throws<ObjectDisposedException>(() => { _ = pool.RegisterActionAsync(asyncAction); });
+        Assert.Throws<ObjectDisposedException>(() => { _ = pool.RegisterActionAsync(asyncAction, LooperActionOptions.Default); });
+        Assert.Throws<ObjectDisposedException>(() => { _ = pool.RegisterActionAsync(asyncActionWithState, 0); });
+        Assert.Throws<ObjectDisposedException>(() => { _ = pool.RegisterActionAsync(asyncActionWithState, 0, LooperActionOptions.Default); });
+        Assert.Throws<ObjectDisposedException>(() => pool.GetLooper());
+        Assert.Throws<ObjectDisposedException>(() => _ = pool.Loopers);
+        await Assert.ThrowsAsync<ObjectDisposedException>(() => pool.ShutdownAsync(TimeSpan.Zero));
+
+        pool.Dispose();
+    }
+
     class FakeSequentialLogicLooperPoolBalancer : ILogicLooperPoolBalancer
     {
         private int _count;
