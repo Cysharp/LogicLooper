@@ -11,6 +11,7 @@ public class RoundRobinLogicLooperPoolBalancer : ILogicLooperPoolBalancer
 
     public ILogicLooper GetPooledLooper(ILogicLooper[] pooledLoopers)
     {
-        return pooledLoopers[Interlocked.Increment(ref _index) % pooledLoopers.Length];
+        var index = unchecked((uint)Interlocked.Increment(ref _index));
+        return pooledLoopers[(int)(index % (uint)pooledLoopers.Length)];
     }
 }
