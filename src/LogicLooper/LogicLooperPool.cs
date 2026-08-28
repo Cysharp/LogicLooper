@@ -9,10 +9,17 @@ public sealed partial class LogicLooperPool : ILogicLooperPool, IDisposable
 {
     private readonly PooledLogicLooper[] _loopers;
     private readonly ILogicLooperPoolBalancer _balancer;
-    private readonly CancellationTokenSource _shutdownTokenSource = new();
+    private bool _isDisposed;
 
     /// <inheritdoc />
-    public IReadOnlyList<ILogicLooper> Loopers => _loopers;
+    public IReadOnlyList<ILogicLooper> Loopers
+    {
+        get
+        {
+            ThrowIfDisposed();
+            return _loopers;
+        }
+    }
 
     /// <summary>
     /// Initialize the looper pool with specified configurations.
@@ -101,15 +108,25 @@ public sealed partial class LogicLooperPool : ILogicLooperPool, IDisposable
     /// <inheritdoc />
     public async Task ShutdownAsync(TimeSpan shutdownDelay)
     {
+        ThrowIfDisposed();
         await Task.WhenAll(_loopers.Select(x => x.WrappedLooper.ShutdownAsync(shutdownDelay)));
     }
 
     /// <inheritdoc />
     public ILogicLooper GetLooper()
-        => _balancer.GetPooledLooper(_loopers);
+    {
+        ThrowIfDisposed();
+        return _balancer.GetPooledLooper(_loopers);
+    }
 
     public void Dispose()
     {
+        if (_isDisposed)
+        {
+            return;
+        }
+        _isDisposed = true;
+
         foreach (var looper in _loopers)
         {
             try
@@ -120,7 +137,14 @@ public sealed partial class LogicLooperPool : ILogicLooperPool, IDisposable
             {
             }
         }
-        _shutdownTokenSource.Cancel();
+    }
+
+    private void ThrowIfDisposed()
+    {
+        if (_isDisposed)
+        {
+            throw new ObjectDisposedException(nameof(LogicLooperPool));
+        }
     }
 
     private class PooledLogicLooper : ILogicLooper
