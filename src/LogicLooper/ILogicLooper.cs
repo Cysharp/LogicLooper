@@ -16,7 +16,7 @@ public interface ILogicLooper : IDisposable
     int ApproximatelyRunningActions { get; }
 
     /// <summary>
-    /// Gets a duration of the last processed frame.
+    /// Gets a duration of the last processed frame. This does not include the time spent waiting for the next frame.
     /// </summary>
     TimeSpan LastProcessingDuration { get; }
 

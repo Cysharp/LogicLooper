@@ -49,7 +49,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     private int _tail = 0;
     private bool _isRunning = false;
     private LooperAction[] _actions;
-    private long _lastProcessingDuration = 0;
+    private long _lastProcessingDurationTicks = 0;
     private int _isShuttingDown = 0;
     private long _frame = 0;
 
@@ -60,7 +60,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     public int ApproximatelyRunningActions => _tail;
 
     /// <inheritdoc/>
-    public TimeSpan LastProcessingDuration => TimeSpan.FromMilliseconds(_lastProcessingDuration);
+    public TimeSpan LastProcessingDuration => TimeSpan.FromTicks(Interlocked.Read(ref _lastProcessingDurationTicks));
 
     /// <inheritdoc/>
     public double TargetFrameRate => _targetFrameRate;
@@ -363,8 +363,10 @@ NextActionLoop:
             }
 
             var now = _timeProvider.GetTimestamp();
-            var elapsedMilliseconds = (int)(_timeProvider.GetElapsedTime(begin, now).TotalMilliseconds);
-            _lastProcessingDuration = elapsedMilliseconds;
+            var elapsed = _timeProvider.GetElapsedTime(begin, now);
+            Interlocked.Exchange(ref _lastProcessingDurationTicks, elapsed.Ticks);
+
+            var elapsedMilliseconds = (int)elapsed.TotalMilliseconds;
 
             var waitForNextFrameMilliseconds = (int)(_targetFrameTimeMilliseconds - elapsedMilliseconds);
             if (waitForNextFrameMilliseconds > 0)
