@@ -372,7 +372,9 @@ NextActionLoop:
             Interlocked.Exchange(ref _lastProcessingDurationTicks, elapsed.Ticks);
             _tracker.RecordProcessingDuration(elapsed, _targetFrameRateTag);
 
-            var elapsedMilliseconds = (int)elapsed.TotalMilliseconds;
+            // NOTE: Recording to the histogram invokes meter listeners synchronously on this thread.
+            //       Include the time spent on it when calculating the sleep time, so that it does not extend the frame interval.
+            var elapsedMilliseconds = (int)_timeProvider.GetElapsedTime(begin).TotalMilliseconds;
 
             var waitForNextFrameMilliseconds = (int)(_targetFrameTimeMilliseconds - elapsedMilliseconds);
             if (waitForNextFrameMilliseconds > 0)
