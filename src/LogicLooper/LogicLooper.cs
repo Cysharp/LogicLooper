@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Cysharp.Threading.Diagnostics;
 using Cysharp.Threading.Internal;
 
 // ReSharper disable StringLiteralTypo
@@ -45,6 +46,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     private readonly int _growFactor = 2;
     private readonly TimeProvider _timeProvider;
     private readonly LogicLooperTracker _tracker;
+    private readonly KeyValuePair<string, object?> _targetFrameRateTag;
 
     private int _tail = 0;
     private bool _isRunning = false;
@@ -85,6 +87,9 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     internal /* for UnitTest */ LogicLooper(TimeSpan targetFrameTime, int initialActionsCapacity, TimeProvider timeProvider, LogicLooperTracker tracker)
     {
         _targetFrameRate = 1000 / targetFrameTime.TotalMilliseconds;
+        // NOTE: The frame rate is rounded because it is calculated back from the frame time, which has limited precision,
+        //       and may slightly differ from the specified frame rate. The value is boxed only once here.
+        _targetFrameRateTag = new(LogicLooperMetrics.TagNames.TargetFrameRate, Math.Round(_targetFrameRate, 2));
         _looperId = Interlocked.Increment(ref _looperSequence);
         _ctsLoop = new CancellationTokenSource();
         _ctsAction = new CancellationTokenSource();
@@ -365,7 +370,7 @@ NextActionLoop:
             var now = _timeProvider.GetTimestamp();
             var elapsed = _timeProvider.GetElapsedTime(begin, now);
             Interlocked.Exchange(ref _lastProcessingDurationTicks, elapsed.Ticks);
-            _tracker.RecordProcessingDuration(elapsed);
+            _tracker.RecordProcessingDuration(elapsed, _targetFrameRateTag);
 
             var elapsedMilliseconds = (int)elapsed.TotalMilliseconds;
 

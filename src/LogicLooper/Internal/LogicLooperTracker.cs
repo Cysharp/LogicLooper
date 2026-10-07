@@ -96,7 +96,8 @@ internal class LogicLooperTracker
     /// Records the processing duration of a frame. This method is called from the loop thread on every frame.
     /// </summary>
     /// <param name="duration">The processing duration of the frame.</param>
-    public void RecordProcessingDuration(TimeSpan duration)
+    /// <param name="targetFrameRateTag">The tag of the looper's target frame rate. It should be cached by the caller to avoid boxing on every frame.</param>
+    public void RecordProcessingDuration(TimeSpan duration, KeyValuePair<string, object?> targetFrameRateTag)
     {
         var histograms = Volatile.Read(ref _processingDurationHistograms);
         if (histograms.Length == 0) return;
@@ -106,7 +107,7 @@ internal class LogicLooperTracker
         {
             try
             {
-                histogram.Record(seconds);
+                histogram.Record(seconds, targetFrameRateTag);
             }
             catch
             {

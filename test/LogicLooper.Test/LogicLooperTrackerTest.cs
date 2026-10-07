@@ -32,15 +32,15 @@ public class LogicLooperTrackerTest
         // Act & Assert
         tracker.AddProcessingDurationHistogram(histogram);
         tracker.AddProcessingDurationHistogram(histogram);
-        tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1));
+        tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1), default);
         Assert.Equal(1, recorder.Count);
 
         tracker.RemoveProcessingDurationHistogram(histogram);
-        tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1));
+        tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1), default);
         Assert.Equal(2, recorder.Count);
 
         tracker.RemoveProcessingDurationHistogram(histogram);
-        tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1));
+        tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1), default);
         Assert.Equal(2, recorder.Count);
     }
 
@@ -63,7 +63,7 @@ public class LogicLooperTrackerTest
 
         // Act
         tracker.RemoveProcessingDurationHistogram(histogram1);
-        tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1));
+        tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1), default);
 
         // Assert
         Assert.Equal(0, recorder1.Count);
@@ -86,7 +86,7 @@ public class LogicLooperTrackerTest
 
         // Act
         tracker.AddProcessingDurationHistogram(histogram);
-        tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1));
+        tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1), default);
 
         // Assert
         Assert.Equal(1, recorder.Count);
@@ -109,7 +109,7 @@ public class LogicLooperTrackerTest
 
         // Act
         tracker.RemoveProcessingDurationHistogram(notRegisteredHistogram);
-        tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1));
+        tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1), default);
 
         // Assert
         Assert.Equal(1, recorder.Count);
@@ -138,7 +138,7 @@ public class LogicLooperTrackerTest
         using var recorderAfter = new HistogramRecorder(meterAfter);
 
         // Act
-        var exception = Record.Exception(() => tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1)));
+        var exception = Record.Exception(() => tracker.RecordProcessingDuration(TimeSpan.FromMilliseconds(1), default));
 
         // Assert
         Assert.Null(exception);

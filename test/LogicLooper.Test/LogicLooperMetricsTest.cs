@@ -108,6 +108,56 @@ public class LogicLooperMetricsTest
     }
 
     /// <summary>
+    /// Ensures that each measurement is tagged with the target frame rate of the looper rounded to two decimal places,
+    /// so that the tag value is not affected by the error in calculating the frame rate from the frame time.
+    /// </summary>
+    [Theory]
+    [InlineData(1000.0 / 60, 60.0)]
+    [InlineData(1000.0 / 30, 30.0)]
+    [InlineData(15.0, 66.67)]
+    public async Task ProcessingDuration_TargetFrameRateTag(double targetFrameTimeMilliseconds, double expectedTagValue)
+    {
+        // Arrange
+        using var testMeterFactory = new TestMeterFactory();
+        var tracker = new LogicLooperTracker();
+        using var collector = new MetricCollector<double>(testMeterFactory, LogicLooperMetrics.MeterName, LogicLooperMetrics.InstrumentNames.ProcessingDuration);
+        using var metrics = new LogicLooperMetrics(testMeterFactory, tracker, () => throw new NotSupportedException());
+        using var looper = new Cysharp.Threading.LogicLooper(TimeSpan.FromMilliseconds(targetFrameTimeMilliseconds), 16, TimeProvider.System, tracker);
+
+        // Act
+        await Task.Delay(200);
+        await looper.ShutdownAsync(TimeSpan.Zero);
+
+        // Assert
+        var values = collector.GetMeasurementSnapshot();
+
+        Assert.NotEmpty(values);
+        Assert.All(values, x => Assert.Equal(expectedTagValue, x.Tags[LogicLooperMetrics.TagNames.TargetFrameRate]));
+    }
+
+    /// <summary>
+    /// Ensures that the bucket boundaries include the frame times of 60 fps and 30 fps,
+    /// so that frames exceeding the frame time of those common frame rates can be counted.
+    /// </summary>
+    [Fact]
+    public void ProcessingDuration_BucketBoundaries()
+    {
+        // Arrange
+        using var testMeterFactory = new TestMeterFactory();
+        var tracker = new LogicLooperTracker();
+        using var collector = new MetricCollector<double>(testMeterFactory, LogicLooperMetrics.MeterName, LogicLooperMetrics.InstrumentNames.ProcessingDuration);
+
+        // Act
+        using var metrics = new LogicLooperMetrics(testMeterFactory, tracker, () => throw new NotSupportedException());
+
+        // Assert
+        var boundaries = ((Histogram<double>)collector.Instrument!).Advice!.HistogramBucketBoundaries!;
+
+        Assert.Contains(1.0 / 60, boundaries);
+        Assert.Contains(1.0 / 30, boundaries);
+    }
+
+    /// <summary>
     /// Ensures that the processing duration is recorded to each of multiple <see cref="LogicLooperMetrics"/> instances
     /// created from different meter factories, and that disposing one of them stops recording to it
     /// while recording to the others continues.

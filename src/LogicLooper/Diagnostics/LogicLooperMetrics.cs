@@ -21,11 +21,12 @@ public class LogicLooperMetrics : IDisposable
 
     // NOTE: The default bucket boundaries of OpenTelemetry (0, 5, 10, 25, ..., 10000) assume values in milliseconds,
     //       so they do not fit this histogram, whose unit is seconds.
+    //       The frame times of common frame rates (60 fps and 30 fps) are also included to make it possible to count frames that exceed them.
     private static readonly double[] ProcessingDurationBucketBoundaries =
     [
         0.0001, 0.00025, 0.0005, 0.00075,
         0.001, 0.0025, 0.005, 0.0075,
-        0.01, 0.025, 0.05, 0.075,
+        0.01, 1.0 / 60, 0.025, 1.0 / 30, 0.05, 0.075,
         0.1, 0.25, 0.5, 0.75,
         1,
     ];
@@ -39,6 +40,11 @@ public class LogicLooperMetrics : IDisposable
         public const string RunningLoopers = "running_loopers";
         public const string RunningActions = "running_actions";
         public const string ProcessingDuration = "processing_duration";
+    }
+
+    public static class TagNames
+    {
+        public const string TargetFrameRate = "logiclooper.target_frame_rate";
     }
 
     public LogicLooperMetrics()
