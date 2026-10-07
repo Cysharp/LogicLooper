@@ -129,9 +129,15 @@ services.AddLogicLooperMetrics();
 |LogicLooper.shared_pool.running_actions|`{action}`|LogicLooperPool.Shared で稼働している LogicLooper に登録されているアクションの数|
 |LogicLooper.running_loopers|`{looper}`|プロセスで稼働している LogicLooper インスタンスの数|
 |LogicLooper.running_actions|`{action}`|プロセスで稼働している LogicLooper に登録されているアクションの数|
-|LogicLooper.processing_duration_min|`ms`|プロセスで稼働しているループの1ループの実行時間 (最小)|
-|LogicLooper.processing_duration_max|`ms`|プロセスで稼働しているループの1ループの実行時間 (最大)|
-|LogicLooper.processing_duration_avg|`ms`|プロセスで稼働しているループの1ループの実行時間 (平均)|
+|LogicLooper.processing_duration|`s`|プロセスで稼働している LogicLooper の1ループ (フレーム) ごとの実行時間のヒストグラム|
+
+`LogicLooper.processing_duration` は各フレームの処理にかかった時間を記録します。次のフレームまでの待機時間は含みません。アクションが1つも実行されなかったフレーム (アクションが登録されていない場合や、すべてのアクションが `TargetFrameRateOverride` によってスキップされた場合など) も含め、すべてのフレームが記録されます。このようなフレームの処理時間はごく短いため、その割合が多いと平均値は小さくなります。重いフレームを見つけるには、平均値ではなくパーセンタイルや最大値などの分布を見てください。
+
+`LogicLooper.processing_duration` は、`InstrumentAdvice` によって次のバケット境界 (単位は秒) を指定しています。バケット境界は、OpenTelemetry の View など、メトリクス SDK 側の設定で上書きできます。
+
+`0.0001, 0.00025, 0.0005, 0.00075, 0.001, 0.0025, 0.005, 0.0075, 0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1`
+
+`LogicLooper.processing_duration` の記録中に `MeterListener` のコールバックが例外をスローした場合、ループのスレッドで未処理の例外となってプロセスが終了しないよう、その例外は通知されずに無視されます。この場合、同じ計器の他のリスナーも計測値を受け取れないことがあります。
 
 
 ## 上級編

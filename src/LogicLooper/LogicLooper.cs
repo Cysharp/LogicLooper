@@ -365,6 +365,7 @@ NextActionLoop:
             var now = _timeProvider.GetTimestamp();
             var elapsed = _timeProvider.GetElapsedTime(begin, now);
             Interlocked.Exchange(ref _lastProcessingDurationTicks, elapsed.Ticks);
+            _tracker.RecordProcessingDuration(elapsed);
 
             var elapsedMilliseconds = (int)elapsed.TotalMilliseconds;
 
