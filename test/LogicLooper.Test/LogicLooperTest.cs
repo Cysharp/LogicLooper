@@ -216,6 +216,28 @@ public class LogicLooperTest
         Assert.InRange(looper.LastProcessingDuration.TotalMilliseconds, 95, 105);
     }
 
+    /// <summary>
+    /// Ensures that <see cref="ILogicLooper.LastProcessingDuration"/> keeps sub-millisecond precision,
+    /// so that a frame that finishes in less than 1 ms does not report <see cref="TimeSpan.Zero"/>.
+    /// </summary>
+    [Fact]
+    public async Task LastProcessingDuration_SubMillisecond()
+    {
+        using var looper = new Cysharp.Threading.LogicLooper(60);
+
+        var runLoopTask = looper.RegisterActionAsync((in LogicLooperActionContext ctx) =>
+        {
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+            while (stopwatch.Elapsed < TimeSpan.FromMicroseconds(200)) { }
+            return !ctx.CancellationToken.IsCancellationRequested;
+        });
+
+        await Task.Delay(1000);
+        await looper.ShutdownAsync(TimeSpan.Zero);
+
+        Assert.True(looper.LastProcessingDuration >= TimeSpan.FromMicroseconds(200), $"LastProcessingDuration: {looper.LastProcessingDuration}");
+    }
+
     [Fact]
     public async Task AsyncAction()
     {

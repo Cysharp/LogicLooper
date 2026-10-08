@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Cysharp.Threading.Diagnostics;
 using Cysharp.Threading.Internal;
 
 // ReSharper disable StringLiteralTypo
@@ -45,11 +46,12 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     private readonly int _growFactor = 2;
     private readonly TimeProvider _timeProvider;
     private readonly LogicLooperTracker _tracker;
+    private readonly KeyValuePair<string, object?> _targetFrameRateTag;
 
     private int _tail = 0;
     private bool _isRunning = false;
     private LooperAction[] _actions;
-    private long _lastProcessingDuration = 0;
+    private long _lastProcessingDurationTicks = 0;
     private int _isShuttingDown = 0;
     private long _frame = 0;
 
@@ -60,7 +62,7 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     public int ApproximatelyRunningActions => _tail;
 
     /// <inheritdoc/>
-    public TimeSpan LastProcessingDuration => TimeSpan.FromMilliseconds(_lastProcessingDuration);
+    public TimeSpan LastProcessingDuration => TimeSpan.FromTicks(Interlocked.Read(ref _lastProcessingDurationTicks));
 
     /// <inheritdoc/>
     public double TargetFrameRate => _targetFrameRate;
@@ -85,6 +87,9 @@ public sealed class LogicLooper : ILogicLooper, IDisposable
     internal /* for UnitTest */ LogicLooper(TimeSpan targetFrameTime, int initialActionsCapacity, TimeProvider timeProvider, LogicLooperTracker tracker)
     {
         _targetFrameRate = 1000 / targetFrameTime.TotalMilliseconds;
+        // NOTE: The frame rate is rounded because it is calculated back from the frame time, which has limited precision,
+        //       and may slightly differ from the specified frame rate. The value is boxed only once here.
+        _targetFrameRateTag = new(LogicLooperMetrics.TagNames.TargetFrameRate, Math.Round(_targetFrameRate, 2));
         _looperId = Interlocked.Increment(ref _looperSequence);
         _ctsLoop = new CancellationTokenSource();
         _ctsAction = new CancellationTokenSource();
@@ -363,8 +368,13 @@ NextActionLoop:
             }
 
             var now = _timeProvider.GetTimestamp();
-            var elapsedMilliseconds = (int)(_timeProvider.GetElapsedTime(begin, now).TotalMilliseconds);
-            _lastProcessingDuration = elapsedMilliseconds;
+            var elapsed = _timeProvider.GetElapsedTime(begin, now);
+            Interlocked.Exchange(ref _lastProcessingDurationTicks, elapsed.Ticks);
+            _tracker.RecordProcessingDuration(elapsed, _targetFrameRateTag);
+
+            // NOTE: Recording to the histogram invokes meter listeners synchronously on this thread.
+            //       Include the time spent on it when calculating the sleep time, so that it does not extend the frame interval.
+            var elapsedMilliseconds = (int)_timeProvider.GetElapsedTime(begin).TotalMilliseconds;
 
             var waitForNextFrameMilliseconds = (int)(_targetFrameTimeMilliseconds - elapsedMilliseconds);
             if (waitForNextFrameMilliseconds > 0)

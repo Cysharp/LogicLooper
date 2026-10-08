@@ -133,9 +133,21 @@ services.AddLogicLooperMetrics();
 |LogicLooper.shared_pool.running_actions|`{action}`|Number of actions registered in LogicLooperPool.Shared that are running in LogicLooper|
 |LogicLooper.running_loopers|`{looper}`|Number of LogicLooper instances running in the process|
 |LogicLooper.running_actions|`{action}`|Number of actions registered in LogicLooper that are running in the process|
-|LogicLooper.processing_duration_min|`ms`|Minimum execution time of one loop in the process for LogicLooper|
-|LogicLooper.processing_duration_max|`ms`|Maximum execution time of one loop in the process for LogicLooper|
-|LogicLooper.processing_duration_avg|`ms`|Average execution time of one loop in the process for LogicLooper|
+|LogicLooper.processing_duration|`s`|Histogram of the execution time of each loop (frame) of LogicLooper instances running in the process|
+
+`LogicLooper.processing_duration` records the time spent processing each frame, excluding the time spent waiting for the next frame. Every frame is recorded, including frames in which no action is invoked, for example because no action is registered or all actions are skipped by `TargetFrameRateOverride`. Such frames take very little time, so the average tends to be small when they are frequent. To find heavy frames, look at the distribution, such as percentiles or the maximum, rather than the average.
+
+`LogicLooper.processing_duration` provides the following explicit bucket boundaries in seconds through `InstrumentAdvice`. They include the frame times of 60 fps (`1/60`) and 30 fps (`1/30`), so you can count the frames that exceed them. You can override the boundaries with the configuration of your metrics SDK, such as a view in OpenTelemetry.
+
+`0.0001, 0.00025, 0.0005, 0.00075, 0.001, 0.0025, 0.005, 0.0075, 0.01, 1/60, 0.025, 1/30, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1`
+
+If a `MeterListener` callback throws an exception while `LogicLooper.processing_duration` is recorded, the exception is ignored without being reported, so that it does not escape the loop thread and terminate the process. In that case, the other listeners of the same instrument may also miss the measurement.
+
+`LogicLooper.processing_duration` has the following tag.
+
+|Tag|Description|
+|---|---|
+|logiclooper.target_frame_rate|Target frame rate of the looper as a `double`, rounded to two decimal places (for example, `60`, `30`, or `66.67`). This is the frame rate of the looper itself, not the one overridden per action (`TargetFrameRateOverride`), because the processing duration is measured per frame of the looper and must fit within the frame time of the looper.|
 
 
 ## Advanced

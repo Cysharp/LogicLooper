@@ -10,19 +10,27 @@ public class LogicLooperMetrics : IDisposable
     private readonly ObservableUpDownCounter<int> _counterSharedPoolRunningActions;
     private readonly ObservableUpDownCounter<int> _counterRunningLoopers;
     private readonly ObservableUpDownCounter<int> _counterRunningActions;
-    private readonly Histogram<double> _histogramProcessingDurationAvg;
-    private readonly Histogram<double> _histogramProcessingDurationMin;
-    private readonly Histogram<double> _histogramProcessingDurationMax;
-    private readonly PointBuffer _pointBuffer;
+    private readonly Histogram<double> _histogramProcessingDuration;
 
-    private readonly TimeProvider _timeProvider;
     private readonly LogicLooperTracker _tracker;
-    private readonly Task _monitorTask;
-    private readonly CancellationTokenSource _shutdownTokenSource = new();
-    private readonly TimeSpan _monitoringLoopInterval;
+    private int _disposed;
 
     private const string LooperCountUnit = "{looper}";
     private const string ActionCountUnit = "{action}";
+    private const string ProcessingDurationUnit = "s";
+
+    // NOTE: The default bucket boundaries of OpenTelemetry (0, 5, 10, 25, ..., 10000) assume values in milliseconds,
+    //       so they do not fit this histogram, whose unit is seconds.
+    //       The frame times of common frame rates (60 fps and 30 fps) are also included to make it possible to count frames that exceed them.
+    private static readonly double[] ProcessingDurationBucketBoundaries =
+    [
+        0.0001, 0.00025, 0.0005, 0.00075,
+        0.001, 0.0025, 0.005, 0.0075,
+        0.01, 1.0 / 60, 0.025, 1.0 / 30, 0.05, 0.075,
+        0.1, 0.25, 0.5, 0.75,
+        1,
+    ];
+
     public const string MeterName = "LogicLooper";
 
     public static class InstrumentNames
@@ -31,27 +39,24 @@ public class LogicLooperMetrics : IDisposable
         public const string SharedPoolRunningActions = "shared_pool.running_actions";
         public const string RunningLoopers = "running_loopers";
         public const string RunningActions = "running_actions";
-        public const string ProcessingDurationAvg = "processing_duration_avg";
-        public const string ProcessingDurationMin = "processing_duration_min";
-        public const string ProcessingDurationMax = "processing_duration_max";
+        public const string ProcessingDuration = "processing_duration";
+    }
+
+    public static class TagNames
+    {
+        public const string TargetFrameRate = "logiclooper.target_frame_rate";
     }
 
     public LogicLooperMetrics()
         : this(new DefaultMeterFactory()) {}
 
     public LogicLooperMetrics(IMeterFactory meterFactory)
-        : this(meterFactory, TimeProvider.System, LogicLooperTracker.Instance, static () => LogicLooperPool.Shared, monitorInterval: 1, countBufferingInterval: 10) {}
+        : this(meterFactory, LogicLooperTracker.Instance, static () => LogicLooperPool.Shared) {}
 
-    internal LogicLooperMetrics(IMeterFactory meterFactory, TimeProvider timeProvider, LogicLooperTracker tracker, Func<ILogicLooperPool> sharedPoolAccessor, int monitorInterval, int countBufferingInterval)
+    internal LogicLooperMetrics(IMeterFactory meterFactory, LogicLooperTracker tracker, Func<ILogicLooperPool> sharedPoolAccessor)
     {
-        if (monitorInterval <= 0) throw new ArgumentOutOfRangeException(nameof(monitorInterval), "Monitor interval must be greater than zero.");
-        if (countBufferingInterval <= 0) throw new ArgumentOutOfRangeException(nameof(monitorInterval), "Count buffering interval must be greater than zero.");
-
         _meter = meterFactory.Create(MeterName);
-        _timeProvider = timeProvider;
         _tracker = tracker;
-        _monitoringLoopInterval = TimeSpan.FromSeconds(monitorInterval);
-        _pointBuffer = new PointBuffer(countBufferingInterval / monitorInterval);
 
         _counterSharedPoolLoopersCounter = _meter.CreateObservableUpDownCounter(
             InstrumentNames.SharedPoolLoopers,
@@ -77,80 +82,23 @@ public class LogicLooperMetrics : IDisposable
             "Number of currently running actions in the process"
         );
 
-        _histogramProcessingDurationAvg = _meter.CreateHistogram<double>(
-            InstrumentNames.ProcessingDurationAvg,
-            unit: "ms",
-            description: "Duration of processing actions in milliseconds (Average)"
+        _histogramProcessingDuration = _meter.CreateHistogram<double>(
+            InstrumentNames.ProcessingDuration,
+            unit: ProcessingDurationUnit,
+            description: "Duration of processing one frame of a looper",
+            tags: null,
+            advice: new InstrumentAdvice<double> { HistogramBucketBoundaries = ProcessingDurationBucketBoundaries }
         );
-        _histogramProcessingDurationMin = _meter.CreateHistogram<double>(
-            InstrumentNames.ProcessingDurationMin,
-            unit: "ms",
-            description: "Duration of processing actions in milliseconds (Min)"
-        );
-        _histogramProcessingDurationMax = _meter.CreateHistogram<double>(
-            InstrumentNames.ProcessingDurationMax,
-            unit: "ms",
-            description: "Duration of processing actions in milliseconds (Max)"
-        );
-
-        _monitorTask = Task.Run(() => RunMonitoringLoopAsync(_shutdownTokenSource.Token));
-    }
-
-    private async Task RunMonitoringLoopAsync(CancellationToken shutdownToken)
-    {
-        while (!shutdownToken.IsCancellationRequested)
-        {
-            var loopers = _tracker.GetLoopersSnapshot();
-            var min = 0.0d;
-            var max = 0.0d;
-            var sum = 0.0d;
-            var count = 0;
-            foreach (var looper in loopers)
-            {
-                if (looper.LastProcessingDuration.TotalMilliseconds == 0) continue;
-
-                var processingDuration = looper.LastProcessingDuration.TotalMilliseconds;
-                if (min > processingDuration || count == 0)
-                {
-                    min = processingDuration;
-                }
-                if (max < processingDuration || count == 0)
-                {
-                    max = processingDuration;
-                }
-                sum += processingDuration;
-                count++;
-            }
-
-            var avg = (count > 0) ? sum / count : 0.0d;
-            _pointBuffer.Add(min, max, avg);
-            if (_pointBuffer.ShouldFlush())
-            {
-                (min, max, avg) = _pointBuffer.Flush();
-                _histogramProcessingDurationAvg.Record(avg);
-                _histogramProcessingDurationMin.Record(min);
-                _histogramProcessingDurationMax.Record(max);
-            }
-
-            await Task.Delay(_monitoringLoopInterval,
-#if NET8_0_OR_GREATER
-                _timeProvider,
-#endif
-                shutdownToken);
-        }
+        _tracker.AddProcessingDurationHistogram(_histogramProcessingDuration);
     }
 
     public void Dispose()
     {
-        _shutdownTokenSource.Cancel();
-        try
-        {
-            _monitorTask.GetAwaiter().GetResult();
-        }
-        catch (OperationCanceledException)
-        {
-            /* Ignore */
-        }
+        // NOTE: The histogram may be shared with other instances, and its registration is reference-counted.
+        //       Unregister it only once so that disposing this instance twice does not stop recording for the others.
+        if (Interlocked.Exchange(ref _disposed, 1) != 0) return;
+
+        _tracker.RemoveProcessingDurationHistogram(_histogramProcessingDuration);
         _meter.Dispose();
     }
 
@@ -171,45 +119,6 @@ public class LogicLooperMetrics : IDisposable
             {
                 meter.Dispose();
             }
-        }
-    }
-
-    private class PointBuffer(int size)
-    {
-        private readonly double[] _min = new double[size];
-        private readonly double[] _max = new double[size];
-        private readonly double[] _avg = new double[size];
-        private int _index;
-
-        public bool ShouldFlush()
-        {
-            return (_index == size);
-        }
-
-        public void Add(double min, double max, double avg)
-        {
-            if (_index < size)
-            {
-                _min[_index] = min;
-                _max[_index] = max;
-                _avg[_index] = avg;
-            }
-            _index++;
-        }
-
-        public (double Min, double Max, double Avg) Flush()
-        {
-            if (_index == 0) return (0, 0, 0);
-            var min = _min.Min();
-            var max = _max.Max();
-            var avg = _avg.Average();
-            _index = 0;
-
-            Array.Clear(_min, 0, size);
-            Array.Clear(_max, 0, size);
-            Array.Clear(_avg, 0, size);
-
-            return (min, max, avg);
         }
     }
 }
