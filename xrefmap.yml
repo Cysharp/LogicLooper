@@ -98,24 +98,12 @@ references:
   commentId: T:Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames
   fullName: Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames
   nameWithType: LogicLooperMetrics.InstrumentNames
-- uid: Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.ProcessingDurationAvg
-  name: ProcessingDurationAvg
-  href: api/Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.html#Cysharp_Threading_Diagnostics_LogicLooperMetrics_InstrumentNames_ProcessingDurationAvg
-  commentId: F:Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.ProcessingDurationAvg
-  fullName: Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.ProcessingDurationAvg
-  nameWithType: LogicLooperMetrics.InstrumentNames.ProcessingDurationAvg
-- uid: Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.ProcessingDurationMax
-  name: ProcessingDurationMax
-  href: api/Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.html#Cysharp_Threading_Diagnostics_LogicLooperMetrics_InstrumentNames_ProcessingDurationMax
-  commentId: F:Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.ProcessingDurationMax
-  fullName: Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.ProcessingDurationMax
-  nameWithType: LogicLooperMetrics.InstrumentNames.ProcessingDurationMax
-- uid: Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.ProcessingDurationMin
-  name: ProcessingDurationMin
-  href: api/Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.html#Cysharp_Threading_Diagnostics_LogicLooperMetrics_InstrumentNames_ProcessingDurationMin
-  commentId: F:Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.ProcessingDurationMin
-  fullName: Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.ProcessingDurationMin
-  nameWithType: LogicLooperMetrics.InstrumentNames.ProcessingDurationMin
+- uid: Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.ProcessingDuration
+  name: ProcessingDuration
+  href: api/Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.html#Cysharp_Threading_Diagnostics_LogicLooperMetrics_InstrumentNames_ProcessingDuration
+  commentId: F:Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.ProcessingDuration
+  fullName: Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.ProcessingDuration
+  nameWithType: LogicLooperMetrics.InstrumentNames.ProcessingDuration
 - uid: Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.RunningActions
   name: RunningActions
   href: api/Cysharp.Threading.Diagnostics.LogicLooperMetrics.InstrumentNames.html#Cysharp_Threading_Diagnostics_LogicLooperMetrics_InstrumentNames_RunningActions
@@ -146,6 +134,18 @@ references:
   commentId: F:Cysharp.Threading.Diagnostics.LogicLooperMetrics.MeterName
   fullName: Cysharp.Threading.Diagnostics.LogicLooperMetrics.MeterName
   nameWithType: LogicLooperMetrics.MeterName
+- uid: Cysharp.Threading.Diagnostics.LogicLooperMetrics.TagNames
+  name: LogicLooperMetrics.TagNames
+  href: api/Cysharp.Threading.Diagnostics.LogicLooperMetrics.TagNames.html
+  commentId: T:Cysharp.Threading.Diagnostics.LogicLooperMetrics.TagNames
+  fullName: Cysharp.Threading.Diagnostics.LogicLooperMetrics.TagNames
+  nameWithType: LogicLooperMetrics.TagNames
+- uid: Cysharp.Threading.Diagnostics.LogicLooperMetrics.TagNames.TargetFrameRate
+  name: TargetFrameRate
+  href: api/Cysharp.Threading.Diagnostics.LogicLooperMetrics.TagNames.html#Cysharp_Threading_Diagnostics_LogicLooperMetrics_TagNames_TargetFrameRate
+  commentId: F:Cysharp.Threading.Diagnostics.LogicLooperMetrics.TagNames.TargetFrameRate
+  fullName: Cysharp.Threading.Diagnostics.LogicLooperMetrics.TagNames.TargetFrameRate
+  nameWithType: LogicLooperMetrics.TagNames.TargetFrameRate
 - uid: Cysharp.Threading.Diagnostics.LogicLooperMetricsInitializationHostedService
   name: LogicLooperMetricsInitializationHostedService
   href: api/Cysharp.Threading.Diagnostics.LogicLooperMetricsInitializationHostedService.html

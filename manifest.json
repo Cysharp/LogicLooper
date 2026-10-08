@@ -32,6 +32,20 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Cysharp.Threading.Diagnostics.LogicLooperMetrics.TagNames.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Cysharp.Threading.Diagnostics.LogicLooperMetrics.TagNames.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Cysharp.Threading.Diagnostics.LogicLooperMetrics.TagNames",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Cysharp.Threading.Diagnostics.LogicLooperMetrics.yml",
       "output": {
         ".html": {
